@@ -1,30 +1,67 @@
 'use strict';
 var tap = require('tap');
 
-var check = require('../lib/check/references.js');
+var references = require('../lib/check/references.js');
 
 tap.test('getReferences', function (t) {
+  t.plan(1);
   var template = require('./template.json');
-  check.getReferences(template).then(function (references) {
-    t.equal(references.length, 25, 'gets all the refs');
-    t.end();
+  return references.getReferences(template).then(function (refs) {
+    t.equal(refs.length, 25, 'gets all the refs');
   });
 });
 
 tap.test('getParameters', function (t) {
+  t.plan(2);
   var template = require('./template.json');
-  check.getParameters(template).then(function (parameters) {
-    t.equal(parameters.length, 4, 'gets all the params');
-    t.ok(parameters.indexOf('SSHLocation') > -1, 'has SSHLocation parameter');
-    t.end();
+  return references.getParameters(template).then(function (params) {
+    t.equal(params.length, 4, 'gets all the params');
+    t.ok(params.indexOf('SSHLocation') > -1, 'has SSHLocation parameter');
+  });
+});
+
+tap.test('getResources', function (t) {
+  t.plan(2);
+  var template = require('./template.json');
+  return references.getResources(template).then(function (resources) {
+    t.equal(resources.length, 9, 'gets all the params');
+    t.ok(resources.indexOf('WebServerGroup') > -1,
+         'has WebServerGroup resource');
   });
 });
 
 tap.test('getPseudoParameters', function (t) {
-  check.getPseudoParameters().then(function (pseudoparameters) {
-    t.equal(pseudoparameters.length, 6, 'gets all the params');
-    t.ok(pseudoparameters.indexOf('AWS::AccountId') > -1,
+  t.plan(2);
+  return references.getPseudoParameters().then(function (pseudos) {
+    t.equal(pseudos.length, 6, 'gets all the params');
+    t.ok(pseudos.indexOf('AWS::AccountId') > -1,
          'has AWS::AccountId parameter');
-    t.end();
+  });
+});
+
+tap.test('areValid with valid template', function (t) {
+  t.plan(1);
+  var template = require('./template.json');
+  return references.areValid(template).then(function (isValid) {
+    t.ok(isValid, 'is valid');
+  });
+});
+
+tap.test('areValid with invalid template', function (t) {
+  t.plan(4);
+  var template = require('./template.json');
+  template
+    .Resources
+    .WebServerGroup
+    .Properties
+    .LaunchConfigurationName
+    .Ref = 'NotAValidRef';
+  return references.areValid(template).catch(function (error) {
+    t.type(error, Error, 'has an error');
+    t.equal(error.issues.length, 1, 'has one error')
+    t.match(error.issues[0], /NotAValidRef/, 'includes the invalid ref')
+    t.match(error.issues[0],
+            /Resources\.WebServerGroup\.Properties\.LaunchConfigurationName/,
+            'includes the path to ref')
   });
 });
