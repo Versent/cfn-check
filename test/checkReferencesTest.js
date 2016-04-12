@@ -19,3 +19,12 @@ tap.test('getParameters', function (t) {
     t.end();
   });
 });
+
+tap.test('getPseudoParameters', function (t) {
+  check.getPseudoParameters().then(function (pseudoparameters) {
+    t.equal(pseudoparameters.length, 6, 'gets all the params');
+    t.ok(pseudoparameters.indexOf('AWS::AccountId') > -1,
+         'has AWS::AccountId parameter');
+    t.end();
+  });
+});
