@@ -21,6 +21,7 @@
     "bluebird": "^3.3.4",
     "commander": "^2.9.0",
     "debug": "^2.2.0",
-    "jsonlint": "^1.6.2"
+    "jsonlint": "^1.6.2",
+    "lodash": "^4.10.0"
   }
 }
