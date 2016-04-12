@@ -1,0 +1,26 @@
+{
+  "name": "cfn-check",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/cfn-check.js",
+  "scripts": {
+    "test": "NODE_ENV=test tap test/*.js",
+    "test:watch": "nodemon --ext js --exec 'clear && npm test'"
+  },
+  "bin": {
+    "cfn-check": "./bin/cfn-check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.9.1",
+    "tap": "^5.7.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "commander": "^2.9.0",
+    "debug": "^2.2.0",
+    "jsonlint": "^1.6.2"
+  }
+}
