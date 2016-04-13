@@ -42,13 +42,13 @@ tap.test('getPseudoParameters', function (t) {
 tap.test('areValid with valid template', function (t) {
   t.plan(1);
   var template = require('./template.json');
-  return references.areValid(template).then(function (isValid) {
-    t.ok(isValid, 'is valid');
+  return references.areValid(template).then(function (errors) {
+    t.equal(errors.length, 0, 'has no errors');
   });
 });
 
 tap.test('areValid with invalid template', function (t) {
-  t.plan(4);
+  t.plan(3);
   var template = require('./template.json');
   template
     .Resources
@@ -56,12 +56,14 @@ tap.test('areValid with invalid template', function (t) {
     .Properties
     .LaunchConfigurationName
     .Ref = 'NotAValidRef';
-  return references.areValid(template).catch(function (error) {
-    t.type(error, Error, 'has an error');
-    t.equal(error.issues.length, 1, 'has one error')
-    t.match(error.issues[0], /NotAValidRef/, 'includes the invalid ref')
-    t.match(error.issues[0],
+  return references.areValid(template).then(function (errors) {
+    var error = errors[0];
+    t.equal(errors.length, 1, 'has one error')
+    t.match(error, /NotAValidRef/, 'includes the invalid ref')
+    t.match(error,
             /Resources\.WebServerGroup\.Properties\.LaunchConfigurationName/,
             'includes the path to ref')
   });
 });
+
+// TODO: Catch test.
