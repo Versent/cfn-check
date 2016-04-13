@@ -4,7 +4,7 @@ var xray = require('x-ray')();
 const url = 'https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html';
 
 xray(url, 'body', [{
-    resource: '.topictitle',
+    type: '.topictitle',
     properties: ['.variablelist dt'],
     descriptions: ['.variablelist dd']
   }])

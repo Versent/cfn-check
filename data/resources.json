@@ -1,7 +1,7 @@
 [
 
   {
-    "resource": "AWS::AutoScaling::AutoScalingGroup",
+    "type": "AWS::AutoScaling::AutoScalingGroup",
     "properties": [
       "AvailabilityZones",
       "Cooldown",
@@ -41,7 +41,7 @@
   }
 ,
   {
-    "resource": "AWS::AutoScaling::LaunchConfiguration",
+    "type": "AWS::AutoScaling::LaunchConfiguration",
     "properties": [
       "AssociatePublicIpAddress",
       "BlockDeviceMappings",
@@ -83,7 +83,7 @@
   }
 ,
   {
-    "resource": "AWS::AutoScaling::LifecycleHook",
+    "type": "AWS::AutoScaling::LifecycleHook",
     "properties": [
       "AutoScalingGroupName",
       "DefaultResult",
@@ -105,7 +105,7 @@
   }
 ,
   {
-    "resource": "AWS::AutoScaling::ScalingPolicy",
+    "type": "AWS::AutoScaling::ScalingPolicy",
     "properties": [
       "AdjustmentType",
       "AutoScalingGroupName",
@@ -131,7 +131,7 @@
   }
 ,
   {
-    "resource": "AWS::AutoScaling::ScheduledAction",
+    "type": "AWS::AutoScaling::ScheduledAction",
     "properties": [
       "AutoScalingGroupName",
       "DesiredCapacity",
@@ -153,7 +153,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::Authentication",
+    "type": "AWS::CloudFormation::Authentication",
     "properties": [
       "accessKeyId",
       "buckets",
@@ -177,7 +177,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::CustomResource",
+    "type": "AWS::CloudFormation::CustomResource",
     "properties": [
       "ServiceToken"
     ],
@@ -187,13 +187,13 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::Init",
+    "type": "AWS::CloudFormation::Init",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS::CloudFormation::Interface",
+    "type": "AWS::CloudFormation::Interface",
     "properties": [
       "ParameterGroups",
       "ParameterLabels"
@@ -205,7 +205,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::Stack",
+    "type": "AWS::CloudFormation::Stack",
     "properties": [
       "NotificationARNs",
       "Parameters",
@@ -225,7 +225,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::WaitCondition",
+    "type": "AWS::CloudFormation::WaitCondition",
     "properties": [
       "Count",
       "Handle",
@@ -241,13 +241,13 @@
   }
 ,
   {
-    "resource": "AWS::CloudFormation::WaitConditionHandle",
+    "type": "AWS::CloudFormation::WaitConditionHandle",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS::CloudFront::Distribution",
+    "type": "AWS::CloudFront::Distribution",
     "properties": [
       "DistributionConfig",
       "DomainName"
@@ -259,7 +259,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudTrail::Trail",
+    "type": "AWS::CloudTrail::Trail",
     "properties": [
       "CloudWatchLogsLogGroupArn",
       "CloudWatchLogsRoleArn",
@@ -289,7 +289,7 @@
   }
 ,
   {
-    "resource": "AWS::CloudWatch::Alarm",
+    "type": "AWS::CloudWatch::Alarm",
     "properties": [
       "ActionsEnabled",
       "AlarmActions",
@@ -327,7 +327,7 @@
   }
 ,
   {
-    "resource": "AWS::CodeDeploy::Application",
+    "type": "AWS::CodeDeploy::Application",
     "properties": [
       "ApplicationName"
     ],
@@ -337,7 +337,7 @@
   }
 ,
   {
-    "resource": "AWS::CodeDeploy::DeploymentConfig",
+    "type": "AWS::CodeDeploy::DeploymentConfig",
     "properties": [
       "DeploymentConfigName",
       "MinimumHealthyHosts"
@@ -349,7 +349,7 @@
   }
 ,
   {
-    "resource": "AWS::CodeDeploy::DeploymentGroup",
+    "type": "AWS::CodeDeploy::DeploymentGroup",
     "properties": [
       "ApplicationName",
       "AutoScalingGroups",
@@ -373,7 +373,7 @@
   }
 ,
   {
-    "resource": "AWS::CodePipeline::CustomActionType",
+    "type": "AWS::CodePipeline::CustomActionType",
     "properties": [
       "Category",
       "ConfigurationProperties",
@@ -395,7 +395,7 @@
   }
 ,
   {
-    "resource": "AWS::CodePipeline::Pipeline",
+    "type": "AWS::CodePipeline::Pipeline",
     "properties": [
       "ArtifactStore",
       "DisableInboundStageTransitions",
@@ -415,7 +415,7 @@
   }
 ,
   {
-    "resource": "AWS::Config::ConfigRule",
+    "type": "AWS::Config::ConfigRule",
     "properties": [
       "ConfigRuleName",
       "Description",
@@ -441,7 +441,7 @@
   }
 ,
   {
-    "resource": "AWS::Config::ConfigurationRecorder",
+    "type": "AWS::Config::ConfigurationRecorder",
     "properties": [
       "Name",
       "RecordingGroup",
@@ -455,7 +455,7 @@
   }
 ,
   {
-    "resource": "AWS::Config::DeliveryChannel",
+    "type": "AWS::Config::DeliveryChannel",
     "properties": [
       "ConfigSnapshotDeliveryProperties",
       "Name",
@@ -473,7 +473,7 @@
   }
 ,
   {
-    "resource": "AWS::DataPipeline::Pipeline",
+    "type": "AWS::DataPipeline::Pipeline",
     "properties": [
       "Activate",
       "Description",
@@ -495,7 +495,7 @@
   }
 ,
   {
-    "resource": "AWS::DirectoryService::MicrosoftAD",
+    "type": "AWS::DirectoryService::MicrosoftAD",
     "properties": [
       "CreateAlias",
       "EnableSso",
@@ -519,7 +519,7 @@
   }
 ,
   {
-    "resource": "AWS::DirectoryService::SimpleAD",
+    "type": "AWS::DirectoryService::SimpleAD",
     "properties": [
       "CreateAlias",
       "Description",
@@ -547,7 +547,7 @@
   }
 ,
   {
-    "resource": "AWS::DynamoDB::Table",
+    "type": "AWS::DynamoDB::Table",
     "properties": [
       "AttributeDefinitions",
       "GlobalSecondaryIndexes",
@@ -571,7 +571,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::CustomerGateway",
+    "type": "AWS::EC2::CustomerGateway",
     "properties": [
       "BgpAsn",
       "IpAddress",
@@ -587,7 +587,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::DHCPOptions",
+    "type": "AWS::EC2::DHCPOptions",
     "properties": [
       "DomainName",
       "DomainNameServers",
@@ -607,7 +607,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::EIP",
+    "type": "AWS::EC2::EIP",
     "properties": [
       "InstanceId",
       "Domain",
@@ -621,7 +621,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::EIPAssociation",
+    "type": "AWS::EC2::EIPAssociation",
     "properties": [
       "AllocationId",
       "EIP",
@@ -639,7 +639,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::Instance",
+    "type": "AWS::EC2::Instance",
     "properties": [
       "AvailabilityZone",
       "BlockDeviceMappings",
@@ -707,7 +707,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::InternetGateway",
+    "type": "AWS::EC2::InternetGateway",
     "properties": [
       "Tags"
     ],
@@ -717,7 +717,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::NatGateway",
+    "type": "AWS::EC2::NatGateway",
     "properties": [
       "AllocationId",
       "SubnetId"
@@ -729,7 +729,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::NetworkAcl",
+    "type": "AWS::EC2::NetworkAcl",
     "properties": [
       "Tags",
       "VpcId"
@@ -741,7 +741,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::NetworkAclEntry",
+    "type": "AWS::EC2::NetworkAclEntry",
     "properties": [
       "CidrBlock",
       "Egress",
@@ -765,7 +765,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::NetworkInterface",
+    "type": "AWS::EC2::NetworkInterface",
     "properties": [
       "Description",
       "GroupSet",
@@ -793,7 +793,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::NetworkInterfaceAttachment",
+    "type": "AWS::EC2::NetworkInterfaceAttachment",
     "properties": [
       "DeleteOnTermination",
       "DeviceIndex",
@@ -809,7 +809,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::PlacementGroup",
+    "type": "AWS::EC2::PlacementGroup",
     "properties": [
       "Strategy"
     ],
@@ -819,7 +819,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::Route",
+    "type": "AWS::EC2::Route",
     "properties": [
       "DestinationCidrBlock",
       "GatewayId",
@@ -841,7 +841,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::RouteTable",
+    "type": "AWS::EC2::RouteTable",
     "properties": [
       "VpcId",
       "Tags"
@@ -853,7 +853,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SecurityGroup",
+    "type": "AWS::EC2::SecurityGroup",
     "properties": [
       "GroupDescription",
       "SecurityGroupEgress",
@@ -873,7 +873,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SecurityGroupEgress",
+    "type": "AWS::EC2::SecurityGroupEgress",
     "properties": [
       "CidrIp",
       "DestinationSecurityGroupId",
@@ -893,7 +893,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SecurityGroupIngress",
+    "type": "AWS::EC2::SecurityGroupIngress",
     "properties": [
       "CidrIp",
       "FromPort",
@@ -919,7 +919,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SpotFleet",
+    "type": "AWS::EC2::SpotFleet",
     "properties": [
       "SpotFleetRequestConfigData"
     ],
@@ -929,7 +929,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::Subnet",
+    "type": "AWS::EC2::Subnet",
     "properties": [
       "AvailabilityZone",
       "CidrBlock",
@@ -949,7 +949,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SubnetNetworkAclAssociation",
+    "type": "AWS::EC2::SubnetNetworkAclAssociation",
     "properties": [
       "SubnetId",
       "NetworkAclId",
@@ -963,7 +963,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::SubnetRouteTableAssociation",
+    "type": "AWS::EC2::SubnetRouteTableAssociation",
     "properties": [
       "RouteTableId",
       "SubnetId"
@@ -975,7 +975,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::Volume",
+    "type": "AWS::EC2::Volume",
     "properties": [
       "AutoEnableIO",
       "AvailabilityZone",
@@ -1001,7 +1001,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VolumeAttachment",
+    "type": "AWS::EC2::VolumeAttachment",
     "properties": [
       "Device",
       "InstanceId",
@@ -1015,7 +1015,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPC",
+    "type": "AWS::EC2::VPC",
     "properties": [
       "CidrBlock",
       "EnableDnsSupport",
@@ -1039,7 +1039,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPCDHCPOptionsAssociation",
+    "type": "AWS::EC2::VPCDHCPOptionsAssociation",
     "properties": [
       "DhcpOptionsId",
       "VpcId"
@@ -1051,7 +1051,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPCEndpoint",
+    "type": "AWS::EC2::VPCEndpoint",
     "properties": [
       "PolicyDocument",
       "RouteTableIds",
@@ -1067,7 +1067,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPCGatewayAttachment",
+    "type": "AWS::EC2::VPCGatewayAttachment",
     "properties": [
       "InternetGatewayId",
       "VpcId",
@@ -1081,7 +1081,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPCPeeringConnection",
+    "type": "AWS::EC2::VPCPeeringConnection",
     "properties": [
       "PeerVpcId",
       "Tags",
@@ -1095,7 +1095,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPNConnection",
+    "type": "AWS::EC2::VPNConnection",
     "properties": [
       "Type",
       "CustomerGatewayId",
@@ -1113,7 +1113,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPNConnectionRoute",
+    "type": "AWS::EC2::VPNConnectionRoute",
     "properties": [
       "DestinationCidrBlock",
       "VpnConnectionId"
@@ -1125,7 +1125,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPNGateway",
+    "type": "AWS::EC2::VPNGateway",
     "properties": [
       "Type",
       "Tags"
@@ -1137,7 +1137,7 @@
   }
 ,
   {
-    "resource": "AWS::EC2::VPNGatewayRoutePropagation",
+    "type": "AWS::EC2::VPNGatewayRoutePropagation",
     "properties": [
       "RouteTableIds",
       "VpnGatewayId"
@@ -1149,7 +1149,7 @@
   }
 ,
   {
-    "resource": "AWS::ECR::Repository",
+    "type": "AWS::ECR::Repository",
     "properties": [
       "RepositoryName",
       "RepositoryPolicyText"
@@ -1161,13 +1161,13 @@
   }
 ,
   {
-    "resource": "AWS::ECS::Cluster",
+    "type": "AWS::ECS::Cluster",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS::ECS::Service",
+    "type": "AWS::ECS::Service",
     "properties": [
       "Cluster",
       "DesiredCount",
@@ -1185,7 +1185,7 @@
   }
 ,
   {
-    "resource": "AWS::ECS::TaskDefinition",
+    "type": "AWS::ECS::TaskDefinition",
     "properties": [
       "ContainerDefinitions",
       "Volumes"
@@ -1197,7 +1197,7 @@
   }
 ,
   {
-    "resource": "AWS::EFS::FileSystem",
+    "type": "AWS::EFS::FileSystem",
     "properties": [
       "FileSystemTags"
     ],
@@ -1207,7 +1207,7 @@
   }
 ,
   {
-    "resource": "AWS::EFS::MountTarget",
+    "type": "AWS::EFS::MountTarget",
     "properties": [
       "FileSystemId",
       "IpAddress",
@@ -1223,7 +1223,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::CacheCluster",
+    "type": "AWS::ElastiCache::CacheCluster",
     "properties": [
       "AutoMinorVersionUpgrade",
       "AZMode",
@@ -1277,7 +1277,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::ParameterGroup",
+    "type": "AWS::ElastiCache::ParameterGroup",
     "properties": [
       "CacheParameterGroupFamily",
       "Description",
@@ -1291,7 +1291,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::ReplicationGroup",
+    "type": "AWS::ElastiCache::ReplicationGroup",
     "properties": [
       "AutomaticFailoverEnabled",
       "AutoMinorVersionUpgrade",
@@ -1347,7 +1347,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::SecurityGroup",
+    "type": "AWS::ElastiCache::SecurityGroup",
     "properties": [
       "Description"
     ],
@@ -1357,7 +1357,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::SecurityGroupIngress",
+    "type": "AWS::ElastiCache::SecurityGroupIngress",
     "properties": [
       "CacheSecurityGroupName",
       "EC2SecurityGroupName",
@@ -1371,7 +1371,7 @@
   }
 ,
   {
-    "resource": "AWS::ElastiCache::SubnetGroup ",
+    "type": "AWS::ElastiCache::SubnetGroup ",
     "properties": [
       "Description",
       "SubnetIds"
@@ -1383,7 +1383,7 @@
   }
 ,
   {
-    "resource": "AWS::ElasticBeanstalk::Application",
+    "type": "AWS::ElasticBeanstalk::Application",
     "properties": [
       "ApplicationName",
       "Description"
@@ -1395,7 +1395,7 @@
   }
 ,
   {
-    "resource": "AWS::ElasticBeanstalk::ApplicationVersion",
+    "type": "AWS::ElasticBeanstalk::ApplicationVersion",
     "properties": [
       "ApplicationName",
       "Description",
@@ -1409,7 +1409,7 @@
   }
 ,
   {
-    "resource": "AWS::ElasticBeanstalk::ConfigurationTemplate",
+    "type": "AWS::ElasticBeanstalk::ConfigurationTemplate",
     "properties": [
       "ApplicationName",
       "Description",
@@ -1429,7 +1429,7 @@
   }
 ,
   {
-    "resource": "AWS::ElasticBeanstalk::Environment",
+    "type": "AWS::ElasticBeanstalk::Environment",
     "properties": [
       "ApplicationName",
       "CNAMEPrefix",
@@ -1459,7 +1459,7 @@
   }
 ,
   {
-    "resource": "AWS::ElasticLoadBalancing::LoadBalancer",
+    "type": "AWS::ElasticLoadBalancing::LoadBalancer",
     "properties": [
       "AccessLoggingPolicy",
       "AppCookieStickinessPolicy",
@@ -1509,7 +1509,7 @@
   }
 ,
   {
-    "resource": "AWS::Elasticsearch::Domain",
+    "type": "AWS::Elasticsearch::Domain",
     "properties": [
       "AccessPolicies",
       "AdvancedOptions",
@@ -1535,7 +1535,7 @@
   }
 ,
   {
-    "resource": "AWS::EMR::Cluster",
+    "type": "AWS::EMR::Cluster",
     "properties": [
       "AdditionalInfo",
       "Applications",
@@ -1571,7 +1571,7 @@
   }
 ,
   {
-    "resource": "AWS::EMR::InstanceGroupConfig",
+    "type": "AWS::EMR::InstanceGroupConfig",
     "properties": [
       "BidPrice",
       "Configurations",
@@ -1597,7 +1597,7 @@
   }
 ,
   {
-    "resource": "AWS::EMR::Step",
+    "type": "AWS::EMR::Step",
     "properties": [
       "ActionOnFailure",
       "HadoopJarStep",
@@ -1613,7 +1613,7 @@
   }
 ,
   {
-    "resource": "AWS::GameLift::Alias",
+    "type": "AWS::GameLift::Alias",
     "properties": [
       "Description",
       "Name",
@@ -1627,7 +1627,7 @@
   }
 ,
   {
-    "resource": "AWS::GameLift::Build",
+    "type": "AWS::GameLift::Build",
     "properties": [
       "Name",
       "StorageLocation",
@@ -1641,7 +1641,7 @@
   }
 ,
   {
-    "resource": "AWS::GameLift::Fleet",
+    "type": "AWS::GameLift::Fleet",
     "properties": [
       "BuildId",
       "Description",
@@ -1667,7 +1667,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::AccessKey",
+    "type": "AWS::IAM::AccessKey",
     "properties": [
       "Serial",
       "Status",
@@ -1683,7 +1683,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::Group",
+    "type": "AWS::IAM::Group",
     "properties": [
       "ManagedPolicyArns",
       "Path",
@@ -1699,7 +1699,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::InstanceProfile",
+    "type": "AWS::IAM::InstanceProfile",
     "properties": [
       "Path",
       "Roles",
@@ -1713,7 +1713,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::ManagedPolicy",
+    "type": "AWS::IAM::ManagedPolicy",
     "properties": [
       "Description",
       "Groups",
@@ -1733,7 +1733,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::Policy",
+    "type": "AWS::IAM::Policy",
     "properties": [
       "Groups",
       "PolicyDocument",
@@ -1751,7 +1751,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::Role",
+    "type": "AWS::IAM::Role",
     "properties": [
       "AssumeRolePolicyDocument",
       "ManagedPolicyArns",
@@ -1769,7 +1769,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::User",
+    "type": "AWS::IAM::User",
     "properties": [
       "Groups",
       "LoginProfile",
@@ -1789,7 +1789,7 @@
   }
 ,
   {
-    "resource": "AWS::IAM::UserToGroupAddition",
+    "type": "AWS::IAM::UserToGroupAddition",
     "properties": [
       "GroupName",
       "Users"
@@ -1801,7 +1801,7 @@
   }
 ,
   {
-    "resource": "AWS::Kinesis::Stream",
+    "type": "AWS::Kinesis::Stream",
     "properties": [
       "ShardCount",
       "Tags",
@@ -1815,7 +1815,7 @@
   }
 ,
   {
-    "resource": "AWS::KMS::Key",
+    "type": "AWS::KMS::Key",
     "properties": [
       "Description",
       "Enabled",
@@ -1831,7 +1831,7 @@
   }
 ,
   {
-    "resource": "AWS::Lambda::EventSourceMapping",
+    "type": "AWS::Lambda::EventSourceMapping",
     "properties": [
       "BatchSize",
       "Enabled",
@@ -1849,7 +1849,7 @@
   }
 ,
   {
-    "resource": "AWS::Lambda::Alias",
+    "type": "AWS::Lambda::Alias",
     "properties": [
       "Description",
       "FunctionName",
@@ -1865,7 +1865,7 @@
   }
 ,
   {
-    "resource": "AWS::Lambda::Function",
+    "type": "AWS::Lambda::Function",
     "properties": [
       "Code",
       "Description",
@@ -1893,7 +1893,7 @@
   }
 ,
   {
-    "resource": "AWS::Lambda::Permission",
+    "type": "AWS::Lambda::Permission",
     "properties": [
       "Action",
       "FunctionName",
@@ -1911,7 +1911,7 @@
   }
 ,
   {
-    "resource": "AWS::Lambda::Version",
+    "type": "AWS::Lambda::Version",
     "properties": [
       "CodeSha256",
       "Description",
@@ -1927,7 +1927,7 @@
   }
 ,
   {
-    "resource": "AWS::Logs::Destination",
+    "type": "AWS::Logs::Destination",
     "properties": [
       "DestinationName",
       "DestinationPolicy",
@@ -1943,7 +1943,7 @@
   }
 ,
   {
-    "resource": "AWS::Logs::LogGroup",
+    "type": "AWS::Logs::LogGroup",
     "properties": [
       "RetentionInDays",
       "Arn"
@@ -1955,7 +1955,7 @@
   }
 ,
   {
-    "resource": "AWS::Logs::LogStream",
+    "type": "AWS::Logs::LogStream",
     "properties": [
       "LogGroupName",
       "LogStreamName"
@@ -1967,7 +1967,7 @@
   }
 ,
   {
-    "resource": "AWS::Logs::MetricFilter",
+    "type": "AWS::Logs::MetricFilter",
     "properties": [
       "FilterPattern",
       "LogGroupName",
@@ -1981,7 +1981,7 @@
   }
 ,
   {
-    "resource": "AWS::Logs::SubscriptionFilter",
+    "type": "AWS::Logs::SubscriptionFilter",
     "properties": [
       "DestinationArn",
       "FilterPattern",
@@ -1997,7 +1997,7 @@
   }
 ,
   {
-    "resource": "AWS::OpsWorks::App",
+    "type": "AWS::OpsWorks::App",
     "properties": [
       "AppSource",
       "Attributes",
@@ -2027,7 +2027,7 @@
   }
 ,
   {
-    "resource": "AWS::OpsWorks::ElasticLoadBalancerAttachment",
+    "type": "AWS::OpsWorks::ElasticLoadBalancerAttachment",
     "properties": [
       "ElasticLoadBalancerName",
       "LayerId"
@@ -2039,7 +2039,7 @@
   }
 ,
   {
-    "resource": "AWS::OpsWorks::Instance",
+    "type": "AWS::OpsWorks::Instance",
     "properties": [
       "AmiId",
       "Architecture",
@@ -2075,7 +2075,7 @@
   }
 ,
   {
-    "resource": "AWS::OpsWorks::Layer",
+    "type": "AWS::OpsWorks::Layer",
     "properties": [
       "Attributes",
       "AutoAssignElasticIps",
@@ -2115,7 +2115,7 @@
   }
 ,
   {
-    "resource": "AWS::OpsWorks::Stack",
+    "type": "AWS::OpsWorks::Stack",
     "properties": [
       "AgentVersion",
       "Attributes",
@@ -2159,7 +2159,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBCluster",
+    "type": "AWS::RDS::DBCluster",
     "properties": [
       "AvailabilityZones",
       "BackupRetentionPeriod",
@@ -2201,7 +2201,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBClusterParameterGroup",
+    "type": "AWS::RDS::DBClusterParameterGroup",
     "properties": [
       "Description",
       "Family",
@@ -2217,7 +2217,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBInstance",
+    "type": "AWS::RDS::DBInstance",
     "properties": [
       "AllocatedStorage",
       "AllowMajorVersionUpgrade",
@@ -2289,7 +2289,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBParameterGroup",
+    "type": "AWS::RDS::DBParameterGroup",
     "properties": [
       "Description",
       "Family",
@@ -2305,7 +2305,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBSecurityGroup",
+    "type": "AWS::RDS::DBSecurityGroup",
     "properties": [
       "EC2VpcId",
       "DBSecurityGroupIngress",
@@ -2321,7 +2321,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBSecurityGroupIngress",
+    "type": "AWS::RDS::DBSecurityGroupIngress",
     "properties": [
       "CIDRIP",
       "DBSecurityGroupName",
@@ -2339,7 +2339,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::DBSubnetGroup",
+    "type": "AWS::RDS::DBSubnetGroup",
     "properties": [
       "DBSubnetGroupDescription",
       "SubnetIds",
@@ -2353,7 +2353,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::EventSubscription",
+    "type": "AWS::RDS::EventSubscription",
     "properties": [
       "Enabled",
       "EventCategories",
@@ -2371,7 +2371,7 @@
   }
 ,
   {
-    "resource": "AWS::RDS::OptionGroup",
+    "type": "AWS::RDS::OptionGroup",
     "properties": [
       "EngineName",
       "MajorEngineVersion",
@@ -2389,7 +2389,7 @@
   }
 ,
   {
-    "resource": "AWS::Redshift::Cluster",
+    "type": "AWS::Redshift::Cluster",
     "properties": [
       "AllowVersionUpgrade",
       "AutomatedSnapshotRetentionPeriod",
@@ -2451,7 +2451,7 @@
   }
 ,
   {
-    "resource": "AWS::Redshift::ClusterParameterGroup",
+    "type": "AWS::Redshift::ClusterParameterGroup",
     "properties": [
       "Description",
       "ParameterGroupFamily",
@@ -2465,7 +2465,7 @@
   }
 ,
   {
-    "resource": "AWS::Redshift::ClusterSecurityGroup",
+    "type": "AWS::Redshift::ClusterSecurityGroup",
     "properties": [
       "Description"
     ],
@@ -2475,7 +2475,7 @@
   }
 ,
   {
-    "resource": "AWS::Redshift::ClusterSecurityGroupIngress",
+    "type": "AWS::Redshift::ClusterSecurityGroupIngress",
     "properties": [
       "ClusterSecurityGroupName",
       "CIDRIP",
@@ -2491,7 +2491,7 @@
   }
 ,
   {
-    "resource": "AWS::Redshift::ClusterSubnetGroup",
+    "type": "AWS::Redshift::ClusterSubnetGroup",
     "properties": [
       "Description",
       "SubnetIds"
@@ -2503,7 +2503,7 @@
   }
 ,
   {
-    "resource": "AWS::Route53::HealthCheck",
+    "type": "AWS::Route53::HealthCheck",
     "properties": [
       "HealthCheckConfig",
       "HealthCheckTags"
@@ -2515,7 +2515,7 @@
   }
 ,
   {
-    "resource": "AWS::Route53::HostedZone",
+    "type": "AWS::Route53::HostedZone",
     "properties": [
       "HostedZoneConfig",
       "HostedZoneTags",
@@ -2531,7 +2531,7 @@
   }
 ,
   {
-    "resource": "AWS::Route53::RecordSet",
+    "type": "AWS::Route53::RecordSet",
     "properties": [
       "AliasTarget",
       "Comment",
@@ -2567,7 +2567,7 @@
   }
 ,
   {
-    "resource": "AWS::Route53::RecordSetGroup",
+    "type": "AWS::Route53::RecordSetGroup",
     "properties": [
       "Comment",
       "HostedZoneId",
@@ -2583,7 +2583,7 @@
   }
 ,
   {
-    "resource": "AWS::S3::Bucket",
+    "type": "AWS::S3::Bucket",
     "properties": [
       "AccessControl",
       "BucketName",
@@ -2615,7 +2615,7 @@
   }
 ,
   {
-    "resource": "AWS::S3::BucketPolicy",
+    "type": "AWS::S3::BucketPolicy",
     "properties": [
       "Bucket",
       "PolicyDocument"
@@ -2627,13 +2627,13 @@
   }
 ,
   {
-    "resource": "AWS::SDB::Domain",
+    "type": "AWS::SDB::Domain",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS::SNS::Topic",
+    "type": "AWS::SNS::Topic",
     "properties": [
       "DisplayName",
       "Subscription",
@@ -2649,7 +2649,7 @@
   }
 ,
   {
-    "resource": "AWS::SNS::TopicPolicy",
+    "type": "AWS::SNS::TopicPolicy",
     "properties": [
       "PolicyDocument",
       "Topics"
@@ -2661,7 +2661,7 @@
   }
 ,
   {
-    "resource": "AWS::SQS::Queue",
+    "type": "AWS::SQS::Queue",
     "properties": [
       "DelaySeconds",
       "MaximumMessageSize",
@@ -2687,7 +2687,7 @@
   }
 ,
   {
-    "resource": "AWS::SQS::QueuePolicy",
+    "type": "AWS::SQS::QueuePolicy",
     "properties": [
       "PolicyDocument",
       "Queues"
@@ -2699,7 +2699,7 @@
   }
 ,
   {
-    "resource": "AWS::SSM::Document",
+    "type": "AWS::SSM::Document",
     "properties": [
       "Content"
     ],
@@ -2709,7 +2709,7 @@
   }
 ,
   {
-    "resource": "AWS::WAF::ByteMatchSet",
+    "type": "AWS::WAF::ByteMatchSet",
     "properties": [
       "ByteMatchTuples",
       "Name"
@@ -2721,7 +2721,7 @@
   }
 ,
   {
-    "resource": "AWS::WAF::IPSet",
+    "type": "AWS::WAF::IPSet",
     "properties": [
       "IPSetDescriptors",
       "c-ip",
@@ -2737,7 +2737,7 @@
   }
 ,
   {
-    "resource": "AWS::WAF::Rule",
+    "type": "AWS::WAF::Rule",
     "properties": [
       "MetricName",
       "Name",
@@ -2751,7 +2751,7 @@
   }
 ,
   {
-    "resource": "AWS::WAF::SqlInjectionMatchSet",
+    "type": "AWS::WAF::SqlInjectionMatchSet",
     "properties": [
       "Name",
       "SqlInjectionMatchTuples"
@@ -2763,7 +2763,7 @@
   }
 ,
   {
-    "resource": "AWS::WAF::WebACL",
+    "type": "AWS::WAF::WebACL",
     "properties": [
       "DefaultAction",
       "MetricName",
@@ -2779,7 +2779,7 @@
   }
 ,
   {
-    "resource": "AWS::WorkSpaces::Workspace",
+    "type": "AWS::WorkSpaces::Workspace",
     "properties": [
       "BundleId",
       "DirectoryId",
@@ -2799,13 +2799,13 @@
   }
 ,
   {
-    "resource": "Resource Property Types Reference",
+    "type": "Resource Property Types Reference",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS CloudFormation AutoScaling Block Device Mapping Property Type",
+    "type": "AWS CloudFormation AutoScaling Block Device Mapping Property Type",
     "properties": [
       "DeviceName",
       "Ebs",
@@ -2821,7 +2821,7 @@
   }
 ,
   {
-    "resource": "AWS CloudFormation AutoScaling EBS Block Device Property Type",
+    "type": "AWS CloudFormation AutoScaling EBS Block Device Property Type",
     "properties": [
       "DeleteOnTermination",
       "Encrypted",
@@ -2841,7 +2841,7 @@
   }
 ,
   {
-    "resource": "Auto Scaling MetricsCollection",
+    "type": "Auto Scaling MetricsCollection",
     "properties": [
       "Granularity",
       "Metrics"
@@ -2853,7 +2853,7 @@
   }
 ,
   {
-    "resource": "Auto Scaling\n      NotificationConfigurations",
+    "type": "Auto Scaling\n      NotificationConfigurations",
     "properties": [
       "NotificationTypes",
       "TopicARN"
@@ -2865,7 +2865,7 @@
   }
 ,
   {
-    "resource": "Auto Scaling ScalingPolicy\n      StepAdjustments",
+    "type": "Auto Scaling ScalingPolicy\n      StepAdjustments",
     "properties": [
       "MetricIntervalLowerBound",
       "MetricIntervalUpperBound",
@@ -2879,7 +2879,7 @@
   }
 ,
   {
-    "resource": "Auto Scaling Tags Property Type",
+    "type": "Auto Scaling Tags Property Type",
     "properties": [
       "Key",
       "Value",
@@ -2893,13 +2893,13 @@
   }
 ,
   {
-    "resource": "CloudFormation Stack Parameters Property Type",
+    "type": "CloudFormation Stack Parameters Property Type",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS CloudFormation Interface Label",
+    "type": "AWS CloudFormation Interface Label",
     "properties": [
       "default"
     ],
@@ -2909,7 +2909,7 @@
   }
 ,
   {
-    "resource": "AWS CloudFormation Interface\n      ParameterGroup",
+    "type": "AWS CloudFormation Interface\n      ParameterGroup",
     "properties": [
       "Label",
       "Parameters"
@@ -2921,7 +2921,7 @@
   }
 ,
   {
-    "resource": "AWS CloudFormation Interface\n      ParameterLabel",
+    "type": "AWS CloudFormation Interface\n      ParameterLabel",
     "properties": [
       "ParameterLogicalID"
     ],
@@ -2931,7 +2931,7 @@
   }
 ,
   {
-    "resource": "CloudFront DistributionConfig",
+    "type": "CloudFront DistributionConfig",
     "properties": [
       "Aliases",
       "CacheBehaviors",
@@ -2965,7 +2965,7 @@
   }
 ,
   {
-    "resource": "CloudFront DistributionConfig\n      CacheBehavior",
+    "type": "CloudFront DistributionConfig\n      CacheBehavior",
     "properties": [
       "AllowedMethods",
       "CachedMethods",
@@ -2997,7 +2997,7 @@
   }
 ,
   {
-    "resource": "CloudFront\n      DistributionConfig CustomErrorResponse",
+    "type": "CloudFront\n      DistributionConfig CustomErrorResponse",
     "properties": [
       "ErrorCachingMinTTL",
       "ErrorCode",
@@ -3013,7 +3013,7 @@
   }
 ,
   {
-    "resource": "CloudFront\n      DefaultCacheBehavior",
+    "type": "CloudFront\n      DefaultCacheBehavior",
     "properties": [
       "AllowedMethods",
       "CachedMethods",
@@ -3043,7 +3043,7 @@
   }
 ,
   {
-    "resource": "CloudFront Logging",
+    "type": "CloudFront Logging",
     "properties": [
       "Bucket",
       "IncludeCookies",
@@ -3057,7 +3057,7 @@
   }
 ,
   {
-    "resource": "CloudFront DistributionConfig Origin",
+    "type": "CloudFront DistributionConfig Origin",
     "properties": [
       "CustomOriginConfig",
       "DomainName",
@@ -3075,7 +3075,7 @@
   }
 ,
   {
-    "resource": "CloudFront DistributionConfig Origin\n      CustomOrigin",
+    "type": "CloudFront DistributionConfig Origin\n      CustomOrigin",
     "properties": [
       "HTTPPort",
       "HTTPSPort",
@@ -3089,7 +3089,7 @@
   }
 ,
   {
-    "resource": "CloudFront DistributionConfig Origin\n      S3Origin",
+    "type": "CloudFront DistributionConfig Origin\n      S3Origin",
     "properties": [
       "OriginAccessIdentity"
     ],
@@ -3099,7 +3099,7 @@
   }
 ,
   {
-    "resource": "CloudFront\n      DistributionConfiguration Restrictions",
+    "type": "CloudFront\n      DistributionConfiguration Restrictions",
     "properties": [
       "GeoRestriction"
     ],
@@ -3109,7 +3109,7 @@
   }
 ,
   {
-    "resource": "CloudFront\n      DistributionConfig Restrictions GeoRestriction",
+    "type": "CloudFront\n      DistributionConfig Restrictions GeoRestriction",
     "properties": [
       "Locations",
       "RestrictionType",
@@ -3127,7 +3127,7 @@
   }
 ,
   {
-    "resource": "CloudFront\n      DistributionConfiguration ViewerCertificate",
+    "type": "CloudFront\n      DistributionConfiguration ViewerCertificate",
     "properties": [
       "CloudFrontDefaultCertificate",
       "IamCertificateId",
@@ -3143,7 +3143,7 @@
   }
 ,
   {
-    "resource": "CloudFront ForwardedValues",
+    "type": "CloudFront ForwardedValues",
     "properties": [
       "Cookies",
       "Headers",
@@ -3157,7 +3157,7 @@
   }
 ,
   {
-    "resource": "CloudFront ForwardedValues\n      Cookies",
+    "type": "CloudFront ForwardedValues\n      Cookies",
     "properties": [
       "Forward",
       "WhitelistedNames"
@@ -3169,7 +3169,7 @@
   }
 ,
   {
-    "resource": "CloudWatch Metric Dimension Property Type",
+    "type": "CloudWatch Metric Dimension Property Type",
     "properties": [
       "Name",
       "Value"
@@ -3181,7 +3181,7 @@
   }
 ,
   {
-    "resource": "CloudWatch Logs MetricFilter\n      MetricTransformation Property",
+    "type": "CloudWatch Logs MetricFilter\n      MetricTransformation Property",
     "properties": [
       "MetricName",
       "MetricNamespace",
@@ -3195,7 +3195,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy\n      DeploymentConfig MinimumHealthyHosts",
+    "type": "AWS CodeDeploy\n      DeploymentConfig MinimumHealthyHosts",
     "properties": [
       "Type",
       "Value"
@@ -3207,7 +3207,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy DeploymentGroup\n      Deployment",
+    "type": "AWS CodeDeploy DeploymentGroup\n      Deployment",
     "properties": [
       "Description",
       "IgnoreApplicationStopFailures",
@@ -3221,7 +3221,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy\n      DeploymentGroup Deployment Revision",
+    "type": "AWS CodeDeploy\n      DeploymentGroup Deployment Revision",
     "properties": [
       "GitHubLocation",
       "RevisionType",
@@ -3235,7 +3235,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy DeploymentGroup Deployment Revision GitHubLocation",
+    "type": "AWS CodeDeploy DeploymentGroup Deployment Revision GitHubLocation",
     "properties": [
       "CommitId",
       "Repository"
@@ -3247,7 +3247,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy\n      DeploymentGroup Deployment Revision S3Location",
+    "type": "AWS CodeDeploy\n      DeploymentGroup Deployment Revision S3Location",
     "properties": [
       "Bucket",
       "BundleType",
@@ -3265,7 +3265,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy DeploymentGroup\n      Ec2TagFilters",
+    "type": "AWS CodeDeploy DeploymentGroup\n      Ec2TagFilters",
     "properties": [
       "Key",
       "Type",
@@ -3279,7 +3279,7 @@
   }
 ,
   {
-    "resource": "AWS CodeDeploy\n      DeploymentGroup OnPremisesInstanceTagFilters",
+    "type": "AWS CodeDeploy\n      DeploymentGroup OnPremisesInstanceTagFilters",
     "properties": [
       "Key",
       "Type",
@@ -3293,7 +3293,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline\n      CustomActionType ArtifactDetails",
+    "type": "AWS CodePipeline\n      CustomActionType ArtifactDetails",
     "properties": [
       "MaximumCount",
       "MinimumCount"
@@ -3305,7 +3305,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline\n      CustomActionType ConfigurationProperties",
+    "type": "AWS CodePipeline\n      CustomActionType ConfigurationProperties",
     "properties": [
       "Description",
       "Key",
@@ -3327,7 +3327,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline CustomActionType\n      Settings",
+    "type": "AWS CodePipeline CustomActionType\n      Settings",
     "properties": [
       "EntityUrlTemplate",
       "ExecutionUrlTemplate",
@@ -3343,7 +3343,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline\n      ArtifactStore",
+    "type": "AWS CodePipeline Pipeline\n      ArtifactStore",
     "properties": [
       "EncryptionKey",
       "Location",
@@ -3357,7 +3357,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline\n      ArtifactStore EncryptionKey",
+    "type": "AWS CodePipeline Pipeline\n      ArtifactStore EncryptionKey",
     "properties": [
       "Id",
       "Type"
@@ -3369,7 +3369,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline\n      Pipeline DisableInboundStageTransitions",
+    "type": "AWS CodePipeline\n      Pipeline DisableInboundStageTransitions",
     "properties": [
       "Reason",
       "StageName"
@@ -3381,7 +3381,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline Stages",
+    "type": "AWS CodePipeline Pipeline Stages",
     "properties": [
       "Actions",
       "Blockers",
@@ -3395,7 +3395,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline Stages\n      Actions",
+    "type": "AWS CodePipeline Pipeline Stages\n      Actions",
     "properties": [
       "ActionTypeId",
       "Configuration",
@@ -3417,7 +3417,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline\n      Stages Actions ActionTypeId",
+    "type": "AWS CodePipeline Pipeline\n      Stages Actions ActionTypeId",
     "properties": [
       "Category",
       "Owner",
@@ -3433,7 +3433,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline\n      Pipeline Stages Actions InputArtifacts",
+    "type": "AWS CodePipeline\n      Pipeline Stages Actions InputArtifacts",
     "properties": [
       "Name"
     ],
@@ -3443,7 +3443,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline\n      Pipeline Stages Actions OutputArtifacts",
+    "type": "AWS CodePipeline\n      Pipeline Stages Actions OutputArtifacts",
     "properties": [
       "Name"
     ],
@@ -3453,7 +3453,7 @@
   }
 ,
   {
-    "resource": "AWS CodePipeline Pipeline Stages\n      Blockers",
+    "type": "AWS CodePipeline Pipeline Stages\n      Blockers",
     "properties": [
       "Name",
       "Type"
@@ -3465,7 +3465,7 @@
   }
 ,
   {
-    "resource": "AWS Config ConfigRule Scope",
+    "type": "AWS Config ConfigRule Scope",
     "properties": [
       "ComplianceResourceId",
       "ComplianceResourceTypes",
@@ -3481,7 +3481,7 @@
   }
 ,
   {
-    "resource": "AWS Config ConfigRule Source",
+    "type": "AWS Config ConfigRule Source",
     "properties": [
       "Owner",
       "SourceDetails",
@@ -3495,7 +3495,7 @@
   }
 ,
   {
-    "resource": "AWS Config ConfigRule Source\n    SourceDetails",
+    "type": "AWS Config ConfigRule Source\n    SourceDetails",
     "properties": [
       "EventSource",
       "MessageType"
@@ -3507,7 +3507,7 @@
   }
 ,
   {
-    "resource": "AWS Config\n    ConfigurationRecorder RecordingGroup",
+    "type": "AWS Config\n    ConfigurationRecorder RecordingGroup",
     "properties": [
       "AllSupported",
       "IncludeGlobalResourceTypes",
@@ -3521,7 +3521,7 @@
   }
 ,
   {
-    "resource": "AWS Config\n    DeliveryChannel ConfigSnapshotDeliveryProperties",
+    "type": "AWS Config\n    DeliveryChannel ConfigSnapshotDeliveryProperties",
     "properties": [
       "DeliveryFrequency"
     ],
@@ -3531,7 +3531,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline Pipeline\n      ParameterObjects",
+    "type": "AWS Data Pipeline Pipeline\n      ParameterObjects",
     "properties": [
       "Attributes",
       "Id"
@@ -3543,7 +3543,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline\n      Parameter Objects Attributes",
+    "type": "AWS Data Pipeline\n      Parameter Objects Attributes",
     "properties": [
       "Key",
       "StringValue"
@@ -3555,7 +3555,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline Pipeline\n      ParameterValues",
+    "type": "AWS Data Pipeline Pipeline\n      ParameterValues",
     "properties": [
       "Id",
       "StringValue"
@@ -3567,7 +3567,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline\n      PipelineObjects",
+    "type": "AWS Data Pipeline\n      PipelineObjects",
     "properties": [
       "Fields",
       "Id",
@@ -3581,7 +3581,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline\n      Data Pipeline Object Fields",
+    "type": "AWS Data Pipeline\n      Data Pipeline Object Fields",
     "properties": [
       "Key",
       "RefValue",
@@ -3595,7 +3595,7 @@
   }
 ,
   {
-    "resource": "AWS Data Pipeline Pipeline\n      PipelineTags",
+    "type": "AWS Data Pipeline Pipeline\n      PipelineTags",
     "properties": [
       "Key",
       "Value"
@@ -3607,7 +3607,7 @@
   }
 ,
   {
-    "resource": "AWS Directory Service MicrosoftAD\n      VpcSettings",
+    "type": "AWS Directory Service MicrosoftAD\n      VpcSettings",
     "properties": [
       "SubnetIds",
       "VpcId"
@@ -3619,7 +3619,7 @@
   }
 ,
   {
-    "resource": "AWS Directory Service SimpleAD\n      VpcSettings",
+    "type": "AWS Directory Service SimpleAD\n      VpcSettings",
     "properties": [
       "SubnetIds",
       "VpcId"
@@ -3631,7 +3631,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Attribute Definitions",
+    "type": "DynamoDB Attribute Definitions",
     "properties": [
       "AttributeName",
       "AttributeType"
@@ -3643,7 +3643,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Global Secondary Indexes",
+    "type": "DynamoDB Global Secondary Indexes",
     "properties": [
       "IndexName",
       "KeySchema",
@@ -3659,7 +3659,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Key Schema",
+    "type": "DynamoDB Key Schema",
     "properties": [
       "AttributeName",
       "KeyType"
@@ -3671,7 +3671,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Local Secondary Indexes",
+    "type": "DynamoDB Local Secondary Indexes",
     "properties": [
       "IndexName",
       "KeySchema",
@@ -3685,7 +3685,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Projection Object",
+    "type": "DynamoDB Projection Object",
     "properties": [
       "NonKeyAttributes",
       "ProjectionType",
@@ -3703,7 +3703,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Provisioned\n      Throughput",
+    "type": "DynamoDB Provisioned\n      Throughput",
     "properties": [
       "ReadCapacityUnits",
       "WriteCapacityUnits"
@@ -3715,7 +3715,7 @@
   }
 ,
   {
-    "resource": "DynamoDB Table\n      StreamSpecification",
+    "type": "DynamoDB Table\n      StreamSpecification",
     "properties": [
       "StreamViewType"
     ],
@@ -3725,7 +3725,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Block Device Mapping Property",
+    "type": "Amazon EC2 Block Device Mapping Property",
     "properties": [
       "DeviceName",
       "Ebs",
@@ -3741,7 +3741,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Block Store Block Device Property",
+    "type": "Amazon Elastic Block Store Block Device Property",
     "properties": [
       "DeleteOnTermination",
       "Encrypted",
@@ -3761,13 +3761,13 @@
   }
 ,
   {
-    "resource": "EC2 ICMP Property Type",
+    "type": "EC2 ICMP Property Type",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Amazon EC2 Instance\n      SsmAssociations",
+    "type": "Amazon EC2 Instance\n      SsmAssociations",
     "properties": [
       "AssociationParameters",
       "DocumentName"
@@ -3779,7 +3779,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2\n      Instance SsmAssociations AssociationParameters",
+    "type": "Amazon EC2\n      Instance SsmAssociations AssociationParameters",
     "properties": [
       "Key",
       "Value"
@@ -3791,7 +3791,7 @@
   }
 ,
   {
-    "resource": "EC2 MountPoint Property Type",
+    "type": "EC2 MountPoint Property Type",
     "properties": [
       "Device",
       "VolumeId"
@@ -3803,7 +3803,7 @@
   }
 ,
   {
-    "resource": "EC2 NetworkInterface Embedded\n      Property Type",
+    "type": "EC2 NetworkInterface Embedded\n      Property Type",
     "properties": [
       "AssociatePublicIpAddress",
       "DeleteOnTermination",
@@ -3831,7 +3831,7 @@
   }
 ,
   {
-    "resource": "EC2 Network Interface Association",
+    "type": "EC2 Network Interface Association",
     "properties": [
       "AttachmentID",
       "InstanceID",
@@ -3847,7 +3847,7 @@
   }
 ,
   {
-    "resource": "EC2 Network Interface Attachment",
+    "type": "EC2 Network Interface Attachment",
     "properties": [
       "AttachmentID",
       "InstanceID"
@@ -3859,7 +3859,7 @@
   }
 ,
   {
-    "resource": "EC2 Network Interface Group Item",
+    "type": "EC2 Network Interface Group Item",
     "properties": [
       "Key",
       "Value"
@@ -3871,7 +3871,7 @@
   }
 ,
   {
-    "resource": "EC2 Network Interface\n      Private IP Specification",
+    "type": "EC2 Network Interface\n      Private IP Specification",
     "properties": [
       "PrivateIpAddress",
       "Primary"
@@ -3883,13 +3883,13 @@
   }
 ,
   {
-    "resource": "EC2 PortRange Property Type",
+    "type": "EC2 PortRange Property Type",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "EC2 Security Group Rule Property Type",
+    "type": "EC2 Security Group Rule Property Type",
     "properties": [
       "CidrIp",
       "DestinationSecurityGroupId (SecurityGroupEgress only)",
@@ -3913,7 +3913,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 SpotFleet\n      SpotFleetRequestConfigData",
+    "type": "Amazon EC2 SpotFleet\n      SpotFleetRequestConfigData",
     "properties": [
       "AllocationStrategy",
       "ExcessCapacityTerminationPolicy",
@@ -3939,7 +3939,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications",
     "properties": [
       "BlockDeviceMappings",
       "EbsOptimized",
@@ -3977,7 +3977,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications\n      BlockDeviceMappings",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications\n      BlockDeviceMappings",
     "properties": [
       "DeviceName",
       "Ebs",
@@ -3993,7 +3993,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications BlockDeviceMappings\n      Ebs",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications BlockDeviceMappings\n      Ebs",
     "properties": [
       "DeleteOnTermination",
       "Encrypted",
@@ -4013,7 +4013,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications\n      IamInstanceProfile",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications\n      IamInstanceProfile",
     "properties": [
       "Arn"
     ],
@@ -4023,7 +4023,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 SpotFleet SpotFleetRequestConfigData LaunchSpecifications Monitoring",
+    "type": "Amazon EC2 SpotFleet SpotFleetRequestConfigData LaunchSpecifications Monitoring",
     "properties": [
       "Enabled"
     ],
@@ -4033,7 +4033,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications NetworkInterfaces",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications NetworkInterfaces",
     "properties": [
       "AssociatePublicIpAddress",
       "DeleteOnTermination",
@@ -4059,7 +4059,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications NetworkInterfaces\n      PrivateIpAddresses",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications NetworkInterfaces\n      PrivateIpAddresses",
     "properties": [
       "Primary",
       "PrivateIpAddress"
@@ -4071,7 +4071,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications Placement",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications Placement",
     "properties": [
       "AvailabilityZone",
       "GroupName"
@@ -4083,7 +4083,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications SecurityGroups",
+    "type": "Amazon Elastic Compute Cloud SpotFleet SpotFleetRequestConfigData LaunchSpecifications SecurityGroups",
     "properties": [
       "GroupId"
     ],
@@ -4093,7 +4093,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service Service\n      LoadBalancers",
+    "type": "Amazon EC2 Container Service Service\n      LoadBalancers",
     "properties": [
       "ContainerName",
       "ContainerPort",
@@ -4107,7 +4107,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service TaskDefinition\n      ContainerDefinitions",
+    "type": "Amazon EC2 Container Service TaskDefinition\n      ContainerDefinitions",
     "properties": [
       "Command",
       "Cpu",
@@ -4139,7 +4139,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions Environment",
+    "type": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions Environment",
     "properties": [
       "Name",
       "Value"
@@ -4151,7 +4151,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions MountPoints",
+    "type": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions MountPoints",
     "properties": [
       "ContainerPath",
       "SourceVolume",
@@ -4165,7 +4165,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions PortMappings",
+    "type": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions PortMappings",
     "properties": [
       "ContainerPort",
       "HostPort"
@@ -4177,7 +4177,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions VolumesFrom",
+    "type": "Amazon EC2 Container Service\n      TaskDefinition ContainerDefinitions VolumesFrom",
     "properties": [
       "SourceContainer",
       "ReadOnly"
@@ -4189,7 +4189,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service TaskDefinition\n      Volumes",
+    "type": "Amazon EC2 Container Service TaskDefinition\n      Volumes",
     "properties": [
       "Name",
       "Host"
@@ -4201,7 +4201,7 @@
   }
 ,
   {
-    "resource": "Amazon EC2 Container Service TaskDefinition Volumes\n      Host",
+    "type": "Amazon EC2 Container Service TaskDefinition Volumes\n      Host",
     "properties": [
       "SourcePath"
     ],
@@ -4211,7 +4211,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic File System FileSystem\n      FileSystemTags",
+    "type": "Amazon Elastic File System FileSystem\n      FileSystemTags",
     "properties": [
       "Key",
       "Value"
@@ -4223,7 +4223,7 @@
   }
 ,
   {
-    "resource": "Elastic Beanstalk Environment Tier Property\n      Type",
+    "type": "Elastic Beanstalk Environment Tier Property\n      Type",
     "properties": [
       "Name",
       "Type",
@@ -4237,7 +4237,7 @@
   }
 ,
   {
-    "resource": "Elastic Beanstalk OptionSettings Property\n      Type",
+    "type": "Elastic Beanstalk OptionSettings Property\n      Type",
     "properties": [
       "Namespace",
       "OptionName",
@@ -4251,7 +4251,7 @@
   }
 ,
   {
-    "resource": "Elastic Beanstalk SourceBundle Property Type",
+    "type": "Elastic Beanstalk SourceBundle Property Type",
     "properties": [
       "S3Bucket",
       "S3Key"
@@ -4263,7 +4263,7 @@
   }
 ,
   {
-    "resource": "Elastic Beanstalk\n      SourceConfiguration Property Type",
+    "type": "Elastic Beanstalk\n      SourceConfiguration Property Type",
     "properties": [
       "ApplicationName",
       "TemplateName"
@@ -4275,7 +4275,7 @@
   }
 ,
   {
-    "resource": "Elastic Load Balancing AccessLoggingPolicy",
+    "type": "Elastic Load Balancing AccessLoggingPolicy",
     "properties": [
       "EmitInterval",
       "Enabled",
@@ -4291,7 +4291,7 @@
   }
 ,
   {
-    "resource": "ElasticLoadBalancing AppCookieStickinessPolicy Type",
+    "type": "ElasticLoadBalancing AppCookieStickinessPolicy Type",
     "properties": [
       "CookieName",
       "PolicyName"
@@ -4303,7 +4303,7 @@
   }
 ,
   {
-    "resource": "Elastic Load Balancing\n      ConnectionDrainingPolicy",
+    "type": "Elastic Load Balancing\n      ConnectionDrainingPolicy",
     "properties": [
       "Enabled",
       "Timeout"
@@ -4315,7 +4315,7 @@
   }
 ,
   {
-    "resource": "Elastic Load Balancing ConnectionSettings",
+    "type": "Elastic Load Balancing ConnectionSettings",
     "properties": [
       "IdleTimeout"
     ],
@@ -4325,7 +4325,7 @@
   }
 ,
   {
-    "resource": "ElasticLoadBalancing HealthCheck Type",
+    "type": "ElasticLoadBalancing HealthCheck Type",
     "properties": [
       "HealthyThreshold",
       "Interval",
@@ -4343,7 +4343,7 @@
   }
 ,
   {
-    "resource": "ElasticLoadBalancing LBCookieStickinessPolicy Type",
+    "type": "ElasticLoadBalancing LBCookieStickinessPolicy Type",
     "properties": [
       "CookieExpirationPeriod",
       "PolicyName"
@@ -4355,7 +4355,7 @@
   }
 ,
   {
-    "resource": "ElasticLoadBalancing Listener Property Type",
+    "type": "ElasticLoadBalancing Listener Property Type",
     "properties": [
       "InstancePort",
       "InstanceProtocol",
@@ -4375,7 +4375,7 @@
   }
 ,
   {
-    "resource": "ElasticLoadBalancing Policy Type",
+    "type": "ElasticLoadBalancing Policy Type",
     "properties": [
       "Attributes",
       "InstancePorts",
@@ -4393,7 +4393,7 @@
   }
 ,
   {
-    "resource": "Amazon Elasticsearch Service Domain\n    EBSOptions",
+    "type": "Amazon Elasticsearch Service Domain\n    EBSOptions",
     "properties": [
       "EBSEnabled",
       "Iops",
@@ -4409,7 +4409,7 @@
   }
 ,
   {
-    "resource": "Amazon Elasticsearch Service Domain\n    ElasticsearchClusterConfig",
+    "type": "Amazon Elasticsearch Service Domain\n    ElasticsearchClusterConfig",
     "properties": [
       "DedicatedMasterCount",
       "DedicatedMasterEnabled",
@@ -4429,7 +4429,7 @@
   }
 ,
   {
-    "resource": "Amazon Elasticsearch Service Domain\n    SnapshotOptions",
+    "type": "Amazon Elasticsearch Service Domain\n    SnapshotOptions",
     "properties": [
       "AutomatedSnapshotStartHour"
     ],
@@ -4439,7 +4439,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Cluster Application",
+    "type": "Amazon Elastic MapReduce Cluster Application",
     "properties": [
       "AdditionalInfo",
       "Args",
@@ -4455,7 +4455,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Cluster\n    BootstrapActionConfig",
+    "type": "Amazon Elastic MapReduce Cluster\n    BootstrapActionConfig",
     "properties": [
       "Name",
       "ScriptBootstrapAction"
@@ -4467,7 +4467,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Cluster BootstrapActionConfig ScriptBootstrapActionConfig",
+    "type": "Amazon Elastic MapReduce Cluster BootstrapActionConfig ScriptBootstrapActionConfig",
     "properties": [
       "Args",
       "Path"
@@ -4479,7 +4479,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Cluster Configuration",
+    "type": "Amazon Elastic MapReduce Cluster Configuration",
     "properties": [
       "Classification",
       "ConfigurationProperties",
@@ -4493,7 +4493,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Cluster\n    JobFlowInstancesConfig",
+    "type": "Amazon Elastic MapReduce Cluster\n    JobFlowInstancesConfig",
     "properties": [
       "AdditionalMasterSecurityGroups",
       "AdditionalSlaveSecurityGroups",
@@ -4525,7 +4525,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce\n    Cluster JobFlowInstancesConfig InstanceGroupConfig",
+    "type": "Amazon Elastic MapReduce\n    Cluster JobFlowInstancesConfig InstanceGroupConfig",
     "properties": [
       "BidPrice",
       "Configurations",
@@ -4545,7 +4545,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce\n    Cluster JobFlowInstancesConfig PlacementType",
+    "type": "Amazon Elastic MapReduce\n    Cluster JobFlowInstancesConfig PlacementType",
     "properties": [
       "AvailabilityZone"
     ],
@@ -4555,7 +4555,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce EbsConfiguration",
+    "type": "Amazon Elastic MapReduce EbsConfiguration",
     "properties": [
       "EbsBlockDeviceConfig",
       "EbsOptimized"
@@ -4567,7 +4567,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce EbsConfiguration EbsBlockDeviceConfig",
+    "type": "Amazon Elastic MapReduce EbsConfiguration EbsBlockDeviceConfig",
     "properties": [
       "VolumeSpecification",
       "VolumesPerInstance"
@@ -4579,7 +4579,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce EbsConfiguration EbsBlockDeviceConfig VolumeSpecification",
+    "type": "Amazon Elastic MapReduce EbsConfiguration EbsBlockDeviceConfig VolumeSpecification",
     "properties": [
       "Iops",
       "SizeInGB",
@@ -4593,7 +4593,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Step\n    HadoopJarStepConfig",
+    "type": "Amazon Elastic MapReduce Step\n    HadoopJarStepConfig",
     "properties": [
       "Args",
       "Jar",
@@ -4609,7 +4609,7 @@
   }
 ,
   {
-    "resource": "Amazon Elastic MapReduce Step\n    HadoopJarStepConfig KeyValue",
+    "type": "Amazon Elastic MapReduce Step\n    HadoopJarStepConfig KeyValue",
     "properties": [
       "Key",
       "Value"
@@ -4621,7 +4621,7 @@
   }
 ,
   {
-    "resource": "Amazon GameLift Alias\n    RoutingStrategy",
+    "type": "Amazon GameLift Alias\n    RoutingStrategy",
     "properties": [
       "FleetId",
       "Message",
@@ -4635,7 +4635,7 @@
   }
 ,
   {
-    "resource": "Amazon GameLift Build\n    StorageLocation",
+    "type": "Amazon GameLift Build\n    StorageLocation",
     "properties": [
       "Bucket",
       "Key",
@@ -4649,7 +4649,7 @@
   }
 ,
   {
-    "resource": "Amazon GameLift Fleet\n    EC2InboundPermission",
+    "type": "Amazon GameLift Fleet\n    EC2InboundPermission",
     "properties": [
       "FromPort",
       "IpRange",
@@ -4665,7 +4665,7 @@
   }
 ,
   {
-    "resource": "IAM Policies",
+    "type": "IAM Policies",
     "properties": [
       "PolicyDocument",
       "PolicyName"
@@ -4677,7 +4677,7 @@
   }
 ,
   {
-    "resource": "IAM User LoginProfile",
+    "type": "IAM User LoginProfile",
     "properties": [
       "Password",
       "PasswordResetRequired"
@@ -4689,7 +4689,7 @@
   }
 ,
   {
-    "resource": "AWS Lambda Function Code",
+    "type": "AWS Lambda Function Code",
     "properties": [
       "S3Bucket",
       "S3Key",
@@ -4715,7 +4715,7 @@
   }
 ,
   {
-    "resource": "AWS Lambda Function VPCConfig",
+    "type": "AWS Lambda Function VPCConfig",
     "properties": [
       "SecurityGroupIds",
       "SubnetIds"
@@ -4727,13 +4727,13 @@
   }
 ,
   {
-    "resource": "Name Type",
+    "type": "Name Type",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS OpsWorks\n      AutoScalingThresholds Type",
+    "type": "AWS OpsWorks\n      AutoScalingThresholds Type",
     "properties": [
       "CpuThreshold",
       "IgnoreMetricsTime",
@@ -4753,7 +4753,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks ChefConfiguration\n      Type",
+    "type": "AWS OpsWorks ChefConfiguration\n      Type",
     "properties": [
       "BerkshelfVersion",
       "ManageBerkshelf"
@@ -4765,7 +4765,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks Layer\n      LifeCycleConfiguration",
+    "type": "AWS OpsWorks Layer\n      LifeCycleConfiguration",
     "properties": [
       "ShutdownEventConfiguration"
     ],
@@ -4775,7 +4775,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks Layer LifeCycleConfiguration ShutdownEventConfiguration",
+    "type": "AWS OpsWorks Layer LifeCycleConfiguration ShutdownEventConfiguration",
     "properties": [
       "DelayUntilElbConnectionsDrained",
       "ExecutionTimeout"
@@ -4787,7 +4787,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks LoadBasedAutoScaling\n      Type",
+    "type": "AWS OpsWorks LoadBasedAutoScaling\n      Type",
     "properties": [
       "DownScaling",
       "Enable",
@@ -4801,7 +4801,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks Recipes Type",
+    "type": "AWS OpsWorks Recipes Type",
     "properties": [
       "Configure",
       "Deploy",
@@ -4819,7 +4819,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks Source Type",
+    "type": "AWS OpsWorks Source Type",
     "properties": [
       "Password",
       "Revision",
@@ -4839,7 +4839,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks App Environment",
+    "type": "AWS OpsWorks App Environment",
     "properties": [
       "Key",
       "Secure",
@@ -4853,7 +4853,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks SslConfiguration\n      Type",
+    "type": "AWS OpsWorks SslConfiguration\n      Type",
     "properties": [
       "Certificate",
       "Chain",
@@ -4867,7 +4867,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks\n      StackConfigurationManager Type",
+    "type": "AWS OpsWorks\n      StackConfigurationManager Type",
     "properties": [
       "Name",
       "Version"
@@ -4879,7 +4879,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks\n      TimeBasedAutoScaling Type",
+    "type": "AWS OpsWorks\n      TimeBasedAutoScaling Type",
     "properties": [
       "Friday",
       "Monday",
@@ -4901,7 +4901,7 @@
   }
 ,
   {
-    "resource": "AWS OpsWorks VolumeConfiguration\n      Type",
+    "type": "AWS OpsWorks VolumeConfiguration\n      Type",
     "properties": [
       "Iops",
       "MountPoint",
@@ -4921,7 +4921,7 @@
   }
 ,
   {
-    "resource": "Amazon Redshift Parameter\n      Type",
+    "type": "Amazon Redshift Parameter\n      Type",
     "properties": [
       "ParameterName",
       "ParameterValue"
@@ -4933,7 +4933,7 @@
   }
 ,
   {
-    "resource": "AWS CloudFormation Resource Tags Type",
+    "type": "AWS CloudFormation Resource Tags Type",
     "properties": [
       "Key",
       "Value"
@@ -4945,7 +4945,7 @@
   }
 ,
   {
-    "resource": "Amazon RDS OptionGroup\n    OptionConfigurations",
+    "type": "Amazon RDS OptionGroup\n    OptionConfigurations",
     "properties": [
       "DBSecurityGroupMemberships",
       "OptionName",
@@ -4963,7 +4963,7 @@
   }
 ,
   {
-    "resource": "Amazon RDS\n    OptionGroup OptionConfigurations OptionSettings",
+    "type": "Amazon RDS\n    OptionGroup OptionConfigurations OptionSettings",
     "properties": [
       "Name",
       "Value"
@@ -4975,7 +4975,7 @@
   }
 ,
   {
-    "resource": "Amazon RDS Security Group Rule",
+    "type": "Amazon RDS Security Group Rule",
     "properties": [
       "CIDRIP",
       "EC2SecurityGroupId",
@@ -4991,7 +4991,7 @@
   }
 ,
   {
-    "resource": "Route 53 AliasTarget Property",
+    "type": "Route 53 AliasTarget Property",
     "properties": [
       "DNSName",
       "EvaluateTargetHealth",
@@ -5005,7 +5005,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53 Record Set GeoLocation\n      Property",
+    "type": "Amazon Route 53 Record Set GeoLocation\n      Property",
     "properties": [
       "ContinentCode",
       "CountryCode",
@@ -5019,7 +5019,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53\n      HealthCheckConfig",
+    "type": "Amazon Route 53\n      HealthCheckConfig",
     "properties": [
       "FailureThreshold",
       "FullyQualifiedDomainName",
@@ -5043,7 +5043,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53\n      HealthCheckTags",
+    "type": "Amazon Route 53\n      HealthCheckTags",
     "properties": [
       "Key",
       "Value"
@@ -5055,7 +5055,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53 HostedZoneConfig\n      Property",
+    "type": "Amazon Route 53 HostedZoneConfig\n      Property",
     "properties": [
       "Comment"
     ],
@@ -5065,7 +5065,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53\n      HostedZoneTags",
+    "type": "Amazon Route 53\n      HostedZoneTags",
     "properties": [
       "Key",
       "Value"
@@ -5077,7 +5077,7 @@
   }
 ,
   {
-    "resource": "Amazon Route 53 HostedZoneVPCs",
+    "type": "Amazon Route 53 HostedZoneVPCs",
     "properties": [
       "VPCId",
       "VPCRegion"
@@ -5089,7 +5089,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Cors Configuration",
+    "type": "Amazon S3 Cors Configuration",
     "properties": [
       "CorsRules"
     ],
@@ -5099,7 +5099,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Cors Configuration Rule",
+    "type": "Amazon S3 Cors Configuration Rule",
     "properties": [
       "AllowedHeaders",
       "AllowedMethods",
@@ -5119,7 +5119,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Lifecycle Configuration",
+    "type": "Amazon S3 Lifecycle Configuration",
     "properties": [
       "Rules"
     ],
@@ -5129,7 +5129,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Lifecycle Rule",
+    "type": "Amazon S3 Lifecycle Rule",
     "properties": [
       "ExpirationDate",
       "ExpirationInDays",
@@ -5157,7 +5157,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      Lifecycle Rule NoncurrentVersionTransition",
+    "type": "Amazon S3\n      Lifecycle Rule NoncurrentVersionTransition",
     "properties": [
       "StorageClass",
       "TransitionInDays"
@@ -5169,7 +5169,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Lifecycle Rule\n      Transition",
+    "type": "Amazon S3 Lifecycle Rule\n      Transition",
     "properties": [
       "StorageClass",
       "TransitionDate",
@@ -5183,7 +5183,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Logging Configuration",
+    "type": "Amazon S3 Logging Configuration",
     "properties": [
       "DestinationBucketName",
       "LogFilePrefix"
@@ -5195,7 +5195,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      NotificationConfiguration",
+    "type": "Amazon S3\n      NotificationConfiguration",
     "properties": [
       "LambdaConfigurations",
       "QueueConfigurations",
@@ -5209,7 +5209,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      NotificationConfiguration Config Filter",
+    "type": "Amazon S3\n      NotificationConfiguration Config Filter",
     "properties": [
       "S3Key"
     ],
@@ -5219,7 +5219,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      NotificationConfiguration Config Filter S3Key",
+    "type": "Amazon S3\n      NotificationConfiguration Config Filter S3Key",
     "properties": [
       "Rules"
     ],
@@ -5229,7 +5229,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 NotificationConfiguration Config Filter S3Key Rules",
+    "type": "Amazon S3 NotificationConfiguration Config Filter S3Key Rules",
     "properties": [
       "Name",
       "Value"
@@ -5241,7 +5241,7 @@
   }
 ,
   {
-    "resource": "Amazon Simple Storage Service\n      NotificationConfiguration LambdaConfigurations",
+    "type": "Amazon Simple Storage Service\n      NotificationConfiguration LambdaConfigurations",
     "properties": [
       "Event",
       "Filter",
@@ -5255,7 +5255,7 @@
   }
 ,
   {
-    "resource": "Amazon Simple Storage Service\n      NotificationConfiguration QueueConfigurations",
+    "type": "Amazon Simple Storage Service\n      NotificationConfiguration QueueConfigurations",
     "properties": [
       "Event",
       "Filter",
@@ -5269,7 +5269,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      NotificationConfiguration TopicConfigurations",
+    "type": "Amazon S3\n      NotificationConfiguration TopicConfigurations",
     "properties": [
       "Event",
       "Filter",
@@ -5283,7 +5283,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      ReplicationConfiguration",
+    "type": "Amazon S3\n      ReplicationConfiguration",
     "properties": [
       "Role",
       "Rules"
@@ -5295,7 +5295,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      ReplicationConfiguration Rules",
+    "type": "Amazon S3\n      ReplicationConfiguration Rules",
     "properties": [
       "Destination",
       "Id",
@@ -5311,7 +5311,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      ReplicationConfiguration Rules Destination",
+    "type": "Amazon S3\n      ReplicationConfiguration Rules Destination",
     "properties": [
       "Bucket",
       "StorageClass"
@@ -5323,7 +5323,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Versioning Configuration",
+    "type": "Amazon S3 Versioning Configuration",
     "properties": [
       "Status"
     ],
@@ -5333,7 +5333,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Website Configuration\n      Property",
+    "type": "Amazon S3 Website Configuration\n      Property",
     "properties": [
       "ErrorDocument",
       "IndexDocument",
@@ -5349,7 +5349,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Website\n      Configuration Redirect All Requests To Property",
+    "type": "Amazon S3 Website\n      Configuration Redirect All Requests To Property",
     "properties": [
       "HostName",
       "Protocol"
@@ -5361,7 +5361,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Website Configuration\n      Routing Rules Property",
+    "type": "Amazon S3 Website Configuration\n      Routing Rules Property",
     "properties": [
       "RedirectRule",
       "RoutingRuleCondition"
@@ -5373,7 +5373,7 @@
   }
 ,
   {
-    "resource": "Amazon S3 Website\n      Configuration Routing Rules Redirect Rule Property",
+    "type": "Amazon S3 Website\n      Configuration Routing Rules Redirect Rule Property",
     "properties": [
       "HostName",
       "HttpRedirectCode",
@@ -5391,7 +5391,7 @@
   }
 ,
   {
-    "resource": "Amazon S3\n      Website Configuration Routing Rules Routing Rule Condition Property",
+    "type": "Amazon S3\n      Website Configuration Routing Rules Routing Rule Condition Property",
     "properties": [
       "HttpErrorCodeReturnedEquals",
       "KeyPrefixEquals"
@@ -5403,7 +5403,7 @@
   }
 ,
   {
-    "resource": "Amazon SNS Subscription Property Type",
+    "type": "Amazon SNS Subscription Property Type",
     "properties": [
       "Endpoint",
       "Protocol"
@@ -5415,7 +5415,7 @@
   }
 ,
   {
-    "resource": "Amazon SQS RedrivePolicy",
+    "type": "Amazon SQS RedrivePolicy",
     "properties": [
       "deadLetterTargetArn",
       "maxReceiveCount"
@@ -5427,7 +5427,7 @@
   }
 ,
   {
-    "resource": "AWS WAF ByteMatchSet\n      ByteMatchTuples",
+    "type": "AWS WAF ByteMatchSet\n      ByteMatchTuples",
     "properties": [
       "FieldToMatch",
       "PositionalConstraint",
@@ -5445,7 +5445,7 @@
   }
 ,
   {
-    "resource": "AWS WAF ByteMatchSet\n      ByteMatchTuples FieldToMatch",
+    "type": "AWS WAF ByteMatchSet\n      ByteMatchTuples FieldToMatch",
     "properties": [
       "Data",
       "Type"
@@ -5457,7 +5457,7 @@
   }
 ,
   {
-    "resource": "AWS WAF IPSet IPSetDescriptors",
+    "type": "AWS WAF IPSet IPSetDescriptors",
     "properties": [
       "Type",
       "Value"
@@ -5469,7 +5469,7 @@
   }
 ,
   {
-    "resource": "AWS WAF Rule Predicates",
+    "type": "AWS WAF Rule Predicates",
     "properties": [
       "DataId",
       "Negated",
@@ -5483,7 +5483,7 @@
   }
 ,
   {
-    "resource": "AWS WAF\n      SqlInjectionMatchSet SqlInjectionMatchTuples",
+    "type": "AWS WAF\n      SqlInjectionMatchSet SqlInjectionMatchTuples",
     "properties": [
       "FieldToMatch",
       "TextTransformation"
@@ -5495,7 +5495,7 @@
   }
 ,
   {
-    "resource": "AWS WAF SqlInjectionMatchSet SqlInjectionMatchTuples FieldToMatch",
+    "type": "AWS WAF SqlInjectionMatchSet SqlInjectionMatchTuples FieldToMatch",
     "properties": [
       "Data",
       "Type"
@@ -5507,7 +5507,7 @@
   }
 ,
   {
-    "resource": "AWS WAF WebACL Action",
+    "type": "AWS WAF WebACL Action",
     "properties": [
       "Type"
     ],
@@ -5517,7 +5517,7 @@
   }
 ,
   {
-    "resource": "AWS WAF WebACL Rules",
+    "type": "AWS WAF WebACL Rules",
     "properties": [
       "Action",
       "Priority",
@@ -5531,13 +5531,13 @@
   }
 ,
   {
-    "resource": "Resource Attribute Reference",
+    "type": "Resource Attribute Reference",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "CreationPolicy Attribute",
+    "type": "CreationPolicy Attribute",
     "properties": [
       "Count",
       "Timeout"
@@ -5549,7 +5549,7 @@
   }
 ,
   {
-    "resource": "DeletionPolicy Attribute",
+    "type": "DeletionPolicy Attribute",
     "properties": [
       "Delete",
       "Retain",
@@ -5563,19 +5563,19 @@
   }
 ,
   {
-    "resource": "DependsOn Attribute",
+    "type": "DependsOn Attribute",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Metadata Attribute",
+    "type": "Metadata Attribute",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "UpdatePolicy Attribute",
+    "type": "UpdatePolicy Attribute",
     "properties": [
       "MaxBatchSize",
       "MinInstancesInService",
@@ -5597,13 +5597,13 @@
   }
 ,
   {
-    "resource": "Intrinsic Function Reference",
+    "type": "Intrinsic Function Reference",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Fn::Base64",
+    "type": "Fn::Base64",
     "properties": [
       "valueToEncode"
     ],
@@ -5613,7 +5613,7 @@
   }
 ,
   {
-    "resource": "Condition Functions",
+    "type": "Condition Functions",
     "properties": [
       "condition",
       "value",
@@ -5635,13 +5635,13 @@
   }
 ,
   {
-    "resource": "Sample Templates",
+    "type": "Sample Templates",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Fn::FindInMap",
+    "type": "Fn::FindInMap",
     "properties": [
       "MapName",
       "TopLevelKey",
@@ -5655,7 +5655,7 @@
   }
 ,
   {
-    "resource": "Fn::GetAtt",
+    "type": "Fn::GetAtt",
     "properties": [
       "logicalNameOfResource",
       "attributeName"
@@ -5667,7 +5667,7 @@
   }
 ,
   {
-    "resource": "Fn::GetAZs",
+    "type": "Fn::GetAZs",
     "properties": [
       "region"
     ],
@@ -5677,7 +5677,7 @@
   }
 ,
   {
-    "resource": "Fn::Join",
+    "type": "Fn::Join",
     "properties": [
       "delimiter",
       "ListOfValues"
@@ -5689,7 +5689,7 @@
   }
 ,
   {
-    "resource": "Fn::Select",
+    "type": "Fn::Select",
     "properties": [
       "index",
       "listOfObjects"
@@ -5701,7 +5701,7 @@
   }
 ,
   {
-    "resource": "Ref",
+    "type": "Ref",
     "properties": [
       "logicalName"
     ],
@@ -5711,7 +5711,7 @@
   }
 ,
   {
-    "resource": "Pseudo Parameters Reference",
+    "type": "Pseudo Parameters Reference",
     "properties": [
       "AWS::AccountId",
       "AWS::NotificationARNs",
@@ -5731,301 +5731,301 @@
   }
 ,
   {
-    "resource": "CloudFormation Helper Scripts Reference",
+    "type": "CloudFormation Helper Scripts Reference",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "cfn-init",
+    "type": "cfn-init",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "cfn-signal",
+    "type": "cfn-signal",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "cfn-get-metadata",
+    "type": "cfn-get-metadata",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "cfn-hup",
+    "type": "cfn-hup",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Templates",
+    "type": "Sample Templates",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Asia Pacific (Seoul) Region",
+    "type": "Asia Pacific (Seoul) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Asia Pacific (Singapore) Region",
+    "type": "Asia Pacific (Singapore) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Asia Pacific (Sydney) Region",
+    "type": "Asia Pacific (Sydney) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Asia Pacific (Tokyo) Region",
+    "type": "Asia Pacific (Tokyo) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "China (Beijing) Region",
+    "type": "China (Beijing) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "EU (Frankfurt) Region",
+    "type": "EU (Frankfurt) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "EU (Ireland) Region",
+    "type": "EU (Ireland) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "South America (Sao Paulo) Region",
+    "type": "South America (Sao Paulo) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "US East (Northern Virginia) Region",
+    "type": "US East (Northern Virginia) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "US West (Northern California) Region",
+    "type": "US West (Northern California) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "US West (Oregon) Region",
+    "type": "US West (Oregon) Region",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Sample Solutions",
+    "type": "Sample Solutions",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Application Frameworks",
+    "type": "Application Frameworks",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Services",
+    "type": "Services",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "AWS CloudFormation Limits",
+    "type": "AWS CloudFormation Limits",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Logging AWS CloudFormation API Calls in AWS CloudTrail",
+    "type": "Logging AWS CloudFormation API Calls in AWS CloudTrail",
     "properties": [],
     "descriptions": []
   }
 ,
   {
-    "resource": "Troubleshooting\n  AWS CloudFormation",
+    "type": "Troubleshooting\n  AWS CloudFormation",
     "properties": [
       "Failed to receive the required number of signals",
       "Changes to a resource were made outside of AWS CloudFormation",
@@ -6045,7 +6045,7 @@
   }
 ,
   {
-    "resource": "Release History",
+    "type": "Release History",
     "properties": [
       "AWS::EMR::Cluster and AWS::EMR::InstanceGroupConfig",
       "AWS::Lambda::Function",
@@ -6193,7 +6193,7 @@
   }
 ,
   {
-    "resource": "Supported AWS Services",
+    "type": "Supported AWS Services",
     "properties": [
       "Amazon Elastic MapReduce (Amazon EMR) (Updated in March 2016)",
       "AWS Data Pipeline (Added in June 2015)",
