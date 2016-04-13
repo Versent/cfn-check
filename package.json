@@ -4,6 +4,7 @@
   "description": "",
   "main": "./lib/cfn-check.js",
   "scripts": {
+    "scrape": "node bin/scrape.js",
     "test": "NODE_ENV=test tap test/*.js",
     "test:watch": "nodemon --ext js --exec 'clear && npm test'"
   },
@@ -15,7 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.9.1",
-    "tap": "^5.7.0"
+    "tap": "^5.7.0",
+    "x-ray": "^2.2.0"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
