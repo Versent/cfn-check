@@ -1,6 +1,12 @@
 # cfn-check
 
+## To Do
+
+* Inline documentation
+
 ## Usage
+
+    TBC Include cfn-check -h output here
 
 * `filename.json` template's filename (required).
 * `watch` watch the tempalte for changes and rerun.
