@@ -196,7 +196,7 @@
         "MinSize" : "1",
         "MaxSize" : "3",
         "LoadBalancerNames" : [ { "Ref" : "ElasticLoadBalancer" } ],
-        "NotificationConfiguration" : {
+        "NotificationConfigurations" : {
           "TopicARN" : { "Ref" : "NotificationTopic" },
           "NotificationTypes" : [ "autoscaling:EC2_INSTANCE_LAUNCH",
                                   "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",

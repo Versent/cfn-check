@@ -1,21 +1,22 @@
 'use strict';
+var _ = require('lodash');
 var tap = require('tap');
 
 var checkResources = require('../lib/check/resources.js');
 
-tap.test('areValid with valid template', function (t) {
+tap.test('checkTypes with valid template', function (t) {
   t.plan(1);
-  var template = require('./template.json');
-  return checkResources.areValid(template).then(function (errors) {
+  var template = _.cloneDeep(require('./template.json'));
+  return checkResources.checkTypes(template).then(function (errors) {
     t.equal(errors.length, 0, 'has no errors');
   });
 });
 
-tap.test('areValid with invalid resource type', function (t) {
+tap.test('checkTypes with invalid resource type', function (t) {
   t.plan(3);
-  var template = require('./template.json');
+  var template = _.cloneDeep(require('./template.json'));
   var invalidType = template.Resources.ElasticLoadBalancer.Type = 'AWS::Not::A::Resource';
-  return checkResources.areValid(template).then(function (errors) {
+  return checkResources.checkTypes(template).then(function (errors) {
     var error = errors[0];
     t.equal(errors.length, 1, 'has one error');
     t.match(error, /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
@@ -23,17 +24,31 @@ tap.test('areValid with invalid resource type', function (t) {
   });
 });
 
-// tap.test('areValid with invalid resource property', function (t) {
-//   t.plan(2);
-//   var template = require('./template.json');
-//   var invalidProperty = template.Resources.ElasticLoadBalancer.Type = 'NotAProperty';
-//   return checkResources.areValid(template).then(function (errors) {
-//     var error = errors[0];
-//     t.equal(errors.length, 1, 'has one error');
-//     t.match(error, new RegExp(invalidProperty), 'has the invalid property\'s name');
-//   });
-// });
+tap.test('checkProperties with invalid resource property', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  var invalidProperty = 'NotAProperty';
+  template.Resources.ElasticLoadBalancer.Properties[invalidProperty] = 'AValue';
+  return checkResources.checkProperties(template).then(function (errors) {
+    var error = errors[0];
+    t.equal(errors.length, 1, 'has one error');
+    t.match(error, /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
+    t.match(error, new RegExp(invalidProperty), 'has the invalid property\'s name');
+  });
+});
 
-// TODO: work out required properties
-// TODO: allow optional properties or not
-// TODO: Conditional properties (!)
+tap.test('checkProperties with missing required property');
+tap.test('checkProperties with valid DependsOn reference');
+tap.test('checkProperties with invalid DependsOn reference');
+tap.test('checkProperties with valid DependsOn reference (multiple)');
+tap.test('checkProperties with invalid DependsOn reference (multiple)');
+tap.test('checkProperties with no conditional properties');
+tap.test('checkProperties with multiple conditional properties');
+tap.test('checkProperties with invalid property data type'); // e.g. Number vs String
+// http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
+tap.test('checkProperties with CustomResource'); // Only ServiceToken is required
+tap.test('checkTypes with custom resource'); // 'CustomResource::*'
+tap.test('areValid with valid template');
+tap.test('areValid with invalid type');
+tap.test('areValid with invalid properties');
+tap.test('areValid with invalid type and properties');
