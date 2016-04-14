@@ -79,7 +79,46 @@ tap.test('areValid with valid template', function (t) {
   });
 });
 
-tap.test('areValid with invalid type');
-tap.test('areValid with invalid properties');
-tap.test('areValid with invalid type and properties');
+tap.test('areValid with invalid resource type', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  var invalidType = template.Resources.ElasticLoadBalancer.Type = 'AWS::Not::A::Resource';
+  return checkResources.areValid(template).then(function (errors) {
+    var error = errors[0];
+    t.equal(errors.length, 1, 'has one error');
+    t.match(error, /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
+    t.match(error, new RegExp(invalidType), 'has the invalid type\'s name');
+  });
+});
+
+tap.test('areValid with invalid resource property', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  var invalidProperty = 'NotAProperty';
+  template.Resources.LaunchConfig.Properties[invalidProperty] = 'AValue';
+  return checkResources.areValid(template).then(function (errors) {
+    var error = errors[0];
+    t.equal(errors.length, 1, 'has one error');
+    t.match(error, /LaunchConfig/, 'has the invalid Resource\'s name');
+    t.match(error, new RegExp(invalidProperty), 'has the invalid property\'s name');
+  });
+});
+
+tap.test('areValid with invalid type and properties', function (t) {
+  t.plan(5);
+  var template = _.cloneDeep(require('./template.json'));
+  var invalidType = template.Resources.ElasticLoadBalancer.Type = 'AWS::Not::A::Resource';
+  var invalidProperty = 'NotAProperty';
+  template.Resources.LaunchConfig.Properties[invalidProperty] = 'AValue';
+  return checkResources.areValid(template).then(function (errors) {
+    t.equal(errors.length, 2, 'has one error');
+    // Type error
+    t.match(errors[0], /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
+    t.match(errors[0], new RegExp(invalidType), 'has the invalid type\'s name');
+    // Properties error
+    t.match(errors[1], /LaunchConfig/, 'has the invalid Resource\'s name');
+    t.match(errors[1], new RegExp(invalidProperty), 'has the invalid property\'s name');
+  });
+});
+
 tap.test('areValid with an excpetion');
