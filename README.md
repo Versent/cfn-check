@@ -15,10 +15,15 @@
 * `pretty` always output pretty JSON (regardless of character limit).
 * `compact` always output compact JSON (regardless of character limit).
 
-## Features
+## Checks
 
 * JSON is valid.
-* `Ref`s are valid parameters, resources, or [pseudo parameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html).
+* `Ref`s are valid parameters, resources, or [pseudo
+  parameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html).
+* All Resource `Type` properties are valid Types as defined in the [Resource
+  Types
+  Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html),
+  including Custom Resources.
 
 * Validate Intrinsic `Fn` arguments
 * `Fn`s can only be used in resource properties, metadata attributes, and update

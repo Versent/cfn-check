@@ -24,6 +24,29 @@ tap.test('checkTypes with invalid resource type', function (t) {
   });
 });
 
+tap.test('checkTypes with custom resource', function (t) {
+  t.plan(1);
+  var template = _.cloneDeep(require('./template.json'));
+  // Example taken from CustomResource Type Reference
+  template.Resources.MyFrontEndTest = {
+    'Type': 'Custom::Thing',
+    'Version': '1.0',
+    'Properties': {
+      'ServiceToken': 'arn:aws:sns:us-east-1:84969EXAMPLE:CRTest',
+      'key1': 'string',
+      'key2': [
+        'list'
+      ],
+      'key3': {
+        'key4': 'map'
+      }
+    }
+  }
+  return checkResources.checkTypes(template).then(function (errors) {
+    t.equal(errors.length, 0, 'has no errors');
+  });
+});
+
 tap.test('checkProperties with invalid resource property', function (t) {
   t.plan(3);
   var template = _.cloneDeep(require('./template.json'));
@@ -47,7 +70,6 @@ tap.test('checkProperties with multiple conditional properties');
 tap.test('checkProperties with invalid property data type'); // e.g. Number vs String
 // http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
 tap.test('checkProperties with CustomResource'); // Only ServiceToken is required
-tap.test('checkTypes with custom resource'); // 'CustomResource::*'
 tap.test('areValid with valid template');
 tap.test('areValid with invalid type');
 tap.test('areValid with invalid properties');
