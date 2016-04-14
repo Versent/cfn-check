@@ -70,7 +70,15 @@ tap.test('checkProperties with multiple conditional properties');
 tap.test('checkProperties with invalid property data type'); // e.g. Number vs String
 // http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
 tap.test('checkProperties with CustomResource'); // Only ServiceToken is required
-tap.test('areValid with valid template');
+
+tap.test('areValid with valid template', function (t) {
+  t.plan(1);
+  var template = require('./template.json');
+  return checkResources.areValid(template).then(function (errors) {
+    t.equal(errors.length, 0, 'has no errors');
+  });
+});
+
 tap.test('areValid with invalid type');
 tap.test('areValid with invalid properties');
 tap.test('areValid with invalid type and properties');
