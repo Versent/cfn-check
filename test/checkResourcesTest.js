@@ -47,12 +47,12 @@ tap.test('checkTypes with custom resource', function (t) {
   });
 });
 
-tap.test('checkProperties with invalid resource property', function (t) {
+tap.test('checkValidProperties with invalid resource property', function (t) {
   t.plan(3);
   var template = _.cloneDeep(require('./template.json'));
   var invalidProperty = 'NotAProperty';
   template.Resources.ElasticLoadBalancer.Properties[invalidProperty] = 'AValue';
-  return checkResources.checkProperties(template).then(function (errors) {
+  return checkResources.checkValidProperties(template).then(function (errors) {
     var error = errors[0];
     t.equal(errors.length, 1, 'has one error');
     t.match(error, /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
@@ -60,16 +60,16 @@ tap.test('checkProperties with invalid resource property', function (t) {
   });
 });
 
-tap.test('checkProperties with missing required property');
-tap.test('checkProperties with valid DependsOn reference');
-tap.test('checkProperties with invalid DependsOn reference');
-tap.test('checkProperties with valid DependsOn reference (multiple)');
-tap.test('checkProperties with invalid DependsOn reference (multiple)');
-tap.test('checkProperties with no conditional properties');
-tap.test('checkProperties with multiple conditional properties');
-tap.test('checkProperties with invalid property data type'); // e.g. Number vs String
+tap.test('checkValidProperties with missing required property');
+tap.test('checkValidProperties with valid DependsOn reference');
+tap.test('checkValidProperties with invalid DependsOn reference');
+tap.test('checkValidProperties with valid DependsOn reference (multiple)');
+tap.test('checkValidProperties with invalid DependsOn reference (multiple)');
+tap.test('checkValidProperties with no conditional properties');
+tap.test('checkValidProperties with multiple conditional properties');
+tap.test('checkValidProperties with invalid property data type'); // e.g. Number vs String
 // http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
-tap.test('checkProperties with CustomResource'); // Only ServiceToken is required
+tap.test('checkValidProperties with CustomResource'); // Only ServiceToken is required
 
 tap.test('areValid with valid template', function (t) {
   t.plan(1);
