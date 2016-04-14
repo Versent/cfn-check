@@ -52,3 +52,4 @@ tap.test('areValid with valid template');
 tap.test('areValid with invalid type');
 tap.test('areValid with invalid properties');
 tap.test('areValid with invalid type and properties');
+tap.test('areValid with an excpetion');

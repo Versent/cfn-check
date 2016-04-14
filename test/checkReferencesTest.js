@@ -66,4 +66,4 @@ tap.test('areValid with invalid template', function (t) {
   });
 });
 
-// TODO: Catch test.
+tap.test('areValid with an excpetion');
