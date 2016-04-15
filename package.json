@@ -11,8 +11,8 @@
   "bin": {
     "cfn-check": "./bin/cfn-check.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["aws", "cloudformation", "cfn", "validation"],
+  "author": "Rowan Udell <rowanu@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.9.1",
