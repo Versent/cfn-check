@@ -3,6 +3,7 @@
 ## To Do
 
 * Inline documentation
+* Remove all `areValid` tests in favour of CLI-level testing
 
 ## Usage
 
