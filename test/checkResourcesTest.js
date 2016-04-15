@@ -73,7 +73,17 @@ tap.test('getRequiredProperties generates required properties', function (t) {
   });
 })
 
-tap.test('checkValidProperties with missing required property');
+tap.test('checkRequiredProperties with missing required property', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  _.unset(template, 'Resources.CPUAlarmLow.Properties.MetricName');
+  checkResources.checkRequiredProperties(template).then(function (errors) {
+    t.equal(errors.length, 1, 'has one error');
+    t.match(errors[0], /CPUAlarmLow/, 'has the invalid Resource\'s name');
+    t.match(errors[0], /MetricName/, 'has the missing property\'s name');
+  });
+});
+
 tap.test('checkValidProperties with valid DependsOn reference');
 tap.test('checkValidProperties with invalid DependsOn reference');
 tap.test('checkValidProperties with valid DependsOn reference (multiple)');
@@ -114,6 +124,17 @@ tap.test('areValid with invalid resource property', function (t) {
     t.equal(errors.length, 1, 'has one error');
     t.match(error, /LaunchConfig/, 'has the invalid Resource\'s name');
     t.match(error, new RegExp(invalidProperty), 'has the invalid property\'s name');
+  });
+});
+
+tap.test('areValid with missing required property', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  _.unset(template, 'Resources.CPUAlarmLow.Properties.MetricName');
+  checkResources.areValid(template).then(function (errors) {
+    t.equal(errors.length, 1, 'has one error');
+    t.match(errors[0], /CPUAlarmLow/, 'has the invalid Resource\'s name');
+    t.match(errors[0], /MetricName/, 'has the missing property\'s name');
   });
 });
 
