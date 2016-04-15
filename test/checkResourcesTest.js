@@ -60,13 +60,16 @@ tap.test('checkValidProperties with invalid resource property', function (t) {
   });
 });
 
-tap.test('getRequiredProperties generates data', function (t) {
-  t.plan(1);
+tap.test('getRequiredProperties generates required properties', function (t) {
+  t.plan(2);
   var resources = require('../data/resources.json');
   checkResources.getRequiredProperties(resources).then(function (requiredProperties) {
     t.same(requiredProperties['AWS::AutoScaling::LaunchConfiguration'],
            ['ImageId', 'InstanceType'],
            'LaunchConfiguration has required properties ImageId and InstanceType');
+    t.same(requiredProperties['AWS::WAF::Rule'],
+           ['MetricName', 'Name'],
+           'WAF::Rule has required properties MetricName and Name');
   });
 })
 
