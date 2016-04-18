@@ -14,7 +14,7 @@ checks your
 
 ## Installation
 
-   npm install -g cfn-check
+    npm install -g cfn-check
 
 ## Usage
 
