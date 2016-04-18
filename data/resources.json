@@ -1613,6 +1613,28 @@
   }
 ,
   {
+    "type": "AWS::Events::Rule",
+    "properties": [
+      "Description",
+      "EventPattern",
+      "Name",
+      "RoleArn",
+      "ScheduleExpression",
+      "State",
+      "Targets"
+    ],
+    "descriptions": [
+      "A description of the rule's purpose.Required: NoType: StringUpdate requires: No interruption",
+      "Describes which events CloudWatch Events routes to the specified target. These routed events are matched events. For more information, see Events and Event Patterns in the Amazon CloudWatch Developer Guide.Required: Conditional. You must specify this property, the ScheduleExpression property, or both.Type: JSON objectUpdate requires: No interruption",
+      "A name for the rule. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the rule name. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
+      "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants CloudWatch Events permission to make calls to target services, such as AWS Lambda (Lambda) or Amazon Kinesis streams.Required: NoType: StringUpdate requires: No interruption",
+      "The schedule or rate (frequency) that determines when CloudWatch Events runs the rule. For more information, see Schedule Expression Syntax for Rules in the Amazon CloudWatch Developer Guide.Required: NoRequired: Conditional. You must specify this property, the EventPattern property, or both.Update requires: No interruption",
+      "Indicates whether the rule is enabled. For valid values, see the State parameter for the PutRule action in the Amazon CloudWatch Events API Reference.Required: NoType: StringUpdate requires: No interruption",
+      "The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered.Required: NoType: List of Amazon CloudWatch Events Rule TargetUpdate requires: No interruption"
+    ]
+  }
+,
+  {
     "type": "AWS::GameLift::Alias",
     "properties": [
       "Description",
@@ -2065,7 +2087,7 @@
       "Whether to install operating system and package updates when the instance\n                  boots.Required: NoType: BooleanUpdate requires: Some interruptions",
       "The instance type, which must be supported by AWS OpsWorks. For more information, see\n                     CreateInstance in the\n                     AWS OpsWorks API Reference.If you specify an Amazon EBS-optimized instance type, AWS OpsWorks enables EBS optimization\n                  by default. For more information about Amazon EBS-optimized instance types, see Amazon EBS–Optimized Instances in the\n                     Amazon EC2 User Guide for Linux Instances.Required: YesType: StringUpdate requires: Some interruptions",
       "The IDs of the AWS OpsWorks layers to associate with this instance.Required: YesType: List of stringsUpdate requires: Some interruptions",
-      "The instance operating system. For more information, see CreateInstance in the\n                     AWS OpsWorks API Reference.Required: NoType: StringUpdate requires: Some interruptions",
+      "The instance operating system. For more information, see CreateInstance in the\n                     AWS OpsWorks API Reference.Required: NoType: StringUpdate requires: Replacement",
       "The root device type of the instance.Required: NoType: StringUpdate requires: Replacement",
       "The SSH key name of the instance.Required: NoType: StringUpdate requires: Some interruptions",
       "The ID of the AWS OpsWorks stack that this instance will be associated with.Required: YesType: StringUpdate requires: Replacement",
@@ -2744,9 +2766,21 @@
       "Predicates"
     ],
     "descriptions": [
-      "A friendly name or description for the metrics of this rule.Required: YesType: StringUpdate requires: Replacement",
+      "A friendly name or description for the metrics of the rule.Required: YesType: StringUpdate requires: Replacement",
       "A friendly name or description of the rule.Required: YesType: StringUpdate requires: Replacement",
-      "The ByteMatchSet, IPSet, or\n              SqlInjectionMatchSet objects to include in a rule. If you add more than\n            one predicate to a rule, a request must match all conditions for it to be allowed or\n            blocked.Required: NoType: List of AWS WAF Rule PredicatesUpdate requires: No interruption"
+      "The ByteMatchSet, IPSet, SizeConstraintSet, SqlInjectionMatchSet, or XssMatchSet objects to include in a rule. If you add more than one predicate to a rule, a request must match all conditions in order to be allowed or blocked.Required: NoType: List of AWS WAF Rule PredicatesUpdate requires: No interruption"
+    ]
+  }
+,
+  {
+    "type": "AWS::WAF::SizeConstraintSet",
+    "properties": [
+      "Name",
+      "SizeConstraints"
+    ],
+    "descriptions": [
+      "A friendly name or description for the SizeConstraintSet.Required: YesType: StringUpdate requires: Replacement",
+      "The size constraint and the part of the web request to check.Required: YesType: List of AWS WAF SizeConstraintSet SizeConstraintUpdate requires: No interruption"
     ]
   }
 ,
@@ -2779,6 +2813,18 @@
   }
 ,
   {
+    "type": "AWS::WAF::XssMatchSet",
+    "properties": [
+      "Name",
+      "XssMatchTuples"
+    ],
+    "descriptions": [
+      "A friendly name or description for the XssMatchSet.Required: YesType: StringUpdate requires: Replacement",
+      "The parts of web requests that you want to inspect for cross-site scripting attacks.Required: NoType: List of AWS WAF XssMatchSet XssMatchTupleUpdate requires: No interruption"
+    ]
+  }
+,
+  {
     "type": "AWS::WorkSpaces::Workspace",
     "properties": [
       "BundleId",
@@ -2795,6 +2841,214 @@
       "Indicates whether Amazon WorkSpaces encrypts data stored on the root volume\n                     (C: drive).Required: NoType: BooleanUpdate requires: Updates are not supported.. To update this property, you must also update another\n                  property that triggers a replacement, such as the UserName\n                  property.",
       "Indicates whether Amazon WorkSpaces encrypts data stored on the user volume\n                     (D: drive).Required: NoType: BooleanUpdate requires: Updates are not supported.. To update this property, you must also update another\n                  property that triggers a replacement, such as the UserName\n                  property.",
       "The AWS Key Management Service (AWS KMS) key ID that Amazon WorkSpaces uses to encrypt data stored on your\n                  workspace.Required: NoType: StringUpdate requires: Updates are not supported.. To update this property, you must also update another\n                  property that triggers a replacement, such as the UserName\n                  property."
+    ]
+  }
+,
+  {
+    "type": "Resource Property Types Reference",
+    "properties": [],
+    "descriptions": []
+  }
+,
+  {
+    "type": "Amazon API Gateway ApiKey StageKey",
+    "properties": [
+      "RestApiId",
+      "StageName"
+    ],
+    "descriptions": [
+      "The ID of a RestApi resource that includes the stage with which you want to associate the API key.Required: NoType: String",
+      "The name of the stage with which to associate the API key. The stage must be included in the RestApi resource that you specified in the RestApiId property.Required: NoType: String"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Deployment StageDescription",
+    "properties": [
+      "CacheClusterEnabled",
+      "CacheClusterSize",
+      "ClientCertificateId",
+      "DeploymentId",
+      "Description",
+      "MethodSettings",
+      "RestApiId",
+      "StageName",
+      "Variables"
+    ],
+    "descriptions": [
+      "Indicates whether cache clustering is enabled for the stage.Required: NoType: Boolean",
+      "The size of the stage's cache cluster.Required: NoType: String",
+      "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage.Required: NoType: String",
+      "The ID of the deployment that the stage points to.Required: NoType: String",
+      "A description of the purpose of the stage.Required: NoType: String",
+      "Configures settings for all of the stage's methods.Required: NoType: Amazon API Gateway Deployment StageDescription MethodSetting",
+      "The ID of a RestApi resource that you're deploying with this stage.Required: NoType: String",
+      "The name of the stage, which API Gateway uses as the first path segment in the invoke Uniform Resource Identifier (URI).Required: NoType: String",
+      "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: [A-Za-z0-9-._~:/?#&amp;=,]+.Required: NoType: List of key-value pairs"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Deployment StageDescription MethodSetting",
+    "properties": [
+      "CacheDataEncrypted",
+      "CacheTtlInSeconds",
+      "CachingEnabled",
+      "DataTraceEnabled",
+      "HttpMethod",
+      "LoggingLevel",
+      "MetricsEnabled",
+      "ResourcePath",
+      "ThrottlingBurstLimit",
+      "ThrottlingRateLimit"
+    ],
+    "descriptions": [
+      "Indicates whether the cached responses are encrypted.Required: NoType: Boolean",
+      "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.Required: NoType: Integer",
+      "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.Required: NoType: Boolean",
+      "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.Required: NoType: Boolean",
+      "The HTTP method.Required: NoType: String",
+      "The\n            logging level for this method.Required: NoType: String",
+      "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.Required: NoType: Boolean",
+      "The resource path for this method.Required: NoType: String",
+      "The\n            number of burst requests per second that API Gateway permits across all APIs, stages, and\n            methods in your AWS account.Required: NoType: Integer",
+      "The\n            number of steady-state requests per second that API Gateway permits across all APIs, stages,\n            and methods in your AWS account.Required: NoType: Number"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Method Integration",
+    "properties": [
+      "CacheKeyParameters",
+      "CacheNamespace",
+      "Credentials",
+      "IntegrationHttpMethod",
+      "IntegrationResponses",
+      "RequestParameters",
+      "RequestTemplates",
+      "Type",
+      "Uri"
+    ],
+    "descriptions": [
+      "A list of request parameters whose values API Gateway will cache.Required: NoType: List of strings",
+      "An API-specific tag group of related cached parameters.Required: NoType: String",
+      "The credentials required for the integration. To specify an AWS Identity and Access Management (IAM) role that API Gateway assumes, specify the role's Amazon Resource Name (ARN). To use resource-based permissions on the AWS Lambda (Lambda) function, specify null. To require that the caller's identity be passed through from the request, specify arn:aws:iam::\\*:user/\\*.Required: NoType: String",
+      "The integration's HTTP method type.Required: NoType: String",
+      "The response that API Gateway provides after a method's back end completes processing a request. API Gateway intercepts the back end's response so that you can control how API Gateway surfaces back-end responses. For example, you can map the back-end status codes to codes that you define.Required: NoType: List of Amazon API Gateway Method Integration IntegrationResponse",
+      "The request parameters that API Gateway sends with the back-end request. Specify request parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.Specify the destination using the following pattern integration.request.location.name, where location is a query string, path, or header, and name is a valid, unique parameter name.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: List of key-value pairs",
+      "The templates used to transform the method request body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value.Required: NoType: List of key-value pairs",
+      "The type of back end your method is running, such as HTTP, AWS, or MOCK.Required: NoType: String",
+      "The integration's Uniform Resource Identifier (URI). If you specify HTTP for the Type property, specify the API endpoint URL. If you specify LAMBDA for the Type property, specify a Lambda function URI, which follows the form: arn:aws:apigateway:region:lambda:path/path. The path is usually in the form\n                /2015-03-31/functions/LambdaFunctionARN/invocations. If you specify AWS for the Type property, specify an AWS service. If you specify MOCK for the Type property, don't specify this property.Required: ConditionalType: String"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Method Integration IntegrationResponse",
+    "properties": [
+      "ResponseParameters",
+      "ResponseTemplates",
+      "SelectionPattern",
+      "StatusCode"
+    ],
+    "descriptions": [
+      "The response parameters from the back-end response that API Gateway sends to the method response. Specify response parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.The destination must be an existing response parameter in the MethodResponse property.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: List of key-value pairs",
+      "The templates used to transform the integration response body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value.Required: NoType: List of key-value pairs",
+      "A regular expression that specifies which error strings or status codes from the back end map to the integration response.Required: NoType: String",
+      "The status code that API Gateway uses to map the integration response to a MethodResponse status code.Required: NoType: String"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Method MethodResponse",
+    "properties": [
+      "ResponseModels",
+      "ResponseParameters",
+      "StatusCode"
+    ],
+    "descriptions": [
+      "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.Required: NoType: List of key-value pairs",
+      "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value. Specify the destination using the following pattern: method.response.header.name, where the name is a valid, unique header name. The Boolean specifies whether a parameter is required.Required: NoType: List of key-value pairs",
+      "The method response's status code, which you map to an IntegrationResponse.Required: NoType: String"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway RestApi S3Location",
+    "properties": [
+      "Bucket",
+      "ETag",
+      "Key",
+      "Version"
+    ],
+    "descriptions": [
+      "The name of the S3 bucket where the Swagger file is stored.Required: NoType: String",
+      "The Amazon S3 ETag (a file checksum) of the Swagger file. If you don't specify a value, API Gateway skips ETag validation of your Swagger file.Required: NoType: String",
+      "The file name of the application revision (Amazon S3 object name).Required: NoType: String",
+      "For versioning-enabled buckets, a specific version of the Swagger file.Required: NoType: String"
+    ]
+  }
+,
+  {
+    "type": "Amazon API Gateway Stage MethodSetting",
+    "properties": [
+      "CacheDataEncrypted",
+      "CacheTtlInSeconds",
+      "CachingEnabled",
+      "DataTraceEnabled",
+      "HttpMethod",
+      "LoggingLevel",
+      "MetricsEnabled",
+      "ResourcePath",
+      "ThrottlingBurstLimit",
+      "ThrottlingRateLimit"
+    ],
+    "descriptions": [
+      "Indicates whether the cached responses are encrypted.Required: NoType: Boolean",
+      "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.Required: NoType: Integer",
+      "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.Required: NoType: Boolean",
+      "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.Required: NoType: Boolean",
+      "The HTTP method.Required: NoType: String",
+      "The\n            logging level for this method.Required: NoType: String",
+      "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.Required: NoType: Boolean",
+      "The resource path for this method.Required: NoType: String",
+      "The number of\n            burst\n            requests per second that API Gateway permits across all APIs, stages, and\n            methods in your AWS account.Required: NoType: Integer",
+      "The number of\n            steady-state\n            requests per second that API Gateway permits across all APIs, stages, and methods in your AWS\n            account.Required: NoType: Number"
+    ]
+  }
+,
+  {
+    "type": "AWS CloudFormation AutoScaling Block Device Mapping Property Type",
+    "properties": [
+      "DeviceName",
+      "Ebs",
+      "NoDevice",
+      "VirtualName"
+    ],
+    "descriptions": [
+      "The name of the device within Amazon EC2.Required: YesType: String",
+      "The Amazon Elastic Block Store volume information.Required: Conditional You can specify either VirtualName or\n                     Ebs, but not both.Type: AutoScaling EBS Block Device.",
+      "Suppresses the device mapping. If NoDevice is set to true for the\n                  root device, the instance might fail the Amazon EC2 health check. Auto Scaling launches a\n                  replacement instance if the instance fails the health check.Required: NoType: Boolean",
+      "The name of the virtual device. The name must be in the form\n                        ephemeralX\n                   where X is a number starting from zero (0), for\n                  example, ephemeral0.Required: Conditional You can specify either VirtualName or\n                     Ebs, but not both.Type: String"
+    ]
+  }
+,
+  {
+    "type": "AWS CloudFormation AutoScaling EBS Block Device Property Type",
+    "properties": [
+      "DeleteOnTermination",
+      "Encrypted",
+      "Iops",
+      "SnapshotId",
+      "VolumeSize",
+      "VolumeType"
+    ],
+    "descriptions": [
+      "Indicates whether to delete the volume when the instance is terminated. By\n                  default, Auto Scaling uses true.Required: NoType: Boolean",
+      "Indicates whether the volume is encrypted. Encrypted EBS volumes must be\n                  attached to instances that support Amazon EBS encryption. Volumes that you create from\n                  encrypted snapshots are automatically encrypted. You cannot create an encrypted\n                  volume from an unencrypted snapshot or an unencrypted volume from an encrypted\n                  snapshot.Required: NoType: Boolean",
+      "The number of I/O operations per second (IOPS) that the volume supports. The\n                  maximum ratio of IOPS to volume size is 30.Required: NoType: Integer.",
+      "The snapshot ID of the volume to use.Required: Conditional If you specify both SnapshotId and\n                     VolumeSize, VolumeSize must be equal or greater than\n                  the size of the snapshot.Type: String",
+      "The volume size, in Gibibytes (GiB). This can be a number from 1 – 1024.\n                  If the volume type is EBS optimized, the minimum value is 10. For more information\n                  about specifying the volume type, see EbsOptimized in AWS::AutoScaling::LaunchConfiguration.Required: Conditional If you specify both SnapshotId and\n                     VolumeSize, VolumeSize must be equal or greater than\n                  the size of the snapshot.Type: Integer.Update requires: Some interruptions",
+      "The volume type. By default, Auto Scaling uses the standard volume type.\n                  For more information, see Ebs in the Auto Scaling API Reference.Required: NoType: String"
     ]
   }
 ]
