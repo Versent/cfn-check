@@ -7,14 +7,20 @@
 
 ## Usage
 
-    TBC Include cfn-check -h output here
+    Usage: cfn-check [options] <template>
 
-* `filename.json` template's filename (required).
-* `watch` watch the tempalte for changes and rerun.
+    Options:
+
+      -h, --help     output usage information
+      -V, --version  output the version number
+      -w, --watch    Watch template for changes
+      -p, --pretty   Print pretty JSON when valid (regardless of character limit)
+      -c, --compact  Print compact JSON when valid (regardless of character limit)
+
+### Planned
+
 * `quiet` don't output anything, just set return code.
 * `verbose` set `debug` level up up up.
-* `pretty` always output pretty JSON (regardless of character limit).
-* `compact` always output compact JSON (regardless of character limit).
 
 ## Checks
 
@@ -26,16 +32,17 @@
   Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html),
   including Custom Resources.
 
+### Planned
+
+* Validate `AWSTemplateFormatVersion`
+  * Enforce presence
+  * `cfn-check` only validates <= '2010-09-09'
 * Validate Intrinsic `Fn` arguments
 * `Fn`s can only be used in resource properties, metadata attributes, and update
   policy attributes.
 * Validate `Resources`
   * Properties
-    * Required fields
-    * Optional fields
-* Validate `AWSTemplateFormatVersion`
-  * Enforce presence
-  * `cfn-check` only validates <= '2010-09-09'
+    * Conditional fields
 * TAP output https://testanything.org/tap-specification.html
   * Only output errors?
 * Support CSON/YAML input files
@@ -44,7 +51,7 @@
 
 ## Resource Properties Definitions
 
-The resource properties definitions are "borrowed" from the [CloudFormation User
+The resource properties definitions are taken from the [CloudFormation User
 Guide Resource Types
 Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 
