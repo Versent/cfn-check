@@ -1,9 +1,16 @@
 # cfn-check
 
-## To Do
+A command-line tool for validating CloudFormation templates **quickly**.
 
-* Inline documentation
-* Remove all `areValid` tests in favour of CLI-level testing
+## Why
+
+[CloudFormation](https://aws.amazon.com/cloudformation/) is great.
+Unfortunately, the error handling leaves a bit to be desired.
+
+The [AWS CLI](https://aws.amazon.com/cli/) provided
+`[validate-template](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/validate-template.html)` command only
+checks your
+[syntax](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-validate-template.html), not the actual resources, their properties, etc. This means you can *think* you're successfully creating a new stack, and still get a `CREATE_FAIL`. This tool aims to give you quick feedback so you spend less time banging your head against the CloudFormation Console.
 
 ## Usage
 
@@ -20,7 +27,7 @@
 ### Planned
 
 * `quiet` don't output anything, just set return code.
-* `verbose` set `debug` level up up up.
+* `verbose` increase the logging level.
 
 ## Checks
 
@@ -37,6 +44,7 @@
 * Validate `AWSTemplateFormatVersion`
   * Enforce presence
   * `cfn-check` only validates <= '2010-09-09'
+* Output compact JSON if over character limit (51,200 bytes) or requested
 * Validate Intrinsic `Fn` arguments
 * `Fn`s can only be used in resource properties, metadata attributes, and update
   policy attributes.
@@ -48,9 +56,6 @@
   violations e.g. UserData length, template length, number of resources, etc
 * TAP output https://testanything.org/tap-specification.html
   * Only output errors?
-* Support CSON/YAML input files
-* Output (pretty) JSON
-* Output compact JSON if over character limit (51,200 bytes) or requested
 
 ## Resource Properties Definitions
 
@@ -76,3 +81,8 @@ To watch them:
 The [template.json](test/template.json) used in tests is taken from [the sample
 templates](https://s3-us-west-2.amazonaws.com/cloudformation-templates-us-west-2/AutoScalingMultiAZWithNotifications.template)
 that AWS provides.
+
+## To Do
+
+* Inline documentation
+* Remove all `areValid` tests in favour of CLI-level testing
