@@ -43,6 +43,9 @@
 * Validate `Resources`
   * Properties
     * Conditional fields
+* Error on
+  [limit](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+  violations e.g. UserData length, template length, number of resources, etc
 * TAP output https://testanything.org/tap-specification.html
   * Only output errors?
 * Support CSON/YAML input files
