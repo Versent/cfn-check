@@ -2,7 +2,7 @@
 
 A command-line tool for validating CloudFormation templates **quickly**.
 
-## Why
+## Overview
 
 [CloudFormation](https://aws.amazon.com/cloudformation/) is great.
 Unfortunately, the error handling leaves a bit to be desired.
@@ -11,6 +11,10 @@ The [AWS CLI](https://aws.amazon.com/cli/) provided
 `[validate-template](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/validate-template.html)` command only
 checks your
 [syntax](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-validate-template.html), not the actual resources, their properties, etc. This means you can *think* you're successfully creating a new stack, and still get a `CREATE_FAIL`. This tool aims to give you quick feedback so you spend less time banging your head against the CloudFormation Console.
+
+## Installation
+
+   npm install -g cfn-check
 
 ## Usage
 
