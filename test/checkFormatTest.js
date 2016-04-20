@@ -21,3 +21,14 @@ tap.test('checkFormat with no format version', function (t) {
     t.match(errors[0], /AWSTemplateFormatVersion/, 'includes the missing key');
   });
 });
+
+tap.test('checkFormat with format version later than "2010-09-09"', function (t) {
+  t.plan(3);
+  var template = _.cloneDeep(require('./template.json'));
+  template.AWSTemplateFormatVersion = '2016-04-20';
+  return format.checkVersion(template).then(function (errors) {
+    t.equal(errors.length, 1, 'has one error');
+    t.match(errors[0], /AWSTemplateFormatVersion/, 'includes the missing key');
+    t.match(errors[0], /2016-04-20/, 'includes the invalid date');
+  });
+});
