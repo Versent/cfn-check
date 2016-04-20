@@ -42,12 +42,12 @@ checks your
   Types
   Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html),
   including Custom Resources.
-
-### Planned
-
 * Validate `AWSTemplateFormatVersion`
   * Enforce presence
   * `cfn-check` only validates <= '2010-09-09'
+
+### Planned
+
 * Output compact JSON if over character limit (51,200 bytes) or requested
 * Validate Intrinsic `Fn` arguments
 * `Fn`s can only be used in resource properties, metadata attributes, and update
