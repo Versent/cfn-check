@@ -13,13 +13,14 @@ tap.test('checkTypes with valid template', function (t) {
 });
 
 tap.test('checkTypes with no resource type', function (t) {
-  t.plan(2);
+  t.plan(3);
   var template = _.cloneDeep(require('./template.json'));
   _.unset(template, 'Resources.ElasticLoadBalancer.Type');
   return checkResources.checkTypes(template).then(function (errors) {
     var error = errors[0];
     t.equal(errors.length, 1, 'has one error');
     t.match(error, /ElasticLoadBalancer/, 'has the invalid Resource\'s name');
+    t.match(error, /missing/i, 'is definied as missing');
   });
 });
 
