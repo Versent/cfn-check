@@ -639,12 +639,28 @@
   }
 ,
   {
+    "type": "AWS::EC2::Host",
+    "properties": [
+      "AutoPlacement",
+      "AvailabilityZone",
+      "InstanceType"
+    ],
+    "descriptions": [
+      "Indicates if the host accepts EC2 instances with only matching configurations or if\n            instances must also specify the host ID. Instances that don't specify a host ID can't\n            launch onto a host with AutoPlacement set to off. By default,\n            AWS CloudFormation sets this property to on. For more information, see Understanding Instance\n              Placement and Host Affinity in the\n            Amazon EC2 User Guide for Linux Instances.Required: NoType: StringUpdate requires: No interruption",
+      "The Availability Zone (AZ) in which to launch the dedicated host.Required: YesType: StringUpdate requires: Replacement",
+      "The instance type that the dedicated host accepts. Only instances of this type can be launched onto the host. For more information, see Supported Instance Types in the Amazon EC2 User Guide for Linux Instances.Required: YesType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
     "type": "AWS::EC2::Instance",
     "properties": [
+      "Affinity",
       "AvailabilityZone",
       "BlockDeviceMappings",
       "DisableApiTermination",
       "EbsOptimized",
+      "HostId",
       "IamInstanceProfile",
       "ImageId",
       "InstanceInitiatedShutdownBehavior",
@@ -673,10 +689,12 @@
       "PublicIp"
     ],
     "descriptions": [
+      "Indicates whether Amazon Elastic Compute Cloud (Amazon EC2) always associates the instance with a dedicated host. If you want Amazon EC2 to always restart the instance (if it was stopped) onto the same host on which it was launched, specify host. If you want Amazon EC2 to restart the instance on any available host, but to try to launch the instance onto the last host it ran on (on a best-effort basis), specify default.Required: NoType: StringUpdate requires: No interruption",
       "Specifies the name of the Availability Zone in which the instance is\n                  located.For more information about AWS regions and Availability Zones, see Regions and Availability Zones in the Amazon EC2 User\n                     Guide.Required: No. If not specified, an Availability Zone will be automatically\n                  chosen for you based on the load balancing criteria for the region.Type: StringUpdate requires: Replacement",
       "Defines a set of Amazon Elastic Block Store block device mappings, ephemeral instance store\n                  block device mappings, or both. For more information, see Amazon Elastic Block Store or Amazon EC2 Instance Store in the\n                  Amazon EC2 User Guide for Linux Instances.Required: NoType: A list of Amazon EC2 Block Device Mapping Property.Update requires: Replacement. If you change only the DeleteOnTermination\n                  property for one or more block devices, update requires No interruption.",
       "Specifies whether the instance can be terminated through the API.Required: NoType: BooleanUpdate requires: No interruption",
       "Specifies whether the instance is optimized for Amazon Elastic Block Store I/O. This\n                  optimization provides dedicated throughput to Amazon EBS and an optimized configuration\n                  stack to provide optimal EBS I/O performance.For more information about the instance types that can be launched as Amazon EBS\n                  optimized instances, see Amazon\n                     EBS-Optimized Instances in the Amazon Elastic Compute Cloud\n                     User Guide. Additional fees are incurred when using Amazon EBS-optimized\n                  instances.Required: No. By default, AWS CloudFormation specifies false.Type: BooleanUpdate requires:Update requires: Some interruptions for Amazon EBS-backed instancesUpdate requires: Replacement for instance store-backed instances",
+      "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account. This type of launch is called an untargeted launch. Note that for untargeted launches, you must have a compatible, dedicated host available to successfully launch instances.Required: NoType: StringUpdate requires: No interruption",
       "The physical ID (resource name) of an instance profile or a reference to an\n                     AWS::IAM::InstanceProfile resource.For more information about IAM roles, see Working with Roles in the\n   AWS Identity and Access Management User Guide.Required: NoType: StringUpdate requires: Replacement",
       "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned\n                  during registration.Required: YesType: StringUpdate requires: Replacement",
       "Indicates whether an instance stops or terminates when you shut down the\n                  instance from the instance's operating system shutdown command. You can specify\n                     stop or terminate. For more information, see the\n                  RunInstances command in the\n                     Amazon EC2 API Reference.Required: NoType: StringUpdate requires: No interruption",
@@ -694,7 +712,7 @@
       "The Amazon EC2 Simple Systems Manager (SSM) document\n                  and parameter values to associate with this instance. To use this property, you\n                  must specify an IAM role for the instance. For more information, see Prerequisites for Remotely\n                     Running Commands on EC2 Instances in the\n                     Amazon EC2 User Guide for Microsoft Windows Instances.NoteYou can currently associate only one document with an instance.Required: NoType: List of Amazon EC2 Instance\n      SsmAssociations.Update requires: No interruption",
       "If you're using Amazon VPC, this property specifies the ID of the subnet that\n                  you want to launch the instance into. If you specified the\n                     NetworkInterfaces property, do not specify this property.Required: NoType: StringUpdate requires: Replacement",
       "An arbitrary set of tags (key–value pairs) for this instance.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
-      "The tenancy of the instance that you want to launch. This value can be either\n                     \"default\" or \"dedicated\". An instance that has a\n                     tenancy value of \"dedicated\" runs on\n                  single-tenant hardware and can be launched only into a VPC. For more information,\n                  see Using\n                     EC2 Dedicated Instances Within Your VPC in the\n                     Amazon VPC User Guide.Required: NoType: StringUpdate requires: Replacement",
+      "The tenancy of the instance that you want to launch, such as default, dedicated, or host. If you specify a tenancy value of dedicated or host, you must launch the instance in a VPC. For more information, see Dedicated Instances in the Amazon VPC User Guide.Required: NoType: StringUpdate requires:Update requires: No interruption if this property was set to dedicated and you change it to host or vice versa.Update requires: Replacement for all other changes.",
       "Base64-encoded MIME user data that is made available to the instances.Required: NoType: StringUpdate requires:Update requires: Some interruptions for Amazon EBS-backed instances.NoteFor EBS-backed instances, changing the UserData stops\n                              and then starts the instance; however, Amazon EC2 doesn't automatically run\n                              the updated UserData. To update configurations on your\n                              instance, use the cfn-hup helper\n                              script.Update requires: Replacement for instance store-backed instances.",
       "The Amazon EBS volumes to attach to the instance.NoteBefore detaching a volume, unmount any file systems on the device within\n                        your operating system. If you don't unmount the file system, a volume might\n                        get stuck in a busy state while detaching.Required: NoType: A list of EC2 MountPoints.Update requires: No interruption",
       "Reserved.Required: NoType: StringUpdate requires:\n    Update requires: Some interruptions for Amazon EBS-backed instancesUpdate requires: Replacement for instance store-backed instances",
@@ -1170,6 +1188,7 @@
     "type": "AWS::ECS::Service",
     "properties": [
       "Cluster",
+      "DeploymentConfiguration",
       "DesiredCount",
       "LoadBalancers",
       "Role",
@@ -1177,6 +1196,7 @@
     ],
     "descriptions": [
       "The name or Amazon Resource Name (ARN) of the cluster that you want to run your\n                  service on. If you do not specify a cluster, Amazon ECS uses the default\n                  cluster.Required: NoType: StringUpdate requires: Replacement",
+      "Configures how many tasks run during a deployment.Required: NoType: Amazon EC2 Container Service Service\n      DeploymentConfigurationUpdate requires: No interruption",
       "The number of simultaneous tasks, which you specify by using the\n                     TaskDefinition property, that you want to run on the\n                  cluster.Required: YesType: StringUpdate requires: No interruption",
       "A list of load balancer objects to associate with the cluster.Required: NoType: List of Amazon EC2 Container Service Service\n      LoadBalancersUpdate requires: Replacement",
       "The name or ARN of an AWS Identity and Access Management (IAM) role that allows your Amazon ECS container\n                  agent to make calls to your load balancer.NoteIn some cases, you might need to add a dependency on the service role's\n                     policy. For more information, see IAM role policy in DependsOn Attribute.Required: Conditional. This parameter is required only if you specify the\n                     LoadBalancers property.Type: StringUpdate requires: Replacement",
@@ -1245,9 +1265,11 @@
       "SnapshotRetentionLimit",
       "SnapshotWindow",
       "Tags",
-      " VpcSecurityGroupIds ",
+      "VpcSecurityGroupIds",
       "ConfigurationEndpoint.Address",
-      "ConfigurationEndpoint.Port"
+      "ConfigurationEndpoint.Port",
+      "RedisEndpoint.Address",
+      "RedisEndpoint.Port"
     ],
     "descriptions": [
       "Indicates that minor engine upgrades will be applied automatically to the cache\n                  cluster during the maintenance window.Required: NoType: BooleanDefault: trueUpdate requires: No interruption",
@@ -1255,7 +1277,7 @@
       "The compute and memory capacity of nodes in a cache cluster.Required: YesType: StringUpdate requires: Replacement",
       "The name of the cache parameter group that is associated with this cache\n                  cluster.Required: NoType: StringUpdate requires: Some interruptions",
       "A list of cache security group names that are associated with this cache\n                  cluster. If your cache cluster is in a VPC, specify the\n                     VpcSecurityGroupIds property instead.Required: Conditional: If your cache cluster isn't in a VPC, you must specify\n                  this property.Type: List of stringsUpdate requires: No interruption",
-      "The cache subnet group that you associate with a cache cluster.Required: NoType: StringUpdate requires: Replacement",
+      "The cache subnet group that you associate with a cache cluster.Required: Conditional. If you specified the VpcSecurityGroupIds property, you must specify this property.Type: StringUpdate requires: Replacement",
       "A name for the cache cluster. If you don't specify a name, AWS CloudFormation generates a\n                  unique physical ID and uses that ID for the cache cluster. For more information,\n                  see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.The name must contain 1 to 20 alphanumeric characters or hyphens. The name must\n                  start with a letter and cannot end with a hyphen or contain two consecutive\n                  hyphens.Required: NoType: StringUpdate requires: Replacement",
       "The name of the cache engine to be used for this cache cluster, such as\n                     memcached or redis.Required: YesType: StringUpdate requires: Replacement",
       "The version of the cache engine to be used for this cluster.Required: NoType: StringUpdate requires: Some interruptions",
@@ -1272,7 +1294,9 @@
       "An arbitrary set of tags (key–value pairs) for this cache\n                  cluster.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
       "A list of VPC security group IDs. If your cache cluster isn't in a VPC, specify\n                  the CacheSecurityGroupNames property instead.\n                  NoteYou must use the AWS::EC2::SecurityGroup resource instead of\n                        the AWS::ElastiCache::SecurityGroup resource in order to\n                        specify an ElastiCache security group that is in a VPC. In addition, if you use\n                        the default VPC for your\n                        AWS account, you must use the Fn::GetAtt function and the\n                           GroupId attribute to retrieve security group IDs (instead of\n                        the Ref function). To see a sample template, see the Template\n                        Snippet section.\n               Required: Conditional: If your cache cluster is in a VPC, you must specify\n                  this property.Type: List of stringsUpdate requires: No interruption",
       "The DNS address of the configuration endpoint for the Memcached cache\n                     cluster.",
-      "The port number of the configuration endpoint for the Memcached cache\n                     cluster."
+      "The port number of the configuration endpoint for the Memcached cache\n                     cluster.",
+      "The DNS address of the configuration endpoint for the Redis cache cluster.",
+      "The port number of the configuration endpoint for the Redis cache cluster."
     ]
   }
 ,
@@ -1495,7 +1519,7 @@
       "Generates a stickiness policy with sticky session lifetimes controlled by the\n                  lifetime of the browser (user-agent), or by a specified expiration period. This\n                  policy can be associated only with HTTP/HTTPS listeners.Required: NoType: A list of LBCookieStickinessPolicy objects.Update requires: No interruption",
       "A name for the load balancer. If you don't specify a name, AWS CloudFormation generates a\n                  unique physical ID and uses that ID for the load balancer. The name must be unique\n                  within your set of load balancers. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
       "One or more listeners for this load balancer. Each listener must be registered\n                  for a specific port, and you cannot have more than one listener for a given\n                  port.ImportantIf you update the property values for a listener specified by the\n                        Listeners property, AWS CloudFormation will delete the existing listener and\n                     create a new one with the updated properties. During the time that AWS CloudFormation is\n                     performing this action, clients will not be able to connect to the load\n                     balancer.Required: YesType: A list of ElasticLoadBalancing Listener Property Type objects.Update requires: No interruption",
-      "A list of elastic load balancing policies to apply to this elastic load\n                  balancer.Required: NoType: A list of ElasticLoadBalancing policy objects.Update requires: No interruption",
+      "A list of elastic load balancing policies to apply to this elastic load balancer. Specify only back-end server policies. For more information, see DescribeLoadBalancerPolicyTypes in the Elastic Load Balancing API Reference.Required: NoType: A list of ElasticLoadBalancing policy objects.Update requires: No interruption",
       "For load balancers attached to an Amazon VPC, this parameter can be used to\n                  specify the type of load balancer to use. Specify internal to create\n                  an internal load balancer with a DNS name that resolves to private IP addresses or\n                     internet-facing to create a load balancer with a publicly\n                  resolvable DNS name, which resolves to public IP addresses.\n                  NoteIf you specify internal, you must specify subnets to\n                        associate with the load balancer, not Availability Zones.\n               Required: NoType: StringUpdate requires: Replacement",
       "Required: NoType: A list of security groups assigned to your load balancer within your\n                  virtual private cloud (VPC).Update requires: No interruption",
       "A list of subnet IDs in your virtual private cloud (VPC) to attach to your load\n                  balancer. Do not specify multiple subnets that are in the same Availability Zone.\n                  You can specify the AvailabilityZones or Subnets\n                  property, but not both.For more information about using Elastic Load Balancing in a VPC, see How Do I Use Elastic Load Balancing in Amazon VPC in the\n                     Elastic Load Balancing Developer Guide.Required: NoType: List of stringsUpdate requires: Replacement if you did not have an subnet specified and you are adding\n                  one or if you are removing all subnets. Otherwise, update requires no interruption. To update the load\n                  balancer to another subnet that is in the same Availability Zone, you must do two\n                  updates. You must first update the load balancer to use a subnet in different\n                  Availability Zone. After the update is complete, update the load balancer to use\n                  the new subnet that is in the original Availability Zone.",
@@ -1621,7 +1645,8 @@
       "RoleArn",
       "ScheduleExpression",
       "State",
-      "Targets"
+      "Targets",
+      "Arn"
     ],
     "descriptions": [
       "A description of the rule's purpose.Required: NoType: StringUpdate requires: No interruption",
@@ -1630,7 +1655,8 @@
       "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants CloudWatch Events permission to make calls to target services, such as AWS Lambda (Lambda) or Amazon Kinesis streams.Required: NoType: StringUpdate requires: No interruption",
       "The schedule or rate (frequency) that determines when CloudWatch Events runs the rule. For more information, see Schedule Expression Syntax for Rules in the Amazon CloudWatch Developer Guide.Required: NoRequired: Conditional. You must specify this property, the EventPattern property, or both.Update requires: No interruption",
       "Indicates whether the rule is enabled. For valid values, see the State parameter for the PutRule action in the Amazon CloudWatch Events API Reference.Required: NoType: StringUpdate requires: No interruption",
-      "The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered.Required: NoType: List of Amazon CloudWatch Events Rule TargetUpdate requires: No interruption"
+      "The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered.Required: NoType: List of Amazon CloudWatch Events Rule TargetUpdate requires: No interruption",
+      "The event rule Amazon Resource Name (ARN), such as arn:aws:events:us-east-1:123456789012:rule/example."
     ]
   }
 ,
@@ -1671,6 +1697,8 @@
       "EC2InboundPermissions",
       "EC2InstanceType",
       "LogPaths",
+      "MaxSize",
+      "MinSize",
       "Name",
       "ServerLaunchParameters",
       "ServerLaunchPath"
@@ -1678,10 +1706,12 @@
     "descriptions": [
       "The unique identifier for the build that you want to use with this fleet.Required: YesType: StringUpdate requires: Replacement",
       "Information that helps you identify the purpose of this fleet.Required: NoType: StringUpdate requires: No interruption",
-      "The number of EC2 instances that you want in this fleet.ImportantCurrently, the number of EC2 instances that AWS CloudFormation supports is 0 or\n                1.Required: YesType: IntegerUpdate requires: No interruption",
+      "The number of EC2 instances that you want in this fleet.Required: YesType: IntegerUpdate requires: No interruption",
       "The incoming traffic, expressed as IP ranges and port numbers, that is permitted to\n            access the game server. If you don't specify values, no traffic is permitted to your\n            game servers.Required: NoType: List of Amazon GameLift Fleet\n    EC2InboundPermissionUpdate requires: No interruption",
       "The type of EC2 instances that the fleet uses. EC2 instance types define the CPU,\n            memory, storage, and networking capacity of the fleet's hosts. For more information\n            about the instance types that are supported by GameLift, see the EC2InstanceType parameter in the\n            Amazon GameLift API Reference.Required: YesType: StringUpdate requires: Replacement",
       "The path to game-session log files that are generated by your game server, with the\n            slashes (\\) escaped. After a game session has been terminated, GameLift\n            captures and stores the logs in an S3 bucket.Required: NoType: List of stringsUpdate requires: Replacement",
+      "The maximum number of EC2 instances that you want to allow in this fleet. By default, AWS CloudFormation, sets this property to 1.Required: NoType: IntegerUpdate requires: No interruption",
+      "The minimum number of EC2 instances that you want to allow in this fleet. By default, AWS CloudFormation, sets this property to 0.Required: NoType: IntegerUpdate requires: No interruption",
       "An identifier to associate with this fleet. Fleet names don't need to be\n            unique.Required: YesType: StringUpdate requires: No interruption",
       "The parameters that are required to launch your game server. Specify these\n            parameters as a string of command-line parameters, such as +sv_port 33435\n              +start_lobby.Required: NoType: StringUpdate requires: Replacement",
       "The location of your game server that GameLift launches. You must escape the slashes\n              (\\) and use the following pattern:\n                C:\\\\game\\\\launchpath. For example,\n            if your game server files are in the MyGame folder, the path should be\n              C:\\\\game\\\\MyGame\\\\server.exe.Required: YesType: StringUpdate requires: Replacement"
@@ -2300,7 +2330,7 @@
       "An option group that this database instance is associated with.Required: NoType: StringUpdate requires: No interruption.",
       "The port for the instance.Required: NoType: StringUpdate requires: Replacement.",
       "The daily time range during which automated backups are created if automated\n                  backups are enabled, as determined by the BackupRetentionPeriod.Required: NoType: StringUpdate requires: No interruption.",
-      "The weekly time range (in UTC) during which system maintenance can\n                  occur.Required: NoType: StringUpdate requires: No interruption or some\n                     interruptions. For more information, see ModifyDBInstance in the\n                     Amazon Relational Database Service API Reference.",
+      "The weekly time range (in UTC) during which system maintenance can occur. NoteThis property applies during the initial resource creation. If you use AWS CloudFormation to update the DB instance, AWS CloudFormation applies those updates immediately.Required: NoType: StringUpdate requires: No interruption or some\n                     interruptions. For more information, see ModifyDBInstance in the\n                     Amazon Relational Database Service API Reference.",
       "Indicates whether the database instance is an Internet-facing instance. If you\n                  specify true, an instance is created with a publicly resolvable DNS\n                  name, which resolves to a public IP address. If you specify false, an\n                  internal instance is created with a DNS name that resolves to a private IP\n                  address. The default behavior value depends on your VPC setup and the database subnet\n                  group. For more information, see the PubliclyAccessible parameter in\n                     CreateDBInstance in the Amazon Relational Database Service API Reference.If this resource has a public IP address and is also in a VPC that is defined in the same template, you must use the\nDependsOn attribute to declare a dependency on the VPC-gateway attachment. For more information,\nsee DependsOn Attribute.NoteCurrently, if you specify DBSecurityGroups, this property is\n                     ignored. If you want to specify a security group and this property, you must\n                     use a VPC security group. For more information about Amazon RDS and VPC, see Using Amazon RDS with Amazon VPC in the\n                        Amazon Relational Database Service User Guide.Required: NoType: BooleanUpdate requires: Replacement.",
       "If you want to create a read replica DB instance, specify the ID of the source\n                  database instance. Each database instance can have a certain number of read\n                  replicas. For more information, see Working with Read Replicas in the\n                     Amazon Relational Database Service Developer Guide.The SourceDBInstanceIdentifier property determines whether a\n                  database instance is a read replica. If you remove the\n                     SourceDBInstanceIdentifier property from your current template and\n                  then update your stack, the read replica is deleted and a new database instance\n                  (not a read replica) is created.ImportantRead replicas do not support deletion policies. Any deletion policy\n                           that's associated with a read replica is ignored.If you specify SourceDBInstanceIdentifier, do not set the\n                              MultiAZ property to true and do not specify\n                           the DBSnapshotIdentifier property. You cannot deploy read\n                           replicas in multiple Availability Zones, and you cannot create a read\n                           replica from a snapshot.Do not set the BackupRetentionPeriod,\n                           DBName, MasterUsername,\n                              MasterUserPassword, and\n                              PreferredBackupWindow properties. The database attributes\n                           are inherited from the source database instance, and backups are disabled\n                           for read replicas.If the source DB instance is in a different region than the read\n                           replica, specify a valid DB instance ARN. For more information, see\n                              Constructing a Amazon RDS Amazon Resource Name (ARN) in the\n                              Amazon Relational Database Service User Guide.For DB instances in an Amazon Aurora clusters, do not specify this\n                           property. Amazon RDS assigns automatically assigns a writer and reader DB\n                           instances.Required: NoType: StringUpdate requires: Replacement.",
       "Indicates whether the database instance is encrypted.If you specify the DBClusterIdentifier,\n                     DBSnapshotIdentifier, or SourceDBInstanceIdentifier\n                  property, do not specify this property. The value is inherited from the cluster,\n                  snapshot, or source database instance.NoteCurrently, if you specify DBSecurityGroups, this property is\n                     ignored. If you want to specify a security group and this property, you must\n                     use a VPC security group. For more information about Amazon RDS and VPC, see Using Amazon RDS with Amazon VPC in the\n                        Amazon Relational Database Service User Guide.Required: Conditional. If you specify the KmsKeyId property, you\n                  must enable encryption.Type: BooleanUpdate requires: Replacement.",
@@ -2938,7 +2968,7 @@
       "The request parameters that API Gateway sends with the back-end request. Specify request parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.Specify the destination using the following pattern integration.request.location.name, where location is a query string, path, or header, and name is a valid, unique parameter name.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: List of key-value pairs",
       "The templates used to transform the method request body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value.Required: NoType: List of key-value pairs",
       "The type of back end your method is running, such as HTTP, AWS, or MOCK.Required: NoType: String",
-      "The integration's Uniform Resource Identifier (URI). If you specify HTTP for the Type property, specify the API endpoint URL. If you specify LAMBDA for the Type property, specify a Lambda function URI, which follows the form: arn:aws:apigateway:region:lambda:path/path. The path is usually in the form\n                /2015-03-31/functions/LambdaFunctionARN/invocations. If you specify AWS for the Type property, specify an AWS service. If you specify MOCK for the Type property, don't specify this property.Required: ConditionalType: String"
+      "The integration's Uniform Resource Identifier (URI). If you specify HTTP for the Type property, specify the API endpoint URL. If you specify MOCK for the Type property, don't specify this property. If you specify AWS for the Type property, specify an AWS service that follows the form:\n                arn:aws:apigateway:region:subdomain.service|service:path|action/service_api. For example, a Lambda function URI follows the form: arn:aws:apigateway:region:lambda:path/path. The path is usually in the form\n                /2015-03-31/functions/LambdaFunctionARN/invocations. For more information, see the uri property of the Integration resource in the Amazon API Gateway REST API Reference.Required: ConditionalType: String"
     ]
   }
 ,
