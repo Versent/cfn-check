@@ -1,6 +1,6 @@
 {
   "name": "cfn-check",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "CloudFormation template validation tool",
   "main": "./lib/cfn-check.js",
   "scripts": {

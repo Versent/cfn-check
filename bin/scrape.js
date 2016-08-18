@@ -9,5 +9,5 @@ xray(url, 'body', [{
     descriptions: ['.variablelist dd']
   }])
   .paginate('#next .awstoc[accesskey="n"]@href')
-  .limit(155) // The number of AWS Resource Type definitions/pages
+  .limit(170) // The number of AWS Resource Type definitions/pages
   .write('data/resources.json');

@@ -17,6 +17,7 @@
       "NotificationConfigurations",
       "PlacementGroup",
       "Tags",
+      "TargetGroupARNs",
       "TerminationPolicies",
       "VPCZoneIdentifier"
     ],
@@ -28,15 +29,16 @@
       "The service you want the health status from, Amazon EC2 or Elastic Load\n                  Balancer. Valid values are EC2 or ELB.Required: NoType: StringUpdate requires: No interruption",
       "The ID of the Amazon EC2 instance you want to use to create the Auto Scaling group. Use this\n                  property if you want to create an Auto Scaling group that uses an existing Amazon EC2 instance\n                  instead of a launch configuration.When you use an Amazon EC2 instance to create an Auto Scaling group, a new launch\n                  configuration is first created and then associated with the Auto Scaling group. The new\n                  launch configuration derives all its properties from the instance, with the\n                  exception of BlockDeviceMapping and\n                     AssociatePublicIpAddress.Required: Conditional. You must specify this property if you don't specify the\n                     LaunchConfigurationName property.Type: StringUpdate requires: Replacement",
       "Specifies the name of the associated AWS::AutoScaling::LaunchConfiguration.NoteIf this resource has a public IP address and is also in a VPC that is defined in the same template, you must use the\nDependsOn attribute to declare a dependency on the VPC-gateway attachment. For more information,\nsee DependsOn Attribute.Required: Conditional; you must specify this property if\n                  you don't specify the InstanceId property.Type: StringUpdate requires: No interruptionImportantWhen you update the LaunchConfigurationName, existing Amazon EC2\n                     instances continue to run with the configuration that they were originally\n                     launched with. To update existing instances, specify an update policy attribute\n                     for this Auto Scaling group. For more information, see UpdatePolicy.",
-      "A list of load balancers associated with this Auto Scaling group.Required: NoType: List of stringsUpdate requires: ReplacementImportant When you update LoadBalancerNames, the entire Auto Scaling group is replaced. ",
+      "A list of Classic load balancers associated with this Auto Scaling group. To specify Application load balancers, use TargetGroupARNs.Required: NoType: List of stringsUpdate requires: ReplacementImportant When you update LoadBalancerNames, the entire Auto Scaling group is replaced. ",
       "The maximum size of the Auto Scaling group.Required: YesType: StringUpdate requires: No interruption",
       "Enables the monitoring of group metrics of an Auto Scaling group.Required: NoType: A list of  Auto Scaling MetricsCollectionUpdate requires: No interruption",
       "The minimum size of the Auto Scaling group.Required: YesType: StringUpdate requires: No interruption",
       "An embedded property that configures an Auto Scaling group to send notifications when\n                  specified events take place.Required: NoType: List of Auto Scaling\n      NotificationConfigurationsUpdate requires: No interruption",
       "The name of an existing cluster placement group into which you want to launch\n                  your instances. A placement group is a logical grouping of instances within a\n                  single Availability Zone. You cannot specify multiple Availability Zones and a\n                  placement group.Required: NoType: StringUpdate requires: No interruption",
-      "The tags you want to attach to this resource.For more information about tags, go to  Tagging\n                     Auto Scaling Groups and Amazon EC2 Instances in the\n                  Auto Scaling Developer Guide.Required: NoType: List of Auto Scaling\n                     TagsUpdate requires: No interruption",
-      "A policy or a list of policies that are used to select the instances to\n                  terminate. The policies are executed in the order that you list them. For more information on configuring a termination policy for your Auto Scaling group,\n                  see Instance Termination\n                     Policy for Your Auto Scaling Group in the\n                     Auto Scaling Developer Guide. Required: NoType: List of stringsUpdate requires: No interruption",
-      "A list of subnet identifiers of Amazon Virtual Private Cloud (Amazon VPCs).If you specify the AvailabilityZones property, the\n                  subnets that you specify for this property must reside in those Availability\n                  Zones.For more information, go to Using EC2 Dedicated Instances Within Your VPC in the\n                     Auto Scaling Developer Guide.Required: Conditional. If you don't specify the\n                     AvailabilityZones property, you must specify this\n                  property.Type: List of stringsUpdate requires: Some interruptionsNoteWhen you update VPCZoneIdentifier, the instances are replaced, but not the\n                     Auto Scaling group."
+      "The tags you want to attach to this resource.For more information about tags, go to  Tagging\n                     Auto Scaling Groups and Amazon EC2 Instances in the\n                  Auto Scaling User Guide.Required: NoType: List of Auto Scaling\n                     TagsUpdate requires: No interruption",
+      "A list of Amazon Resource Names (ARN) of target groups to associate with the Auto Scaling group.Required: NoType: List of stringsUpdate requires: No interruption",
+      "A policy or a list of policies that are used to select the instances to\n                  terminate. The policies are executed in the order that you list them. For more information on configuring a termination policy for your Auto Scaling group, see Instance Termination Policy for Your Auto Scaling Group in the Auto Scaling User Guide. Required: NoType: List of stringsUpdate requires: No interruption",
+      "A list of subnet identifiers of Amazon Virtual Private Cloud (Amazon VPCs).If you specify the AvailabilityZones property, the\n                  subnets that you specify for this property must reside in those Availability\n                  Zones.For more information, go to Using EC2 Dedicated Instances Within Your VPC in the\n                     Auto Scaling User Guide.Required: Conditional. If you don't specify the\n                     AvailabilityZones property, you must specify this\n                  property.Type: List of stringsUpdate requires: Some interruptionsNoteWhen you update VPCZoneIdentifier, the instances are replaced, but not the\n                     Auto Scaling group."
     ]
   }
 ,
@@ -124,8 +126,8 @@
       "The estimated time, in seconds, until a newly launched instance can send\n                  metrics to CloudWatch. By default, Auto Scaling uses the cooldown period, as specified in the\n                     Cooldown property.Do not specify this property if you are using the SimpleScaling\n                  policy type.Required: NoType: IntegerUpdate requires: No interruption",
       "The aggregation type for the CloudWatch metrics. You can specify\n                  Minimum, Maximum, or Average. By default,\n                  AWS CloudFormation specifies Average.Do not specify this property if you are using the SimpleScaling\n                  policy type.Required: NoType: StringUpdate requires: No interruption",
       "For the PercentChangeInCapacity adjustment type, the minimum\n                  number of instances to scale. The scaling policy changes the desired capacity of\n                  the Auto Scaling group by a minimum of this many instances. This property replaces the\n                     MinAdjustmentStep property.Required: NoType: IntegerUpdate requires: No interruption",
-      "An Auto Scaling policy type. You can specify SimpleScaling or\n                     StepScaling. By default, AWS CloudFormation specifies\n                     SimpleScaling. For more information, see Scaling Policy\n                     Types in the Auto Scaling Developer Guide.Required: NoType: StringUpdate requires: No interruption",
-      "The number of instances by which to scale. The AdjustmentType\n                  property determines whether AWS CloudFormation interprets this number as an absolute number\n                  (when the ExactCapacityvalue is specified) or as a\n                  percentage of the existing Auto Scaling group size (when the\n                     PercentChangeInCapacity value is specified). A positive\n                  value adds to the current capacity and a negative value subtracts from the current\n                  capacity.Required: Conditional. This property is required if the policy type\n                     is SimpleScaling. This property is not supported with any other\n                  policy type. Type: IntegerUpdate requires: No interruption",
+      "An Auto Scaling policy type. You can specify SimpleScaling or\n                     StepScaling. By default, AWS CloudFormation specifies\n                     SimpleScaling. For more information, see Scaling Policy\n                     Types in the Auto Scaling User Guide.Required: NoType: StringUpdate requires: No interruption",
+      "The number of instances by which to scale. The AdjustmentType property determines if AWS CloudFormation interprets this number as an absolute number (when the ExactCapacity value is specified), increase or decrease capacity by a specified number (when the ChangeInCapacity value is specified), or increase or decrease capacity as a percentage of the existing Auto Scaling group size (when the PercentChangeInCapacity value is\n                  specified). A positive value adds to the current capacity and a negative value subtracts from the current capacity. For exact capacity, you must specify a positive value.Required: Conditional. This property is required if the policy type\n                     is SimpleScaling. This property is not supported with any other\n                  policy type. Type: IntegerUpdate requires: No interruption",
       "A set of adjustments that enable you to scale based on the size of the alarm\n                  breach.Required: Conditional. This property is required if the policy type\n                     is StepScaling. This property is not supported with any other\n                  policy type. Type: List of Auto Scaling ScalingPolicy\n      StepAdjustmentsUpdate requires: No interruption"
     ]
   }
@@ -153,6 +155,20 @@
   }
 ,
   {
+    "type": "AWS::CertificateManager::Certificate",
+    "properties": [
+      "DomainName",
+      "DomainValidationOptions",
+      "SubjectAlternativeNames"
+    ],
+    "descriptions": [
+      "Fully qualified domain name (FQDN), such as www.example.com, of the site that you want to secure with the ACM certificate. To protect several sites in the same domain, use an asterisk (*) to specify a wildcard. For example, *.example.com protects www.example.com, site.example.com, and images.example.com.For constraints, see the DomainName parameter for the RequestCertificate action in the AWS Certificate Manager API Reference.Required: YesType: StringUpdate requires: Replacement",
+      "Domain information that domain name registrars use to verify your identity. For more information and the default values, see Configure Email for Your Domain and Validate Domain Ownership in the AWS Certificate Manager User Guide.Required: NoType: List of AWS Certificate Manager Certificate DomainValidationOptionUpdate requires: Replacement",
+      "FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example, you can add www.example.net to a certificate for the www.example.com domain name so that users can reach your site by using either name.Required: NoType: List of stringsUpdate requires: Replacement"
+    ]
+  }
+,
+  {
     "type": "AWS::CloudFormation::Authentication",
     "properties": [
       "accessKeyId",
@@ -169,7 +185,7 @@
       "A comma-delimited list of Amazon S3 buckets to be associated with the S3\n                  authentication credentials.Required: Conditional Can be specified only if the type\n                  property is set to \"S3\".Type: List of strings",
       "Specifies the password for basic authentication.Required: Conditional Can be specified only if the type property is set to\n                     \"basic\".Type: String",
       "Specifies the secret key for S3 authentication.Required: Conditional Can be specified only if the type\n                  property is set to \"S3\".Type: String",
-      "Specifies whether the authentication scheme uses a user name and password\n                  (\"basic\") or an access key ID and secret key (\"S3\").If you specify \"basic\", you must also specify the\n                     username, password, and uris\n                  properties.If you specify \"S3\", you must also specify the\n                     accessKeyId, secretKey, and buckets\n                  properties.Required: YesType: String Valid values are \"basic\" or \"S3\"",
+      "Specifies whether the authentication scheme uses a user name and password\n                  (\"basic\") or an access key ID and secret key (\"S3\").If you specify \"basic\", specify the username, password, and uris properties.If you specify \"S3\", specify the accessKeyId, secretKey, and buckets (optional) properties.Required: YesType: String Valid values are \"basic\" or \"S3\"",
       "A comma-delimited list of URIs to be associated with the basic authentication\n                  credentials. The authorization applies to the specified URIs and any more specific\n                  URI. For example, if you specify http://www.example.com, the\n                  authorization will also apply to http://www.example.com/test.Required: Conditional Can be specified only if the type\n                  property is set to \"basic\".Type: List of strings",
       "Specifies the user name for basic authentication.Required: Conditional Can be specified only if the type property is set to\n                     \"basic\".Type: String",
       "Describes the role for role-based authentication.Required: Conditional Can be specified only if the type\n                  property is set to \"S3\".Type: String."
@@ -182,7 +198,7 @@
       "ServiceToken"
     ],
     "descriptions": [
-      "The service token that was given to the template developer by the service provider\n                  to access the service, such as an Amazon SNS topic ARN or Lambda function ARN. The\n                  service token must be from the same region in which you are creating the\n                  stack.Required: YesType: String"
+      "The service token that was given to the template developer by the service provider\n                  to access the service, such as an Amazon SNS topic ARN or Lambda function ARN. The\n                  service token must be from the same region in which you are creating the\n                  stack.Required: YesType: StringUpdate requires: Updates are not supported."
     ]
   }
 ,
@@ -639,6 +655,24 @@
   }
 ,
   {
+    "type": "AWS::EC2::FlowLog",
+    "properties": [
+      "DeliverLogsPermissionArn",
+      "LogGroupName",
+      "ResourceId",
+      "ResourceType",
+      "TrafficType"
+    ],
+    "descriptions": [
+      "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account.Required: YesType: StringUpdate requires: Replacement",
+      "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs.Required: YesType: StringUpdate requires: Replacement",
+      "The ID of the subnet, network interface, or VPC for which you want to create a flow log.Required: YesType: StringUpdate requires: Replacement",
+      "The type of resource that you specified in the ResourceId property. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property. For valid values, see the ResourceType parameter for the CreateFlowLogs action in the Amazon EC2 API Reference.Required: YesType: StringUpdate requires: Replacement",
+      "The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic. For valid values, see the TrafficType parameter for the CreateFlowLogs action in the Amazon EC2 API Reference.Required: YesType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
     "type": "AWS::EC2::Host",
     "properties": [
       "AutoPlacement",
@@ -1014,7 +1048,7 @@
       "The size of the volume, in gibibytes (GiBs). For more information about the valid sizes for each volume type, see the Size parameter for the CreateVolume action in the Amazon EC2 API Reference.If you specify the SnapshotId property, specify a size that is\n                  equal to or greater than the snapshot size. If you don't specify a size, Amazon EC2\n                  will use the size of the snapshot as the volume size.Required: Conditional. If you don't specify a value for the\n                     SnapshotId property, you must specify this property.Type: StringUpdate requires: Updates are not supported.",
       "The snapshot from which to create the new volume.Required: NoType: StringUpdate requires: Updates are not supported.",
       "An arbitrary set of tags (key–value pairs) for this volume.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption",
-      "The volume type. You can specify standard, io1, or gp2. If you set the type to io1, you must also set the Iops property. For more information about these values and the default value, see the VolumeType parameter for the CreateVolume action in the Amazon EC2 API Reference.Required: NoType: StringUpdate requires: Updates are not supported."
+      "The volume type. If you set the type to io1, you must also set the Iops property. For valid values, see the VolumeType parameter for the CreateVolume action in the Amazon EC2 API Reference.Required: NoType: StringUpdate requires: Updates are not supported."
     ]
   }
 ,
@@ -1048,8 +1082,8 @@
       "The CIDR block you want the VPC to cover. For example: \"10.0.0.0/16\".Required: YesType: StringUpdate requires: Replacement",
       "Specifies whether DNS resolution is supported for the VPC. If this attribute is\n                     true, the Amazon DNS server resolves DNS hostnames for your\n                  instances to their corresponding IP addresses; otherwise, it does not. By default\n                  the value is set to true.Required: NoType: BooleanUpdate requires: No interruption",
       "Specifies whether the instances launched in the VPC get DNS hostnames. If this\n                  attribute is true, instances in the VPC get DNS hostnames; otherwise,\n                  they do not. You can only set EnableDnsHostnames to true\n                  if you also set the EnableDnsSupport attribute to true.\n                  By default, the value is set to false.Required: NoType: BooleanUpdate requires: No interruption",
-      "The allowed tenancy of instances launched into the VPC. \"default\": Instances can be launched with any\n                        tenancy.\"dedicated\": Any instance launched into the VPC will\n                        automatically be dedicated, regardless of the tenancy option you specify\n                        when you launch the instance.Required: NoType: StringValid values: \"default\" or\n                     \"dedicated\"Update requires: Replacement",
-      "An arbitrary set of tags (key–value pairs) for this VPC.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
+      "The allowed tenancy of instances launched into the VPC. \"default\": Instances can be launched with any\n                        tenancy.\"dedicated\": Any instance launched into the VPC automatically has dedicated tenancy, unless you launch it with the default\n                        tenancy.Required: NoType: StringValid values: \"default\" or\n                     \"dedicated\"Update requires: Replacement",
+      "An arbitrary set of tags (key–value pairs) for this VPC. To name a VPC resource, specify a value for the Name key.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
       "The set of IP addresses for the VPC. For example,\n                     10.0.0.0/16.",
       "The default network ACL ID that is associated with the VPC. For example,\n                        acl-814dafe3.",
       "The default security group ID that is associated with the VPC. For example,\n                        sg-b178e0d3."
@@ -1192,15 +1226,17 @@
       "DesiredCount",
       "LoadBalancers",
       "Role",
-      "TaskDefinition"
+      "TaskDefinition",
+      "Name"
     ],
     "descriptions": [
       "The name or Amazon Resource Name (ARN) of the cluster that you want to run your\n                  service on. If you do not specify a cluster, Amazon ECS uses the default\n                  cluster.Required: NoType: StringUpdate requires: Replacement",
       "Configures how many tasks run during a deployment.Required: NoType: Amazon EC2 Container Service Service\n      DeploymentConfigurationUpdate requires: No interruption",
       "The number of simultaneous tasks, which you specify by using the\n                     TaskDefinition property, that you want to run on the\n                  cluster.Required: YesType: StringUpdate requires: No interruption",
-      "A list of load balancer objects to associate with the cluster.Required: NoType: List of Amazon EC2 Container Service Service\n      LoadBalancersUpdate requires: Replacement",
+      "A list of load balancer objects to associate with the cluster. For information about the number of load balancers you can specify per service, see Service Load Balancing in the Amazon EC2 Container Service Developer Guide.Required: NoType: List of Amazon EC2 Container Service Service\n      LoadBalancersUpdate requires: Replacement",
       "The name or ARN of an AWS Identity and Access Management (IAM) role that allows your Amazon ECS container\n                  agent to make calls to your load balancer.NoteIn some cases, you might need to add a dependency on the service role's\n                     policy. For more information, see IAM role policy in DependsOn Attribute.Required: Conditional. This parameter is required only if you specify the\n                     LoadBalancers property.Type: StringUpdate requires: Replacement",
-      "The ARN of the task definition that you want to run on the cluster.Required: YesType: StringUpdate requires: Some interruptions"
+      "The ARN of the task definition that you want to run on the cluster.Required: YesType: StringUpdate requires: Some interruptions",
+      "The name of the Amazon ECS service, such as sample-webapp."
     ]
   }
 ,
@@ -1219,10 +1255,12 @@
   {
     "type": "AWS::EFS::FileSystem",
     "properties": [
-      "FileSystemTags"
+      "FileSystemTags",
+      "PerformanceMode"
     ],
     "descriptions": [
-      "Tags to associate with the file system.Required: NoType: Amazon Elastic File System FileSystem\n      FileSystemTagsUpdate requires: No interruption"
+      "Tags to associate with the file system.Required: NoType: Amazon Elastic File System FileSystem\n      FileSystemTagsUpdate requires: No interruption",
+      "The performance mode of the file system. For valid values, see the PerformanceMode parameter for the CreateFileSystem action in the Amazon Elastic File System User Guide.For more information about performance modes, see Amazon EFS Performance in the Amazon Elastic File System User Guide.Required: NoType: StringUpdate requires: Replacement"
     ]
   }
 ,
@@ -1310,7 +1348,7 @@
     "descriptions": [
       "The name of the cache parameter group family that the cache parameter group can be used\n               with.Required: YesType: StringUpdate requires: Updates are not supported.",
       "The description for the Cache Parameter Group.Required: YesType: StringUpdate requires: Updates are not supported.",
-      "A comma-delimited list of parameter name/value pairs. For more information, go to ModifyCacheParameterGroup in the Amazon ElastiCache API Reference\n                     Guide.Example:\n\"Properties\" : {\n   \"cas_disabled\" : \"1\",\n   \"chunk_size_growth_factor\" : \"1.02\"\n}              Required: YesType: JSON objectUpdate requires: Updates are not supported."
+      "A comma-delimited list of parameter name/value pairs. For more information, go to ModifyCacheParameterGroup in the Amazon ElastiCache API Reference\n                     Guide.Example:\n\"Properties\" : {\n   \"cas_disabled\" : \"1\",\n   \"chunk_size_growth_factor\" : \"1.02\"\n}              Required: NoType: Mapping of key-value pairsUpdate requires: Updates are not supported."
     ]
   }
 ,
@@ -1517,9 +1555,9 @@
       "Application health check for the instances.Required: NoType: ElasticLoadBalancing HealthCheck Type.Update requires: Replacement if you did not have a health check specified and you are\n                  adding one or if you are removing a health check. Otherwise, update requires no interruption.",
       "A list of EC2 instance IDs for the load balancer.Required: NoType: List of stringsUpdate requires: No interruption",
       "Generates a stickiness policy with sticky session lifetimes controlled by the\n                  lifetime of the browser (user-agent), or by a specified expiration period. This\n                  policy can be associated only with HTTP/HTTPS listeners.Required: NoType: A list of LBCookieStickinessPolicy objects.Update requires: No interruption",
-      "A name for the load balancer. If you don't specify a name, AWS CloudFormation generates a\n                  unique physical ID and uses that ID for the load balancer. The name must be unique\n                  within your set of load balancers. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
+      "A name for the load balancer. For valid values, see the LoadBalancerName parameter for the CreateLoadBalancer action in the Elastic Load Balancing API Reference version 2012-06-01.If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the load balancer. The name must be unique within your set of load balancers. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
       "One or more listeners for this load balancer. Each listener must be registered\n                  for a specific port, and you cannot have more than one listener for a given\n                  port.ImportantIf you update the property values for a listener specified by the\n                        Listeners property, AWS CloudFormation will delete the existing listener and\n                     create a new one with the updated properties. During the time that AWS CloudFormation is\n                     performing this action, clients will not be able to connect to the load\n                     balancer.Required: YesType: A list of ElasticLoadBalancing Listener Property Type objects.Update requires: No interruption",
-      "A list of elastic load balancing policies to apply to this elastic load balancer. Specify only back-end server policies. For more information, see DescribeLoadBalancerPolicyTypes in the Elastic Load Balancing API Reference.Required: NoType: A list of ElasticLoadBalancing policy objects.Update requires: No interruption",
+      "A list of elastic load balancing policies to apply to this elastic load balancer. Specify only back-end server policies. For more information, see DescribeLoadBalancerPolicyTypes in the Elastic Load Balancing API Reference version 2012-06-01.Required: NoType: A list of ElasticLoadBalancing policy objects.Update requires: No interruption",
       "For load balancers attached to an Amazon VPC, this parameter can be used to\n                  specify the type of load balancer to use. Specify internal to create\n                  an internal load balancer with a DNS name that resolves to private IP addresses or\n                     internet-facing to create a load balancer with a publicly\n                  resolvable DNS name, which resolves to public IP addresses.\n                  NoteIf you specify internal, you must specify subnets to\n                        associate with the load balancer, not Availability Zones.\n               Required: NoType: StringUpdate requires: Replacement",
       "Required: NoType: A list of security groups assigned to your load balancer within your\n                  virtual private cloud (VPC).Update requires: No interruption",
       "A list of subnet IDs in your virtual private cloud (VPC) to attach to your load\n                  balancer. Do not specify multiple subnets that are in the same Availability Zone.\n                  You can specify the AvailabilityZones or Subnets\n                  property, but not both.For more information about using Elastic Load Balancing in a VPC, see How Do I Use Elastic Load Balancing in Amazon VPC in the\n                     Elastic Load Balancing Developer Guide.Required: NoType: List of stringsUpdate requires: Replacement if you did not have an subnet specified and you are adding\n                  one or if you are removing all subnets. Otherwise, update requires no interruption. To update the load\n                  balancer to another subnet that is in the same Availability Zone, you must do two\n                  updates. You must first update the load balancer to use a subnet in different\n                  Availability Zone. After the update is complete, update the load balancer to use\n                  the new subnet that is in the original Availability Zone.",
@@ -1529,6 +1567,110 @@
       "The DNS name for the load balancer.Example: mystack-myelb-15HMABG9ZCN57-1013119603.us-east-1.elb.amazonaws.com",
       "The security group that you can use as part of your inbound rules for your load balancer's\n                     back-end Amazon EC2 application instances.Example: amazon-elb",
       "The owner of the source security group.Example: amazon-elb-sg"
+    ]
+  }
+,
+  {
+    "type": "AWS::ElasticLoadBalancingV2::Listener",
+    "properties": [
+      "Certificates",
+      "DefaultActions",
+      "LoadBalancerArn",
+      "Port",
+      "Protocol",
+      "SslPolicy"
+    ],
+    "descriptions": [
+      "The SSL server certificate for the listener. With a certificate, you can encrypt traffic between the load balancer and the clients that initiate HTTPS sessions, and traffic between the load balancer and your targets.Required: Conditional. If you specify HTTPS for the Protocol property, specify a certificate.Type: List of Elastic Load Balancing Listener CertificatesUpdate requires: No interruption",
+      "The default actions that the listener takes when handling incoming requests.Required: YesType: List of Elastic Load Balancing Listener DefaultActionsUpdate requires: No interruption",
+      "The Amazon Resource Name (ARN) of the load balancer to associate with the listener.Required: YesType: StringUpdate requires: Replacement",
+      "The port on which the listener listens for requests.For valid values, see the Port parameter for the CreateListener action in the Elastic Load Balancing API Reference version 2015-12-01.Required: YesType: IntegerUpdate requires: No interruption",
+      "The protocol that clients must use to send requests to the listener.For valid values, see the Protocol parameter for the CreateListener action in the Elastic Load Balancing API Reference version 2015-12-01.Required: YesType: StringUpdate requires: No interruption",
+      "The security policy that defines the ciphers and protocols that the load balancer supports.Required: NoType: StringUpdate requires: No interruption"
+    ]
+  }
+,
+  {
+    "type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    "properties": [
+      "Actions",
+      "Conditions",
+      "ListenerArn",
+      "Priority"
+    ],
+    "descriptions": [
+      "The action that the listener takes when a request meets the specified condition.Required: YesType: List of Elastic Load Balancing ListenerRule ActionsUpdate requires: No interruption",
+      "The conditions under which a rule takes effect.Required: YesType: List of Elastic Load Balancing ListenerRule ConditionsUpdate requires: No interruption",
+      "The Amazon Resource Name (ARN) of the listener that the rule applies to.Required: YesType: StringUpdate requires: Replacement",
+      "The priority for the rule. Elastic Load Balancing evaluates rules in priority order, from the lowest value to the highest value. If a request satisfies a rule, Elastic Load Balancing ignores all subsequent rules.NoteA target group can have only one rule with a given priority.For valid values, see the Priority parameter for the CreateRule action in the Elastic Load Balancing API Reference version 2015-12-01.Required: YesType: IntegerUpdate requires: No interruption"
+    ]
+  }
+,
+  {
+    "type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    "properties": [
+      "LoadBalancerAttributes",
+      "Name",
+      "Scheme",
+      "SecurityGroups",
+      "Subnets",
+      "Tags",
+      "DNSName",
+      "CanonicalHostedZoneID",
+      "LoadBalancerFullName",
+      "LoadBalancerName",
+      "SecurityGroups"
+    ],
+    "descriptions": [
+      "Load balancer configurations.Required: NoType: List of Elastic Load Balancing LoadBalancer LoadBalancerAttributesUpdate requires: No interruption",
+      "A name for the load balancer, which must be unique within your AWS account. The name can have a maximum of 32 alphanumeric characters and hyphens. Names can't begin or end with a hyphen.Required: NoType: StringUpdate requires: Replacement",
+      "Indicates whether the load balancer is Internet-facing or internal. An Internet-facing load balancer routes requests from clients over the Internet to targets in your public subnets. An internal load balancer routes requests to targets using private IP addresses.For valid and default values, see the Scheme parameter for the CreateLoadBalancer action in the Elastic Load Balancing API Reference version 2015-12-01.Required: NoType: StringUpdate requires: Replacement",
+      "A list of the IDs of the security groups to assign to the load balancer.Required: NoType: List of stringsUpdate requires: No interruption",
+      "A list of at least two IDs of the subnets to associate with the load balancer. Subnets must be in different Availability Zones.Required: YesType: List of stringsUpdate requires: No interruption",
+      "An arbitrary set of tags (key–value pairs) to associate with this load balancer. Use tags to help manage resources.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption",
+      "The DNS name for the Application load balancer, such as my-load-balancer-424835706.us-west-2.elb.amazonaws.com.",
+      "The ID of the Amazon Route 53 hosted zone that is associated with the load balancer, such as Z2P70J7EXAMPLE.",
+      "The full name of the Application load balancer, such as app/my-load-balancer/50dc6c495c0c9188.",
+      "The name of the Application load balancer, such as my-load-balancer.",
+      "The IDs of the security groups for the Application load balancer, such as sg-123456a."
+    ]
+  }
+,
+  {
+    "type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    "properties": [
+      "HealthCheckIntervalSeconds",
+      "HealthCheckPath",
+      "HealthCheckPort",
+      "HealthCheckProtocol",
+      "HealthCheckTimeoutSeconds",
+      "HealthyThresholdCount",
+      "Matcher",
+      "Name",
+      "Port",
+      "Protocol",
+      "Tags",
+      "TargetGroupAttributes",
+      "Targets",
+      "UnhealthyThresholdCount",
+      "VpcId"
+    ],
+    "descriptions": [
+      "The approximate number of seconds between health checks for an individual target.Required: NoType: IntegerUpdate requires: No interruption",
+      "The ping path destination where Elastic Load Balancing sends health check requests.Required: NoType: StringUpdate requires: No interruption",
+      "The port that the load balancer uses when performing health checks on the targets.For valid and default values, see the HealthCheckPort parameter for the CreateTargetGroup action in the Elastic Load Balancing API Reference version 2015-12-01.Required: NoType: StringUpdate requires: No interruption",
+      "The protocol that the load balancer uses when performing health checks on the targets, such as HTTP or HTTPS.For valid and default values, see the HealthCheckProtocol parameter for the CreateTargetGroup action in the Elastic Load Balancing API Reference version 2015-12-01.Required: NoType: StringUpdate requires: No interruption",
+      "The number of seconds to wait for a response before considering that a health check has failed.Required: NoType: IntegerUpdate requires: No interruption",
+      "The number of consecutive successful health checks that are required before an unhealthy target is considered healthy.Required: NoType: IntegerUpdate requires: No interruption",
+      "The HTTP codes that a healthy target uses when responding to a health check.Required: NoType: Elastic Load Balancing TargetGroup MatcherUpdate requires: No interruption",
+      "A name for the target group.Required: NoType: StringUpdate requires: Replacement",
+      "The port on which the targets receive traffic.Required: YesType: IntegerUpdate requires: Replacement",
+      "The protocol to use for routing traffic to the targets.Required: YesType: StringUpdate requires: Replacement",
+      "An arbitrary set of tags (key–value pairs) for the target group. Use tags to help manage resources.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
+      "Target group configurations.Required: NoType: List of Elastic Load Balancing TargetGroup TargetGroupAttributesUpdate requires: No interruption",
+      "The targets to add to this target group.Required: NoType: List of Elastic Load Balancing TargetGroup TargetDescriptionUpdate requires: No interruption",
+      "The number of consecutive failed health checks that are required before a target is considered unhealthy.Required: NoType: IntegerUpdate requires: No interruption",
+      "The ID of the VPC in which your targets are located.Required: YesType: StringUpdate requires: Replacement"
     ]
   }
 ,
@@ -1548,7 +1690,7 @@
     "descriptions": [
       "An AWS Identity and Access Management (IAM) policy document that specifies who can access the Amazon ES\n            domain and their permissions. For more information, see Configuring Access Policies in the\n            Amazon Elasticsearch Service Developer Guide.Required: NoType: JSON objectUpdate requires: No interruption",
       "Additional options to specify for the Amazon ES domain. For more information, see\n              Configuring Advanced Options in the\n            Amazon Elasticsearch Service Developer Guide.Required: NoType: A JSON object consisting of a string key-value pair, such\n            as:{\n  \"rest.action.multi.allow_explicit_index\": \"true\"\n}Update requires: Replacement",
-      "A name for the Amazon ES domain. If you don't specify a name, AWS CloudFormation generates a\n            unique physical ID and uses that ID for the domain name. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
+      "A name for the Amazon ES domain. For valid values, see the DomainName data type in the Amazon Elasticsearch Service Developer Guide.If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the domain name. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
       "The configurations of Amazon Elastic Block Store (Amazon EBS) volumes that are attached to data nodes in\n            the Amazon ES domain. For more information, see Configuring EBS-based Storage in the\n            Amazon Elasticsearch Service Developer Guide.Required: NoType: Amazon Elasticsearch Service Domain\n    EBSOptionsUpdate requires: No interruption",
       "The cluster configuration for the  Amazon ES domain. You can specify options such as\n            the instance type and the number of instances. For more information, see Configuring Amazon ES Domains in the\n            Amazon Elasticsearch Service Developer Guide.Required: NoType: Amazon Elasticsearch Service Domain\n    ElasticsearchClusterConfigUpdate requires: No interruption",
       "The automated snapshot configuration for the Amazon ES domain indices.Required: NoType: Amazon Elasticsearch Service Domain\n    SnapshotOptionsUpdate requires: No interruption",
@@ -1565,7 +1707,6 @@
       "Applications",
       "BootstrapActions",
       "Configurations",
-      "EbsConfiguration",
       "Instances",
       "JobFlowRole",
       "LogUri",
@@ -1578,16 +1719,15 @@
     ],
     "descriptions": [
       "Additional features that you want to select.Required: NoType: JSON objectUpdate requires: Replacement",
-      "The software applications to deploy on the cluster, and the arguments that Amazon EMR\n            passes to those applications.Required: NoType: List of Amazon Elastic MapReduce Cluster ApplicationUpdate requires: Replacement",
-      "A list of bootstrap actions that Amazon EMR runs before starting applications on the\n            cluster.Required: NoType: List of Amazon Elastic MapReduce Cluster\n    BootstrapActionConfigUpdate requires: Replacement",
-      "The software configuration of the Amazon EMR cluster.Required: NoType: List of Amazon Elastic MapReduce Cluster ConfigurationUpdate requires: Replacement",
-      "Configures Amazon Elastic Block Store (Amazon EBS) storage volumes to attach to your instances.Required: NoType: Amazon Elastic MapReduce EbsConfigurationUpdate requires: Replacement",
-      "Configures the EC2 instances that will run jobs in the Amazon EMR cluster.Required: YesType: Amazon Elastic MapReduce Cluster\n    JobFlowInstancesConfigUpdate requires: Replacement",
-      "An AWS Identity and Access Management (IAM) role for an Amazon EMR cluster. All EC2 instances in the cluster\n            assume this role, which instances use to access AWS services and resources to complete a\n            job. For more information, see Configure IAM Roles for Amazon EMR in the Amazon Elastic MapReduce Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The software applications to deploy on the cluster, and the arguments that Amazon EMR\n            passes to those applications.Required: NoType: List of Amazon EMR Cluster ApplicationUpdate requires: Replacement",
+      "A list of bootstrap actions that Amazon EMR runs before starting applications on the\n            cluster.Required: NoType: List of Amazon EMR Cluster\n    BootstrapActionConfigUpdate requires: Replacement",
+      "The software configuration of the Amazon EMR cluster.Required: NoType: List of Amazon EMR Cluster ConfigurationUpdate requires: Replacement",
+      "Configures the EC2 instances that will run jobs in the Amazon EMR cluster.Required: YesType: Amazon EMR Cluster\n    JobFlowInstancesConfigUpdate requires: Replacement",
+      "An AWS Identity and Access Management (IAM) role for an Amazon EMR cluster. All EC2 instances in the cluster\n            assume this role, which instances use to access AWS services and resources to complete a\n            job. For more information, see Configure IAM Roles for Amazon EMR in the Amazon EMR Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
       "An S3 bucket location to which Amazon EMR writes logs files from a job flow. If you don't\n            specify a value, Amazon EMR doesn't write any log files.Required: NoType: StringUpdate requires: Replacement",
       "A name for the Amazon EMR cluster.Required: YesType: StringUpdate requires: Replacement",
-      "The Amazon EMR software release label. A release is a set of software applications and\n            components that you can install and configure on an Amazon EMR cluster. For more information,\n            see About Amazon EMR Releases in the Amazon Elastic MapReduce Release\n              Guide.Currently, AWS CloudFormation supports only Amazon EMR 4.0 and later software releases.Required: NoType: StringUpdate requires: Replacement",
-      "The IAM role that Amazon EMR assumes to access AWS resources on your behalf. For more\n            information, see Configure IAM Roles for Amazon EMR in the Amazon Elastic MapReduce Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The Amazon EMR software release label. A release is a set of software applications and\n            components that you can install and configure on an Amazon EMR cluster. For more information,\n            see About Amazon EMR Releases in the Amazon EMR Release\n              Guide.Currently, AWS CloudFormation supports only Amazon EMR 4.0 and later software releases.Required: Conditional. If you specify the Applications property, you must specify this property.Type: StringUpdate requires: Replacement",
+      "The IAM role that Amazon EMR assumes to access AWS resources on your behalf. For more\n            information, see Configure IAM Roles for Amazon EMR in the Amazon EMR Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
       "An arbitrary set of tags (key–value pairs) to help you identify the Amazon EMR\n            cluster.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
       "Indicates whether the instances in the cluster are visible to all IAM users in the\n            AWS account. If you specify true, all IAM users can view and (if they\n            have permissions) manage the instances. If you specify false, only the\n            IAM user that created the cluster can view and manage it. By default, AWS CloudFormation sets this\n            property to false.Required: NoType: BooleanUpdate requires: No interruption",
       "The public DNS name of the master node (instance), such as\n                ec2-12-123-123-123.us-west-2.compute.amazonaws.com."
@@ -1609,11 +1749,11 @@
     ],
     "descriptions": [
       "The bid price in USD for each EC2 instance in the instance group when launching\n            instances (nodes) as Spot Instances.Required: NoType: StringUpdate requires: Replacement",
-      "A list of configurations to apply to this instance group. For more information see,\n              Configuring Applications in the Amazon Elastic MapReduce Release\n              Guide.Required: NoType: List of Amazon Elastic MapReduce Cluster ConfigurationUpdate requires: Replacement",
-      "Configures Amazon Elastic Block Store (Amazon EBS) storage volumes to attach to your instances.Required: NoType: Amazon Elastic MapReduce EbsConfigurationUpdate requires: Replacement",
+      "A list of configurations to apply to this instance group. For more information see,\n              Configuring Applications in the Amazon EMR Release\n              Guide.Required: NoType: List of Amazon EMR Cluster ConfigurationUpdate requires: Replacement",
+      "Configures Amazon Elastic Block Store (Amazon EBS) storage volumes to attach to your instances.Required: NoType: Amazon EMR EbsConfigurationUpdate requires: Replacement",
       "The number of instances to launch in the instance group.Required: YesType: IntegerUpdate requires: No interruption",
-      "The role of the servers in the Amazon EMR cluster, such as TASK. For more\n            information, see Instance Groups in the Amazon Elastic MapReduce Management\n            Guide.NoteCurrently, the only valid value is TASK. You configure the master and\n              core instance groups as part of the AWS::EMR::Cluster resource.Required: YesType: StringUpdate requires: Replacement",
-      "The EC2 instance type for all instances in the instance group. For more information,\n            see Instance Configurations in the Amazon Elastic MapReduce Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The role of the servers in the Amazon EMR cluster, such as TASK. For more\n            information, see Instance Groups in the Amazon EMR Management\n            Guide.NoteCurrently, the only valid value is TASK. You configure the master and\n              core instance groups as part of the AWS::EMR::Cluster resource.Required: YesType: StringUpdate requires: Replacement",
+      "The EC2 instance type for all instances in the instance group. For more information,\n            see Instance Configurations in the Amazon EMR Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
       "The ID of an Amazon EMR cluster that you want to associate this instance group\n            with.Required: YesType: StringUpdate requires: Replacement",
       "The type of marketplace from which your instances are provisioned into this group,\n            either ON_DEMAND or SPOT. For more information, see Amazon EC2 Purchasing Options.Required: NoType: StringUpdate requires: Replacement",
       "A name for the instance group.Required: NoType: StringUpdate requires: Replacement"
@@ -1629,8 +1769,8 @@
       "Name"
     ],
     "descriptions": [
-      "The action to take if the job flow step fails. Currently, AWS CloudFormation supports\n              CONTINUE and CONTINUE_AND_WAIT. For more information, see\n              Managing Cluster Termination in the Amazon Elastic MapReduce Management\n              Guide.Required: YesType: StringUpdate requires: Replacement",
-      "The JAR file that includes the main function that Amazon EMR executes.Required: YesType: Amazon Elastic MapReduce Step\n    HadoopJarStepConfigUpdate requires: Replacement",
+      "The action to take if the job flow step fails. Currently, AWS CloudFormation supports CONTINUE and CANCEL_AND_WAIT. For more information, see Managing Cluster Termination in the Amazon EMR Management Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The JAR file that includes the main function that Amazon EMR executes.Required: YesType: Amazon EMR Step\n    HadoopJarStepConfigUpdate requires: Replacement",
       "The ID of a cluster in which you want to run this job flow step.Required: YesType: StringUpdate requires: Replacement",
       "A name for the job flow step.Required: YesType: StringUpdate requires: Replacement"
     ]
@@ -1655,7 +1795,7 @@
       "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants CloudWatch Events permission to make calls to target services, such as AWS Lambda (Lambda) or Amazon Kinesis streams.Required: NoType: StringUpdate requires: No interruption",
       "The schedule or rate (frequency) that determines when CloudWatch Events runs the rule. For more information, see Schedule Expression Syntax for Rules in the Amazon CloudWatch Developer Guide.Required: NoRequired: Conditional. You must specify this property, the EventPattern property, or both.Update requires: No interruption",
       "Indicates whether the rule is enabled. For valid values, see the State parameter for the PutRule action in the Amazon CloudWatch Events API Reference.Required: NoType: StringUpdate requires: No interruption",
-      "The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered.Required: NoType: List of Amazon CloudWatch Events Rule TargetUpdate requires: No interruption",
+      "The resources, such as Lambda functions or Amazon Kinesis streams, that CloudWatch Events routes events to and invokes when the rule is triggered.  For information about valid targets, see the PutTargets action in the Amazon CloudWatch Events API Reference.Required: NoType: List of Amazon CloudWatch Events Rule TargetUpdate requires: No interruption",
       "The event rule Amazon Resource Name (ARN), such as arn:aws:events:us-east-1:123456789012:rule/example."
     ]
   }
@@ -1737,15 +1877,17 @@
   {
     "type": "AWS::IAM::Group",
     "properties": [
+      "GroupName",
       "ManagedPolicyArns",
       "Path",
       "Policies",
       "Arn"
     ],
     "descriptions": [
+      "A name for the IAM group. For valid values, see the GroupName parameter for the CreateGroup action in the IAM API Reference. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the group name.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.If you specify a name, you must specify the CAPABILITY_NAMED_IAM value to acknowledge your template's capabilities. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. WarningNaming an IAM resource can cause an unrecoverable error if you reuse the same template in multiple regions. To prevent this, we recommend using Fn::Join and AWS::Region to create a region-specific name, as in the following example: {\"Fn::Join\": [\"\", [{\"Ref\": \"AWS::Region\"}, {\"Ref\": \"MyResourceName\"}]]}.Required: NoType: StringUpdate requires: Replacement",
       "One or more managed policy ARNs to attach to this group.Required: NoType: List of stringsUpdate requires: No interruption",
-      "The path to the group. For more information about paths, see Identifiers for IAM Entities in Using IAM.Required: NoType: StringUpdate requires: No interruption",
-      "The policies to associate with this group. For information about policies,\n                  see Overview of Policies in Using IAM.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
+      "The path to the group. For more information about paths, see IAM Identifiers in the IAM User Guide.Required: NoType: StringUpdate requires: No interruption",
+      "The policies to associate with this group. For information about policies, see Overview of IAM Policies in the IAM User Guide.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
       "Returns the Amazon Resource Name (ARN) for the AWS::IAM::Group resource. For\n                     example: arn:aws:iam::123456789012:group/mystack-mygroup-1DZETITOWEKVO."
     ]
   }
@@ -1809,13 +1951,15 @@
       "ManagedPolicyArns",
       "Path",
       "Policies",
+      "RoleName",
       "Arn"
     ],
     "descriptions": [
-      "The IAM assume role policy that is associated with this role.Required: YesType: A JSON policy document.Update requires: No interruptionNoteYou can associate only one assume role policy with a role. For an example of\n                     an assume role policy, see Template Examples.",
+      "The trust policy that is associated with this role.Required: YesType: A JSON policy documentUpdate requires: No interruptionNoteYou can associate only one assume role policy with a role. For an example of\n                     an assume role policy, see Template Examples.",
       "One or more managed policy ARNs to attach to this role.Required: NoType: List of stringsUpdate requires: No interruption",
       "The path associated with this role. For information about IAM paths, see\n                     Friendly Names and Paths in\n                  IAM User Guide.Required: NoType: StringUpdate requires: Replacement",
-      "The policies to associate with this role. Policies can also be specified\n                  externally. For sample templates that demonstrates both embedded and external\n                  policies, see Template\n                     Examples.If you specify multiple polices, specify unique values for the policy name. If\n                  you don't, updates to the IAM role will fail.NoteIf an external policy (such as AWS::IAM::Policy or\n                        AWS::IAM::ManagedPolicy) has a Ref to a role and\n                     if a resource (such as AWS::ECS::Service) also has a\n                        Ref to the same role, add a DependsOn attribute to\n                     the resource so that the resource depends on the external policy. This\n                     dependency ensures that the role's policy is available throughout the\n                     resource's lifecycle. For example, when you delete a stack with an\n                        AWS::ECS::Service resource, the DependsOn\n                     attribute ensures that the AWS::ECS::Service resource can complete\n                     its deletion before its role's policy is deleted.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
+      "The policies to associate with this role. For sample templates, see Template Examples.ImportantThe name of each policy for a role, user, or group must be unique. If you don't, updates to the IAM role will fail. NoteIf an external policy (such as AWS::IAM::Policy or AWS::IAM::ManagedPolicy) has a Ref to a role and if a resource (such as AWS::ECS::Service) also has a Ref to the same role, add a DependsOn attribute to the resource to make the resource depend on the external policy. This dependency ensures that the role's policy is available throughout the resource's lifecycle. For example, when you delete a\n                     stack with an AWS::ECS::Service resource, the DependsOn attribute ensures that AWS CloudFormation deletes the AWS::ECS::Service resource  before deleting its role's policy.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
+      "A name for the IAM role. For valid values, see the RoleName parameter for the CreateRole action in the IAM API Reference. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the group name.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.If you specify a name, you must specify the CAPABILITY_NAMED_IAM value to acknowledge your template's capabilities. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. WarningNaming an IAM resource can cause an unrecoverable error if you reuse the same template in multiple regions. To prevent this, we recommend using Fn::Join and AWS::Region to create a region-specific name, as in the following example: {\"Fn::Join\": [\"\", [{\"Ref\": \"AWS::Region\"}, {\"Ref\": \"MyResourceName\"}]]}.Required: NoType: StringUpdate requires: Replacement",
       "Returns the Amazon Resource Name (ARN) for the instance profile. For example:{\"Fn::GetAtt\" : [\"MyRole\", \"Arn\"] }This will return a value such as “arn:aws:iam::1234567890:role/MyRole-AJJHDSKSDF”."
     ]
   }
@@ -1828,14 +1972,16 @@
       "ManagedPolicyArns",
       "Path",
       "Policies",
+      "UserName",
       "Arn"
     ],
     "descriptions": [
       "A name of a group to which you want to add the user.Required: NoType: List of stringsUpdate requires: No interruption",
       "Creates a login profile so that the user can access the AWS Management Console.Required: NoType: IAM User LoginProfileUpdate requires: No interruption",
       "One or more managed policy ARNs to attach to this user.Required: NoType: List of stringsUpdate requires: No interruption",
-      "The path for the user name. For more information about paths, see Identifiers\n                  for IAM Entities in Using AWS Identity and Access Management.Required: NoType: StringUpdate requires: No interruption",
-      "The policies to associate with this user. For information about policies, see\n                     Overview of Policies in [Using IAM].NoteIf you specify multiple polices, specify unique values for the policy name.\n                     If you don't, updates to the IAM user will fail.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
+      "The path for the user name. For more information about paths, see IAM Identifiers in the IAM User Guide.Required: NoType: StringUpdate requires: No interruption",
+      "The policies to associate with this user. For information about policies, see Overview of IAM Policies in the IAM User Guide.NoteIf you specify multiple polices, specify unique values for the policy name.\n                     If you don't, updates to the IAM user will fail.Required: NoType: List of IAM PoliciesUpdate requires: No interruption",
+      "A name for the IAM user. For valid values, see the UserName\n            parameter for the CreateUser action in the IAM API Reference.\n            If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for\n            the\n            group\n            name.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.If you specify a name, you must specify the CAPABILITY_NAMED_IAM value to acknowledge your template's capabilities. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. WarningNaming an IAM resource can cause an unrecoverable error if you reuse the same template in multiple regions. To prevent this, we recommend using Fn::Join and AWS::Region to create a region-specific name, as in the following example: {\"Fn::Join\": [\"\", [{\"Ref\": \"AWS::Region\"}, {\"Ref\": \"MyResourceName\"}]]}.Required: NoType: StringUpdate requires: Replacement",
       "Returns the Amazon Resource Name (ARN) for the specified AWS::IAM::User resource. For example:\n                     arn:aws:iam::123456789012:user/mystack-myuser-1CCXAFG2H2U4D."
     ]
   }
@@ -1853,16 +1999,108 @@
   }
 ,
   {
+    "type": "AWS::IoT::Certificate",
+    "properties": [
+      "CertificateSigningRequest",
+      "Status",
+      "Arn"
+    ],
+    "descriptions": [
+      "The certificate signing request (CSR).Required: YesType: StringUpdate requires: Replacement",
+      "The status of the certificate.Required: YesType: StringUpdate requires: No interruption",
+      "Returns the Amazon Resource Name (ARN) for the instance profile. For\n                     example:{ \"Fn::GetAtt\": [\"MyCertificate\", \"Arn\"] }A value similar to the following is\n                     returned:arn:aws:iot:ap-southeast-2:123456789012:cert/a1234567b89c012d3e4fg567hij8k9l01mno1p23q45678901rs234567890t1u2"
+    ]
+  }
+,
+  {
+    "type": "AWS::IoT::Policy",
+    "properties": [
+      "PolicyDocument",
+      "PolicyName"
+    ],
+    "descriptions": [
+      "The JSON document that describes the policy.Required: YesType: JSON objectUpdate requires: Replacement",
+      "The name (the physical ID) of the AWS IoT policy.Required: NoType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
+    "type": "AWS::IoT::PolicyPrincipalAttachment",
+    "properties": [
+      "PolicyName",
+      "Principal"
+    ],
+    "descriptions": [
+      "The name of the policy.Required: YesType: StringUpdate requires: Replacement",
+      "The principal, which can be a certificate ARN (as returned from the\n                     CreateCertificate operation) or an Amazon Cognito ID.Required: YesType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
+    "type": "AWS::IoT::Thing",
+    "properties": [
+      "AttributePayload",
+      "ThingName"
+    ],
+    "descriptions": [
+      "A JSON string that contains up to three key-value pairs, for example:\n                     {\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}.Required: NoType: String to string mapUpdate requires: No interruption",
+      "The name (the physical ID) of the AWS IoT thing.Required: NoType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
+    "type": "AWS::IoT::ThingPrincipalAttachment",
+    "properties": [
+      "Principal",
+      "ThingName"
+    ],
+    "descriptions": [
+      "The principal, which can be a certificate ARN (as returned from the\n                     CreateCertificate operation) or an Amazon Cognito ID.Required: YesType: StringUpdate requires: Replacement",
+      "The name of the AWS IoT thing.Required: YesType: StringUpdate requires: Replacement"
+    ]
+  }
+,
+  {
+    "type": "AWS::IoT::TopicRule",
+    "properties": [
+      "RuleName",
+      "TopicRulePayload"
+    ],
+    "descriptions": [
+      "The name (the physical ID) of the AWS IoT rule.Required: NoType: StringUpdate requires: Replacement",
+      "The actions associated with the AWS IoT rule.Required: YesType: TopicRulePayload objectUpdate requires: No interruption"
+    ]
+  }
+,
+  {
     "type": "AWS::Kinesis::Stream",
     "properties": [
+      "Name",
       "ShardCount",
       "Tags",
       "Arn"
     ],
     "descriptions": [
+      "The name of the Amazon Kinesis stream. If you don't specify a name, AWS CloudFormation generates a unique physical \n                  ID and uses that ID for the stream name. For more information, see \n                  Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.\n               Required: NoType: StringUpdate requires: Replacement",
       "The number of shards that the stream uses. For greater provisioned throughput,\n                  increase the number of shards.Required: YesType: IntegerUpdate requires: Replacement",
       "An arbitrary set of tags (key–value pairs) to associate with the Amazon Kinesis\n                  stream.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption",
       "The Amazon resource name (ARN) of the Amazon Kinesis stream, such as\n                     arn:aws:kinesis:us-east-1:123456789012:stream/mystream."
+    ]
+  }
+,
+  {
+    "type": "AWS::KinesisFirehose::DeliveryStream",
+    "properties": [
+      "DeliveryStreamName",
+      "ElasticsearchDestinationConfiguration",
+      "RedshiftDestinationConfiguration",
+      "S3DestinationConfiguration"
+    ],
+    "descriptions": [
+      "A name for the delivery stream.Required: NoType: StringUpdate requires: Replacement",
+      "An Amazon ES destination for the delivery stream.Required: Conditional. You must specify only one destination configuration.Type: Amazon Kinesis Firehose DeliveryStream ElasticsearchDestinationConfigurationUpdate requires: No interruption. If you change the delivery stream destination from an Amazon ES destination to an Amazon S3 or Amazon Redshift destination, update requires some interruptions.",
+      "An Amazon Redshift destination for the delivery stream.Required: Conditional. You must specify only one destination configuration.Type: Amazon Kinesis Firehose DeliveryStream RedshiftDestinationConfigurationUpdate requires: No interruption. If you change the delivery stream destination from an Amazon Redshift destination to an Amazon ES destination, update requires some interruptions.",
+      "An Amazon S3 destination for the delivery stream.Required: Conditional. You must specify only one destination configuration.Type: Amazon Kinesis Firehose DeliveryStream S3DestinationConfigurationUpdate requires: No interruption. If you change the delivery stream destination from an Amazon S3 destination to an Amazon ES destination, update requires some interruptions."
     ]
   }
 ,
@@ -1878,7 +2116,7 @@
       "A description of the key. Use a description that helps your users decide\n                  whether the key is appropriate for a particular task.Required: NoType: StringUpdate requires: No interruption",
       "Indicates whether the key is available for use. AWS CloudFormation sets this value to\n              true by default.Required: NoType: BooleanUpdate requires: No interruption",
       "Indicates whether AWS KMS rotates the key. AWS CloudFormation sets this value to\n                     false by default.Required: NoType: BooleanUpdate requires: No interruption",
-      "An AWS Identity and Access Management (IAM) policy to attach to the key. Use a policy to specify who\n                  has permission to use the key and which actions they can perform. For more\n                  information, see Key Policies\n                  in the AWS Key Management Service Developer Guide.Required: YesType: JSON objectUpdate requires: No interruption"
+      "An AWS KMS key policy to attach to the key. Use a policy to specify who has permission to use the key and which actions they can perform. For more information, see Key Policies in the AWS Key Management Service Developer Guide.Required: YesType: JSON objectUpdate requires: No interruption"
     ]
   }
 ,
@@ -1934,10 +2172,10 @@
       "The source code of your Lambda function. You can point to a file in an Amazon Simple Storage Service\n            (Amazon S3) bucket or specify your source code as inline text.Required: YesType: AWS Lambda Function CodeUpdate requires: No interruption",
       "A description of the function.Required: NoType: StringUpdate requires: No interruption",
       "A name for the function. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the function's name. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
-      "The name of the function (within your source code) that Lambda calls to start running\n                  your code. For more information, see the Handler property in the\n                     AWS Lambda Developer Guide.NoteIf you specify your source code as inline text by specifying the\n                        ZipFile property within the Code property, specify\n                        index.handler as the handler.Required: YesType: StringUpdate requires: No interruption",
+      "The name of the function (within your source code) that Lambda calls to start running\n                  your code. For more information, see the Handler property in the\n                     AWS Lambda Developer Guide.NoteIf you specify your source code as inline text by specifying the ZipFile property within the Code property, specify index.function_name as the handler.Required: YesType: StringUpdate requires: No interruption",
       "The amount of memory, in MB, that is allocated to your Lambda function. Lambda\n                  uses this value to proportionally allocate the amount of CPU power. For more\n                  information, see Resource\n                     Model in the AWS Lambda Developer Guide.Your function use case determines your CPU and memory requirements. For\n                  example, a database operation might need less memory than an image processing\n                  function. You must specify a value that is greater than or equal to\n                     128, and it must be a multiple of 64. You cannot specify a size\n                  larger than 1536. The default value is 128 MB.Required: NoType: IntegerUpdate requires: No interruption",
       "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) execution role that\n                  Lambda assumes when it runs your code to access AWS services.Required: YesType: StringUpdate requires: No interruption",
-      "The runtime environment for the Lambda function that you are uploading.  For\n                  valid values, see the Runtime property in the AWS Lambda Developer Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The runtime environment for the Lambda function that you are uploading. For valid values, see the Runtime property in the AWS Lambda Developer Guide.Required: YesType: StringUpdate requires: Replacement",
       "The function execution time (in seconds) after which Lambda terminates the\n                  function. Because the execution time affects cost, set this value based on the\n                  function's expected execution time. By default,  Timeout is set to\n                     3 seconds. Required: NoType: IntegerUpdate requires: No interruption",
       "If the Lambda function requires access to resources in a VPC, specify a VPC configuration that Lambda uses to set up an elastic network interface (ENI). The ENI enables your function to connect to other resources in your VPC, but it doesn't provide public Internet access. If your function requires Internet access (for example, to access AWS services that don't have VPC endpoints), configure a Network Address Translation (NAT) instance inside your VPC or use an Amazon Virtual Private Cloud\n                  (Amazon VPC) NAT gateway. For more information, see NAT Gateways in the Amazon VPC User Guide.Required: NoType: AWS Lambda Function VPCConfigUpdate requires: No interruption",
       "The ARN of the Lambda function, such as\n                        arn:aws:lambda:us-west-2:123456789012:MyStack-AMILookUp-NT5EUXTNTXXD."
@@ -1954,11 +2192,11 @@
       "SourceArn"
     ],
     "descriptions": [
-      "The Lambda actions that you want to allow in this statement. For example, you\n                  can specify lambda:CreateFunction to specify a certain action, or use\n                  a wildcard (lambda:*) to grant permission to all Lambda actions. For a\n                  list of actions, see Actions\n                  in the AWS Lambda Developer Guide.Required: YesType: StringUpdate requires: Replacement",
+      "The Lambda actions that you want to allow in this statement. For example, you can specify lambda:CreateFunction to specify a certain action, or use a wildcard (lambda:*) to grant permission to all Lambda actions. For a list of actions, see Actions and Condition Context Keys for AWS Lambda in the IAM User Guide.Required: YesType: StringUpdate requires: Replacement",
       "The name (physical ID) or Amazon Resource Name (ARN) of the Lambda function that\n                  you want to associate with this statement. Lambda adds this statement to the\n                  function's access policy.Required: YesType: StringUpdate requires: Replacement",
       "The entity for which you are granting permission to invoke the Lambda function.\n                  This entity can be any valid AWS service principal, such as\n                     s3.amazonaws.com or sns.amazonaws.com, or, if you are\n                  granting cross-account permission, an AWS account ID. For example, you might want\n                  to allow a custom application in another AWS account to push events to Lambda by\n                  invoking your function.Required: YesType: StringUpdate requires: Replacement",
-      "The AWS account ID (without hyphens) of the source owner. For example, if you\n                  specify an S3 bucket in the SourceArn property, this value is the\n                  bucket owner's account ID. You can use this property to ensure that all source\n                  principals are owned by a specific account.Required: NoType: StringUpdate requires: Replacement",
-      "The ARN of a resource that is invoking your function. When granting Amazon Simple Storage Service\n                  (Amazon S3) permission to invoke your function, specify this property with the bucket\n                  ARN as its value. This ensures that events generated only from the specified\n                  bucket, not just any bucket from any AWS account that creates a mapping to your\n                  function, can invoke the function.Required: NoType: StringUpdate requires: Replacement"
+      "The AWS account ID (without hyphens) of the source owner. For example, if you\n                  specify an S3 bucket in the SourceArn property, this value is the\n                  bucket owner's account ID. You can use this property to ensure that all source\n                  principals are owned by a specific account.ImportantThis property is not supported by all event sources. For more information, see the SourceAccount parameter for the AddPermission action in the AWS Lambda Developer Guide.Required: NoType: StringUpdate requires: Replacement",
+      "The ARN of a resource that is invoking your function. When granting Amazon Simple Storage Service\n                  (Amazon S3) permission to invoke your function, specify this property with the bucket\n                  ARN as its value. This ensures that events generated only from the specified\n                  bucket, not just any bucket from any AWS account that creates a mapping to your\n                  function, can invoke the function.ImportantThis property is not supported by all event sources. For more information, see the SourceArn parameter for the AddPermission action in the AWS Lambda Developer Guide.Required: NoType: StringUpdate requires: Replacement"
     ]
   }
 ,
@@ -2315,7 +2553,7 @@
       "The name of the compute and memory capacity class of the DB instance.Required: YesType: StringUpdate requires: Some interruptions",
       "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lower\n                  case. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses\n                  that ID for the DB instance. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
       "The name of the initial database of this instance that was provided at create\n                  time, if one was specified. This same name is returned for the life of the DB\n                  instance.NoteIf you restore from a snapshot, do specify this property for the MySQL or\n                     MariaDB engines.Required: NoType: StringUpdate requires: Replacement",
-      "The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup\n                  resource created in the template.Required: NoType: StringUpdate requires: No interruption or some\n                     interruptions. For more information, see ModifyDBInstance in the\n                     Amazon Relational Database Service API Reference. Also, if any of the data members of the\n                  referenced parameter group are changed during an update, the database instance may\n                  need to be restarted, causing some interruption.",
+      "The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup\n                  resource created in the template.Required: NoType: StringUpdate requires: No interruption or some interruptions. If any of the data members of the referenced parameter group are changed during an update, the database instance might need to be restarted, causing some interruption. If the parameter group contains static parameters, whether they were changed or not, an update triggers a reboot.",
       "A list of the DB security groups to assign to the Amazon RDS instance. The list can\n                  include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup\n                  resources created in the template.If you set DBSecurityGroups, you must not set VPCSecurityGroups, and\n                  vice-versa.Required: NoType: List of stringsUpdate requires: No interruption",
       "The identifier for the DB snapshot to restore from.By specifying this property, you can create a DB instance from the specified DB\n                  snapshot. If the DBSnapshotIdentifier property is an empty string or the\n                  AWS::RDS::DBInstance declaration has no DBSnapshotIdentifier property, the\n                  database is created as a new database. If the property contains a value (other\n                  than empty string), AWS CloudFormation creates a database from the specified snapshot. If a\n                  snapshot with the specified name does not exist, the database creation fails and\n                  the stack rolls back.Some DB instance properties are not valid when you restore from a snapshot,\n                  such as the MasterUsername and MasterUserPassword\n                  properties. For information about the properties that you can specify, see the\n                     RestoreDBInstanceFromDBSnapshot action in the\n                     Amazon Relational Database Service API Reference.Required: NoType: StringUpdate requires: Replacement",
       "A DB subnet group to associate with the DB instance.If there is no DB subnet group, then it is a non-VPC DB instance.For more information about using Amazon RDS in a VPC, go to Using Amazon RDS\n                     with Amazon Virtual Private Cloud (VPC) in the\n                     Amazon Relational Database Service Developer Guide.Required: NoType: StringUpdate requires: Replacement",
@@ -2329,14 +2567,14 @@
       "Specifies if the database instance is a multiple Availability Zone deployment.\n                  You cannot set the AvailabilityZone parameter if the\n                     MultiAZ parameter is set to true.NoteDo not specify this property if you want a Multi-AZ deployment for a SQL\n                        Server database instance. Use the mirroring option in an option group to set\n                        Multi-AZ for a SQL Server database instance.Required: NoType: BooleanUpdate requires: No interruption.",
       "An option group that this database instance is associated with.Required: NoType: StringUpdate requires: No interruption.",
       "The port for the instance.Required: NoType: StringUpdate requires: Replacement.",
-      "The daily time range during which automated backups are created if automated\n                  backups are enabled, as determined by the BackupRetentionPeriod.Required: NoType: StringUpdate requires: No interruption.",
-      "The weekly time range (in UTC) during which system maintenance can occur. NoteThis property applies during the initial resource creation. If you use AWS CloudFormation to update the DB instance, AWS CloudFormation applies those updates immediately.Required: NoType: StringUpdate requires: No interruption or some\n                     interruptions. For more information, see ModifyDBInstance in the\n                     Amazon Relational Database Service API Reference.",
+      "The daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod property. For valid values, see the PreferredBackupWindow parameter for the CreateDBInstance action in the Amazon Relational Database Service API Reference.Required: NoType: StringUpdate requires: No interruption.",
+      "The weekly time range (in UTC) during which system maintenance can occur. For valid values, see the PreferredMaintenanceWindow parameter for the CreateDBInstance action in the Amazon Relational Database Service API Reference.NoteThis property applies during the initial resource creation. If you use AWS CloudFormation to update the DB instance, AWS CloudFormation applies those updates immediately.Required: NoType: StringUpdate requires: No interruption or some\n                     interruptions. For more information, see ModifyDBInstance in the\n                     Amazon Relational Database Service API Reference.",
       "Indicates whether the database instance is an Internet-facing instance. If you\n                  specify true, an instance is created with a publicly resolvable DNS\n                  name, which resolves to a public IP address. If you specify false, an\n                  internal instance is created with a DNS name that resolves to a private IP\n                  address. The default behavior value depends on your VPC setup and the database subnet\n                  group. For more information, see the PubliclyAccessible parameter in\n                     CreateDBInstance in the Amazon Relational Database Service API Reference.If this resource has a public IP address and is also in a VPC that is defined in the same template, you must use the\nDependsOn attribute to declare a dependency on the VPC-gateway attachment. For more information,\nsee DependsOn Attribute.NoteCurrently, if you specify DBSecurityGroups, this property is\n                     ignored. If you want to specify a security group and this property, you must\n                     use a VPC security group. For more information about Amazon RDS and VPC, see Using Amazon RDS with Amazon VPC in the\n                        Amazon Relational Database Service User Guide.Required: NoType: BooleanUpdate requires: Replacement.",
       "If you want to create a read replica DB instance, specify the ID of the source\n                  database instance. Each database instance can have a certain number of read\n                  replicas. For more information, see Working with Read Replicas in the\n                     Amazon Relational Database Service Developer Guide.The SourceDBInstanceIdentifier property determines whether a\n                  database instance is a read replica. If you remove the\n                     SourceDBInstanceIdentifier property from your current template and\n                  then update your stack, the read replica is deleted and a new database instance\n                  (not a read replica) is created.ImportantRead replicas do not support deletion policies. Any deletion policy\n                           that's associated with a read replica is ignored.If you specify SourceDBInstanceIdentifier, do not set the\n                              MultiAZ property to true and do not specify\n                           the DBSnapshotIdentifier property. You cannot deploy read\n                           replicas in multiple Availability Zones, and you cannot create a read\n                           replica from a snapshot.Do not set the BackupRetentionPeriod,\n                           DBName, MasterUsername,\n                              MasterUserPassword, and\n                              PreferredBackupWindow properties. The database attributes\n                           are inherited from the source database instance, and backups are disabled\n                           for read replicas.If the source DB instance is in a different region than the read\n                           replica, specify a valid DB instance ARN. For more information, see\n                              Constructing a Amazon RDS Amazon Resource Name (ARN) in the\n                              Amazon Relational Database Service User Guide.For DB instances in an Amazon Aurora clusters, do not specify this\n                           property. Amazon RDS assigns automatically assigns a writer and reader DB\n                           instances.Required: NoType: StringUpdate requires: Replacement.",
-      "Indicates whether the database instance is encrypted.If you specify the DBClusterIdentifier,\n                     DBSnapshotIdentifier, or SourceDBInstanceIdentifier\n                  property, do not specify this property. The value is inherited from the cluster,\n                  snapshot, or source database instance.NoteCurrently, if you specify DBSecurityGroups, this property is\n                     ignored. If you want to specify a security group and this property, you must\n                     use a VPC security group. For more information about Amazon RDS and VPC, see Using Amazon RDS with Amazon VPC in the\n                        Amazon Relational Database Service User Guide.Required: Conditional. If you specify the KmsKeyId property, you\n                  must enable encryption.Type: BooleanUpdate requires: Replacement.",
-      "The storage type associated with this database instance.For the default and valid values, see the StorageType parameter of\n                  the CreateDBInstance action in the\n                  Amazon Relational Database Service API Reference.NoteCurrently, if you specify DBSecurityGroups, this property is\n                     ignored. If you want to specify a security group and this property, you must\n                     use a VPC security group. For more information about Amazon RDS and VPC, see Using Amazon RDS with Amazon VPC in the\n                        Amazon Relational Database Service User Guide.Required: NoType: StringUpdate requires: Some interruptions",
+      "Indicates whether the database instance is encrypted.If you specify the DBClusterIdentifier,\n                     DBSnapshotIdentifier, or SourceDBInstanceIdentifier\n                  property, do not specify this property. The value is inherited from the cluster,\n                  snapshot, or source database instance.Required: Conditional. If you specify the KmsKeyId property, you\n                  must enable encryption.Type: BooleanUpdate requires: Replacement.",
+      "The storage type associated with this database instance.For the default and valid values, see the StorageType parameter of\n                  the CreateDBInstance action in the\n                  Amazon Relational Database Service API Reference.Required: NoType: StringUpdate requires: Some interruptions",
       "An arbitrary set of tags (key–value pairs) for this database\n                  instance.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption.",
-      "A list of the VPC security groups to assign to the Amazon RDS instance. The list can\n                  include both the physical IDs of existing VPC security groups or references to\n                     AWS::EC2::SecurityGroup resources created in the\n                  template.If you set VPCSecurityGroups, you must not set DBSecurityGroups, and\n                  vice-versa.ImportantYou can migrate a database instance in your stack from an RDS DB security\n                     group to a VPC security group, but you should keep the following points in\n                     mind:You cannot revert to using an RDS security group once you have\n                           established a VPC security group membership.When you migrate your DB instance to VPC security groups, if your\n                           stack update rolls back because of another failure in the database\n                           instance update, or because of an update failure in another AWS CloudFormation\n                           resource, the rollback will fail because it cannot revert to an RDS\n                           security group.To avoid this situation, only migrate your DB instance to using VPC security\n                     groups when that is the only change in your stack\n                     template.Required: NoType: List of stringsUpdate requires: No interruption."
+      "A list of the VPC security group IDs to assign to the Amazon RDS instance. The list can include both the physical IDs of existing VPC security groups or references to AWS::EC2::SecurityGroup resources created in the template.If you set VPCSecurityGroups, you must not set DBSecurityGroups, and\n                  vice-versa.ImportantYou can migrate a database instance in your stack from an RDS DB security\n                     group to a VPC security group, but you should keep the following points in\n                     mind:You cannot revert to using an RDS security group once you have\n                           established a VPC security group membership.When you migrate your DB instance to VPC security groups, if your\n                           stack update rolls back because of another failure in the database\n                           instance update, or because of an update failure in another AWS CloudFormation\n                           resource, the rollback will fail because it cannot revert to an RDS\n                           security group.To avoid this situation, only migrate your DB instance to using VPC security\n                     groups when that is the only change in your stack\n                     template.Required: NoType: List of stringsUpdate requires: No interruption."
     ]
   }
 ,
@@ -2349,9 +2587,9 @@
       "Tags"
     ],
     "descriptions": [
-      "A friendly description of the RDS parameter group. For example, \"My Parameter Group\".Required: YesType: StringUpdate requires: No interruption",
-      "The database family of this RDS parameter group. For example, \"MySQL5.1\".Required: YesType: StringUpdate requires: No interruption",
-      "The parameters to set for this RDS parameter group. Changes to dynamic parameters are applied immediately. Changes to static\n                  parameters require a reboot without failover to the DB instance that is associated\n                  with the parameter group before the change can take effect.Required: NoType: A JSON object consisting of string key-value pairs,\n                  as shown in the following example:\n\"Parameters\" : {\n   \"Key1\" : \"Value1\",\n   \"Key2\" : \"Value2\",\n   \"Key3\" : \"Value3\"\n} Update requires: No interruption or Some\n                     interruptions",
+      "A friendly description of the RDS parameter group. For example, \"My Parameter Group\".Required: YesType: StringUpdate requires: Updates are not supported.",
+      "The database family of this RDS parameter group. For example, \"MySQL5.1\".Required: YesType: StringUpdate requires: Updates are not supported.",
+      "The parameters to set for this RDS parameter group.Required: NoType: A JSON object consisting of string key-value pairs,\n                  as shown in the following example:\n\"Parameters\" : {\n   \"Key1\" : \"Value1\",\n   \"Key2\" : \"Value2\",\n   \"Key3\" : \"Value3\"\n} Update requires: No interruption or Some interruptions. Changes to dynamic parameters are applied immediately. During an update, if you have static parameters (whether they were changed or not), triggers AWS CloudFormation to reboot the associated DB instance without failover.",
       "The tags that you want to attach to the RDS parameter group.Required: NoType: A list of resource tags.Update requires: No interruption"
     ]
   }
@@ -2415,10 +2653,10 @@
     ],
     "descriptions": [
       "Indicates whether to activate the subscription. If you don't specify this\n                  property, AWS CloudFormation activates the subscription.Required: NoType: BooleanUpdate requires: No interruption",
-      "A list of event categories that you want to subscribe to for a given source\n                  type. If you don't specify this property, you are notified about all event\n                  categories.Required: NoType: List of stringsUpdate requires: No interruption",
+      "A list of event categories that you want to subscribe to for a given source type. If you don't specify this property, you are notified about all event categories. For more information, see  Using Amazon RDS Event Notification in the Amazon Relational Database Service User Guide.Required: NoType: List of stringsUpdate requires: No interruption",
       "The Amazon Resource Name (ARN) of an Amazon SNS topic that you want to send event\n                  notifications to.Required: YesType: StringUpdate requires: Replacement",
       "A list of identifiers for which Amazon RDS provides notification events.If you don't specify a value, notifications are provided for all sources. If\n                  you specify multiple values, they must be of the same type. For example, if you\n                  specify a database instance ID, all other values must be database instance\n                  IDs.Required: NoType: List of stringsUpdate requires: No interruption",
-      "The type of source for which Amazon RDS provides notification events. For example,\n                  if you want to be notified of events generated by a database instance, set this\n                  parameter to db-instance. If you don't specify a value, notifications\n                  are provided for all source types.Required: Conditional. If you specify the SourceIds or\n                     EventCategories property, you must specify this property.Type: StringUpdate requires: Replacement if you're removing this property after it was previously\n                  specified. All other updates require no\n                     interruption."
+      "The type of source for which Amazon RDS provides notification events. For example, if you want to be notified of events generated by a database instance, set this parameter to db-instance. If you don't specify a value, notifications are provided for all source types. For valid values, see the SourceType parameter for the CreateEventSubscription action in the\n                     Amazon Relational Database Service API Reference.Required: Conditional. If you specify the SourceIds or EventCategories property, you must specify this property.Type: StringUpdate requires: Replacement if you're removing this property after it was previously\n                  specified. All other updates require no\n                     interruption."
     ]
   }
 ,
@@ -2489,7 +2727,7 @@
       "The user name that is associated with the master user account for this\n                  cluster.Required: YesType: StringUpdate requires: Replacement",
       "The  password associated with the master user account for this cluster.Required: YesType: StringUpdate requires: No interruption",
       "The node type that is provisioned for this cluster.Required: YesType: StringUpdate requires: No interruption",
-      "The number of compute nodes in the cluster. If you specify\n                     multi-node for the ClusterType parameter, you must\n                  specify a number greater than 1.Required: ConditionalType: IntegerUpdate requires: No interruption",
+      "The number of compute nodes in the cluster. If you specify\n                     multi-node for the ClusterType parameter, you must\n                  specify a number greater than 1.Required: ConditionalType: IntegerUpdate requires: Some interruptions",
       "When you restore from a snapshot from another AWS account, the 12-digit AWS\n                  account ID that contains that snapshot.Required: NoType: StringUpdate requires: Replacement",
       "The port number on which the cluster accepts incoming connections.Required: NoType: IntegerUpdate requires: Replacement",
       "The weekly time range (in UTC) during which automated cluster maintenance can\n                  occur.  The format of the time range is\n                  ddd:hh24:mi-ddd:hh24:mi.Required: NoType: StringUpdate requires: No interruption",
@@ -2656,7 +2894,7 @@
       "Rules that define cross-origin resource sharing of objects in this bucket.\n                        For more information, see Enabling\n                            Cross-Origin Resource Sharing in the\n                            Amazon Simple Storage Service Developer Guide.Required: NoType: Amazon S3 Cors ConfigurationUpdate requires: No interruption",
       "Rules that define how Amazon S3 manages objects during their lifetime. For more\n                        information, see Object\n                            Lifecycle Management in the\n                            Amazon Simple Storage Service Developer Guide.Required: NoType: Amazon S3 Lifecycle ConfigurationUpdate requires: No interruption",
       "Settings that defines where logs are stored.Required: NoType: Amazon S3 Logging ConfigurationUpdate requires: No interruption",
-      "Configuration that defines which Amazon SNS topic to send messages to and what\n                        events to report.Required: NoType: Amazon S3\n      NotificationConfigurationUpdate requires: No interruption",
+      "Configuration that defines how Amazon S3 handles bucket notifications.Required: NoType: Amazon S3\n      NotificationConfigurationUpdate requires: No interruption",
       "Configuration for replicating objects in an S3 bucket. To enable replication, you\n            must also enable versioning by using the VersioningConfiguration\n            property.Amazon S3 can store replicated objects in only one destination (S3 bucket). You cannot\n            send replicated objects to multiple S3 buckets.Required: NoType: Amazon S3\n      ReplicationConfigurationUpdate requires: No interruption",
       "An arbitrary set of tags (key-value pairs) for this Amazon S3 bucket.Required: NoType: AWS CloudFormation Resource TagsUpdate requires: No interruption",
       "Enables multiple variants of all objects in this bucket. You might enable\n                        versioning to prevent objects from being deleted or overwritten by mistake\n                        or to archive objects so that you can retrieve previous versions of\n                        them.Required: NoType: Amazon S3 Versioning ConfigurationUpdate requires: No interruption",
@@ -2693,9 +2931,9 @@
       "TopicName"
     ],
     "descriptions": [
-      "A developer-defined string that can be used to identify this SNS topic.Required: NoType: StringUpdate requires: Updates are not supported.",
-      "The SNS subscriptions (endpoints) for this topic.Required: NoType: List of SNS\n                     SubscriptionsUpdate requires: Updates are not supported.",
-      "A name for the topic. If you don't specify a name, AWS CloudFormation generates a unique\n                  physical ID and uses that ID for the topic name. For more information, see Name Type.Required: NoType: StringUpdate requires: Updates are not supported.",
+      "A developer-defined string that can be used to identify this SNS topic.Required: NoType: StringUpdate requires: No interruption",
+      "The SNS subscriptions (endpoints) for this topic.Required: NoType: List of SNS\n                     SubscriptionsUpdate requires: No interruption",
+      "A name for the topic. If you don't specify a name, AWS CloudFormation generates a unique\n                  physical ID and uses that ID for the topic name. For more information, see Name Type.ImportantIf you specify a name, you cannot do updates that require this resource to be replaced.\nYou can still do updates that require no or some interruption. If you must replace the resource, specify a new name.Required: NoType: StringUpdate requires: Replacement",
       "Returns the name for an Amazon SNS topic."
     ]
   }
@@ -2897,24 +3135,36 @@
     "properties": [
       "CacheClusterEnabled",
       "CacheClusterSize",
+      "CacheDataEncrypted",
+      "CacheTtlInSeconds",
+      "CachingEnabled",
       "ClientCertificateId",
-      "DeploymentId",
+      "DataTraceEnabled",
       "Description",
+      "LoggingLevel",
       "MethodSettings",
-      "RestApiId",
+      "MetricsEnabled",
       "StageName",
+      "ThrottlingBurstLimit",
+      "ThrottlingRateLimit",
       "Variables"
     ],
     "descriptions": [
       "Indicates whether cache clustering is enabled for the stage.Required: NoType: Boolean",
       "The size of the stage's cache cluster.Required: NoType: String",
+      "Indicates whether the cached responses are encrypted.Required: NoType: Boolean",
+      "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.Required: NoType: Integer",
+      "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses. For more information, see Enable API Gateway Caching in a Stage to Enhance API Performance in the API Gateway Developer Guide.Required: NoType: Boolean",
       "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage.Required: NoType: String",
-      "The ID of the deployment that the stage points to.Required: NoType: String",
+      "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.Required: NoType: Boolean",
       "A description of the purpose of the stage.Required: NoType: String",
+      "The logging level for this method. For valid values, see the loggingLevel property of the Stage resource in the Amazon API Gateway API Reference.Required: NoType: String",
       "Configures settings for all of the stage's methods.Required: NoType: Amazon API Gateway Deployment StageDescription MethodSetting",
-      "The ID of a RestApi resource that you're deploying with this stage.Required: NoType: String",
+      "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.Required: NoType: Boolean",
       "The name of the stage, which API Gateway uses as the first path segment in the invoke Uniform Resource Identifier (URI).Required: NoType: String",
-      "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: [A-Za-z0-9-._~:/?#&amp;=,]+.Required: NoType: List of key-value pairs"
+      "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Integer",
+      "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Number",
+      "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: [A-Za-z0-9-._~:/?#&amp;=,]+.Required: NoType: Mapping of key-value pairs"
     ]
   }
 ,
@@ -2935,14 +3185,14 @@
     "descriptions": [
       "Indicates whether the cached responses are encrypted.Required: NoType: Boolean",
       "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.Required: NoType: Integer",
-      "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.Required: NoType: Boolean",
+      "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses. For more information, see Enable API Gateway Caching in a Stage to Enhance API Performance in the API Gateway Developer Guide.Required: NoType: Boolean",
       "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.Required: NoType: Boolean",
       "The HTTP method.Required: NoType: String",
-      "The\n            logging level for this method.Required: NoType: String",
+      "The logging level for this method. For valid values, see the loggingLevel property of the Stage resource in the Amazon API Gateway API Reference.Required: NoType: String",
       "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.Required: NoType: Boolean",
-      "The resource path for this method.Required: NoType: String",
-      "The\n            number of burst requests per second that API Gateway permits across all APIs, stages, and\n            methods in your AWS account.Required: NoType: Integer",
-      "The\n            number of steady-state requests per second that API Gateway permits across all APIs, stages,\n            and methods in your AWS account.Required: NoType: Number"
+      "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/).Required: NoType: String",
+      "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Integer",
+      "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Number"
     ]
   }
 ,
@@ -2954,6 +3204,7 @@
       "Credentials",
       "IntegrationHttpMethod",
       "IntegrationResponses",
+      "PassthroughBehavior",
       "RequestParameters",
       "RequestTemplates",
       "Type",
@@ -2962,13 +3213,14 @@
     "descriptions": [
       "A list of request parameters whose values API Gateway will cache.Required: NoType: List of strings",
       "An API-specific tag group of related cached parameters.Required: NoType: String",
-      "The credentials required for the integration. To specify an AWS Identity and Access Management (IAM) role that API Gateway assumes, specify the role's Amazon Resource Name (ARN). To use resource-based permissions on the AWS Lambda (Lambda) function, specify null. To require that the caller's identity be passed through from the request, specify arn:aws:iam::\\*:user/\\*.Required: NoType: String",
-      "The integration's HTTP method type.Required: NoType: String",
+      "The credentials required for the integration. To specify an AWS Identity and Access Management (IAM) role that API Gateway assumes, specify the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify arn:aws:iam::*:user/*.To use resource-based permissions on the AWS Lambda (Lambda) function, don't specify this property. Use the AWS::Lambda::Permission resource to permit API Gateway to call the function. For more information, see Example 2: Grant Amazon API Gateway Permissions to Invoke Your Lambda Function in the AWS Lambda Developer Guide.Required: NoType: String",
+      "The integration's HTTP method type.Required: Conditional. For the Type property, if you specify MOCK, this property is optional. For all other types, you must specify this property.Type: String",
       "The response that API Gateway provides after a method's back end completes processing a request. API Gateway intercepts the back end's response so that you can control how API Gateway surfaces back-end responses. For example, you can map the back-end status codes to codes that you define.Required: NoType: List of Amazon API Gateway Method Integration IntegrationResponse",
-      "The request parameters that API Gateway sends with the back-end request. Specify request parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.Specify the destination using the following pattern integration.request.location.name, where location is a query string, path, or header, and name is a valid, unique parameter name.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: List of key-value pairs",
-      "The templates used to transform the method request body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value.Required: NoType: List of key-value pairs",
-      "The type of back end your method is running, such as HTTP, AWS, or MOCK.Required: NoType: String",
-      "The integration's Uniform Resource Identifier (URI). If you specify HTTP for the Type property, specify the API endpoint URL. If you specify MOCK for the Type property, don't specify this property. If you specify AWS for the Type property, specify an AWS service that follows the form:\n                arn:aws:apigateway:region:subdomain.service|service:path|action/service_api. For example, a Lambda function URI follows the form: arn:aws:apigateway:region:lambda:path/path. The path is usually in the form\n                /2015-03-31/functions/LambdaFunctionARN/invocations. For more information, see the uri property of the Integration resource in the Amazon API Gateway REST API Reference.Required: ConditionalType: String"
+      "Indicates when API Gateway passes requests to the targeted back end. This behavior depends on the request's Content-Type header and whether you defined a mapping template for it.For more information and valid values, see the passthroughBehavior field in the API Gateway API Reference.Required: NoType: String",
+      "The request parameters that API Gateway sends with the back-end request. Specify request parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.Specify the destination using the following pattern integration.request.location.name, where location is  querystring, path, or header, and name is a valid, unique parameter name.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: Mapping of key-value pairs",
+      "A map of Apache Velocity templates that are applied on the request payload. The template that API Gateway uses is based on the value of the Content-Type header sent by the client. The content type value is the key, and the template is the value (specified as a string), such as the following snippet:\"application/json\": \"{\\n    \\\"statusCode\\\": \\\"200\\\"\\n}\"For more information about templates, see API Gateway API Request and Response Payload-Mapping Template Reference in the API Gateway Developer Guide.Required: NoType: Mapping of key-value pairs",
+      "The type of back end your method is running, such as HTTP, AWS (for Lambda functions), or MOCK.Required: YesType: String",
+      "The integration's Uniform Resource Identifier (URI).If you specify HTTP for the Type property, specify the API endpoint URL.If you specify MOCK for the Type property, don't specify this property.If you specify AWS for the Type property, specify an AWS service that follows the form: arn:aws:apigateway:region:subdomain.service|service:path|action/service_api. For example, a Lambda function URI follows the form:\n                arn:aws:apigateway:region:lambda:path/path. The path is usually in the form /2015-03-31/functions/LambdaFunctionARN/invocations. For more information, see the uri property of the Integration resource in the Amazon API Gateway REST API Reference.Required: Conditional. If you specified HTTP or AWS for the Type property, you must specify this property.Type: String"
     ]
   }
 ,
@@ -2981,8 +3233,8 @@
       "StatusCode"
     ],
     "descriptions": [
-      "The response parameters from the back-end response that API Gateway sends to the method response. Specify response parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value.The destination must be an existing response parameter in the MethodResponse property.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: List of key-value pairs",
-      "The templates used to transform the integration response body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value.Required: NoType: List of key-value pairs",
+      "The response parameters from the back-end response that API Gateway sends to the method response. Specify response parameters as key-value pairs (string-to-string maps), with a destination as the key and a source as the value. For more information, see API Gateway API Request and Response Parameter-Mapping Reference in the API Gateway Developer Guide.The destination must be an existing response parameter in the MethodResponse property.The source must be an existing method request parameter or a static value. Static values must be enclosed in single quotation marks and pre-encoded based on their destination in the request.Required: NoType: Mapping of key-value pairs",
+      "The templates used to transform the integration response body. Specify templates as key-value pairs (string-to-string maps), with a content type as the key and a template as the value. For more information, see API Gateway API Request and Response Payload-Mapping Template Reference in the API Gateway Developer Guide.Required: NoType: Mapping of key-value pairs",
       "A regular expression that specifies which error strings or status codes from the back end map to the integration response.Required: NoType: String",
       "The status code that API Gateway uses to map the integration response to a MethodResponse status code.Required: NoType: String"
     ]
@@ -2996,9 +3248,9 @@
       "StatusCode"
     ],
     "descriptions": [
-      "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.Required: NoType: List of key-value pairs",
-      "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value. Specify the destination using the following pattern: method.response.header.name, where the name is a valid, unique header name. The Boolean specifies whether a parameter is required.Required: NoType: List of key-value pairs",
-      "The method response's status code, which you map to an IntegrationResponse.Required: NoType: String"
+      "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.Required: NoType: Mapping of key-value pairs",
+      "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value. Specify the destination using the following pattern: method.response.header.name, where the name is a valid, unique header name. The Boolean specifies whether a parameter is required.Required: NoType: Mapping of key-value pairs",
+      "The method response's status code, which you map to an IntegrationResponse.Required: YesType: String"
     ]
   }
 ,
@@ -3013,7 +3265,7 @@
     "descriptions": [
       "The name of the S3 bucket where the Swagger file is stored.Required: NoType: String",
       "The Amazon S3 ETag (a file checksum) of the Swagger file. If you don't specify a value, API Gateway skips ETag validation of your Swagger file.Required: NoType: String",
-      "The file name of the application revision (Amazon S3 object name).Required: NoType: String",
+      "The file name of the Swagger file (Amazon S3 object name).Required: NoType: String",
       "For versioning-enabled buckets, a specific version of the Swagger file.Required: NoType: String"
     ]
   }
@@ -3037,12 +3289,44 @@
       "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.Required: NoType: Integer",
       "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.Required: NoType: Boolean",
       "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.Required: NoType: Boolean",
-      "The HTTP method.Required: NoType: String",
-      "The\n            logging level for this method.Required: NoType: String",
+      "The HTTP method.Required: YesType: String",
+      "The logging level for this method. For valid values, see the loggingLevel property of the Stage resource in the Amazon API Gateway API Reference.Required: NoType: String",
       "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.Required: NoType: Boolean",
-      "The resource path for this method.Required: NoType: String",
-      "The number of\n            burst\n            requests per second that API Gateway permits across all APIs, stages, and\n            methods in your AWS account.Required: NoType: Integer",
-      "The number of\n            steady-state\n            requests per second that API Gateway permits across all APIs, stages, and methods in your AWS\n            account.Required: NoType: Number"
+      "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/).Required: YesType: String",
+      "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Integer",
+      "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account. For more information, see Manage API Request Throttling in the API Gateway Developer Guide.Required: NoType: Number"
+    ]
+  }
+,
+  {
+    "type": "Application Auto Scaling ScalingPolicy StepScalingPolicyConfiguration",
+    "properties": [
+      "AdjustmentType",
+      "Cooldown",
+      "MetricAggregationType",
+      "MinAdjustmentMagnitude",
+      "StepAdjustments"
+    ],
+    "descriptions": [
+      "Specifies whether the ScalingAdjustment value in the StepAdjustment property is an absolute number or a percentage of the current capacity. For valid values, see the AdjustmentType content for the StepScalingPolicyConfiguration data type in the Application Auto Scaling API Reference.Required: NoType: String",
+      "The amount of time, in seconds, after a scaling activity completes before any\n            further trigger-related scaling activities can start. For more information, see the\n              Cooldown content for the StepScalingPolicyConfiguration data type in the\n              Application Auto Scaling API Reference.Required: NoType: Integer",
+      "The aggregation type for the CloudWatch metrics. You can specify Minimum, Maximum, or Average. By default, AWS CloudFormation specifies Average. For more information, see Aggregation in the Amazon CloudWatch Developer Guide.Required: NoType: String",
+      "The minimum number of resources to adjust when a scaling activity is triggered. If you specify PercentChangeInCapacity for the adjustment type, the scaling policy scales the target by this amount.Required: NoType: Integer",
+      "A set of adjustments that enable you to scale based on the size of the alarm breach.Required: NoType: List of Application Auto Scaling ScalingPolicy StepScalingPolicyConfiguration StepAdjustment"
+    ]
+  }
+,
+  {
+    "type": "Application Auto Scaling ScalingPolicy StepScalingPolicyConfiguration StepAdjustment",
+    "properties": [
+      "MetricIntervalLowerBound",
+      "MetricIntervalUpperBound",
+      "ScalingAdjustment"
+    ],
+    "descriptions": [
+      "The lower bound of the breach size. The lower bound is the difference between the breach threshold and the aggregated CloudWatch metric value. If the metric value is within the lower and upper bounds, Application Auto Scaling triggers this step adjustment.If the metric value is above the breach threshold, the metric must be greater than or equal to the threshold plus the lower bound to trigger this step adjustment (the metric value is inclusive). If the metric value is below the breach threshold, the metric must be greater than the threshold plus the lower bound to trigger this step adjustment (the metric value is exclusive). A null value indicates negative infinity.Required: NoType: Number",
+      "The upper bound of the breach size. The upper bound is the difference between the breach threshold and the CloudWatch metric value. If the metric value is within the lower and upper bounds, Application Auto Scaling triggers this step adjustment.If the metric value is above the breach threshold, the metric must be less than the threshold plus the upper bound to trigger this step adjustment (the metric value is exclusive). If the metric value is below the breach threshold, the metric must be less than or equal to the threshold plus the upper bound to trigger this step adjustment (the metric value is inclusive). A null value indicates positive infinity.Required: NoType: Number",
+      "The amount by which to scale. The adjustment is based on the value that you specified in the AdjustmentType property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.Required: YesType: Integer"
     ]
   }
 ,
