@@ -15,7 +15,6 @@
   "author": "Rowan Udell <rowanu@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.9.1",
     "tap": "^5.7.0",
     "x-ray": "^2.2.0"
   },
@@ -24,6 +23,7 @@
     "commander": "^2.9.0",
     "debug": "^2.2.0",
     "jsonlint": "^1.6.2",
-    "lodash": "^4.10.0"
+    "lodash": "^4.10.0",
+    "nodemon": "^1.9.1"
   }
 }
