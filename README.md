@@ -1,0 +1,77 @@
+# cfn-check
+
+A command-line tool for validating CloudFormation templates **quickly**.
+
+## Overview
+
+[CloudFormation](https://aws.amazon.com/cloudformation/) is great.
+Unfortunately, the error handling leaves a bit to be desired.
+
+The [AWS CLI](https://aws.amazon.com/cli/) provided
+[`validate-template`](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/validate-template.html) command only
+checks your
+[syntax](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-validate-template.html), not the actual resources, their properties, etc. This means you can *think* you're successfully creating a new stack, and still get a `CREATE_FAIL`. This tool aims to give you quick feedback so you spend less time banging your head against the CloudFormation Console.
+
+## Installation
+
+    go get github.com/Versent/cfn-check
+
+TODO Download links
+
+## Usage
+
+    Usage: cfn-check [options] <template>
+
+    Options:
+
+      -h, --help     output usage information
+      -V, --version  output the version number
+      -w, --watch    Watch template for changes
+      -p, --pretty   Print pretty JSON when valid (regardless of character limit)
+      -c, --compact  Print compact JSON when valid (regardless of character limit)
+
+### Planned
+
+* `quiet` don't output anything, just set return code.
+* `verbose` increase the logging level.
+
+## Checks
+
+* Template is valid JSON/YAML.
+
+### Planned
+
+* `Ref`s are valid parameters, resources, or [pseudo
+  parameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html).
+* All Resource `Type` properties are valid Types as defined in the [Resource
+  Types
+  Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html),
+  including Custom Resources.
+* Validate `AWSTemplateFormatVersion`
+  * Enforce presence
+  * `cfn-check` only validates <= '2010-09-09'
+* Output compact JSON if over character limit (51,200 bytes) or requested
+* Validate Intrinsic `Fn` arguments
+* `Fn`s can only be used in resource properties, metadata attributes, and update
+  policy attributes.
+* Validate `Resources`
+  * Properties
+    * Conditional fields
+* Error on
+  [limit](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+  violations e.g. UserData length, template length, number of resources, etc
+* TAP output https://testanything.org/tap-specification.html
+  * Only output errors?
+
+## Contributing
+
+TODO Local setup steps
+
+### Testing
+
+Templates used in tests are stored in `testdata`, which is ignored by `go`
+commands (see `go help packages`).
+
+To run the tests:
+
+    go test
